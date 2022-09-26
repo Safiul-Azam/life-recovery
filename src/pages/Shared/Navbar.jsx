@@ -23,7 +23,7 @@ const Navbar = () => {
                                     <span className="badge">New</span>
                                 </Link>
                             </li>
-                            <li><Link to='/signUp'>Sign In</Link></li>
+                            <li><Link to='/login'>Sign In</Link></li>
                             <li><Link to='/'>Logout</Link></li>
                         </ul>
                     </div>
