@@ -8,7 +8,7 @@ const Navbar = () => {
     const [user] = useAuthState(auth)
     
     return (
-        <div className='bg-green-300'>
+        <div className=' bg-transparent'>
             <div className="container mx-auto navbar">
                 <div className="flex-1">
                     <img width={50} src={logo} alt="" />
