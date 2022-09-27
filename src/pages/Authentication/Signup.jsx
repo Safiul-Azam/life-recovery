@@ -17,20 +17,20 @@ const SignUp = () => {
     ] = useCreateUserWithEmailAndPassword(auth);
     console.log(user);
     const [updateProfile, updating, updateError] = useUpdateProfile(auth);
-    const onSubmit =async data => {
+    const onSubmit = async data => {
         const displayName = data.displayName
         await createUserWithEmailAndPassword(data.email, data.password)
-        await updateProfile({displayName})
+        await updateProfile({ displayName })
         console.log(data)
     };
-    if(loading||updating){
-        return <p>Loading...</p>
+    if (loading || updating) {
+        return <p className='text-green-600 text-xl text-center mt-20'>Loading...</p>
     }
     let errorMessage;
-    if(error || updateError){
+    if (error || updateError) {
         errorMessage = <p className='text-red-400'>{error.message || updateError.message}</p>
     }
-    if(user){
+    if (user) {
         navigate('/')
     }
     return (
@@ -39,20 +39,21 @@ const SignUp = () => {
             <h2 className="text-2xl text-green-700 font-bold text-center mb-4 uppercase">Registration</h2>
             <form className='' onSubmit={handleSubmit(onSubmit)}>
                 <div className="form-control w-full">
-                    {/* <label className="label">
-                        <span className="label-text">Your Name</span>
-                    </label> */}
-                    <input
-                        {...register('displayName', {
-                            required: {
-                                value: true,
-                                message: 'name is required'
-                            }
-                        })}
-                        type="text" placeholder="Your Name"
-                        className="input border-b-gray-300 outline-0 focus:outline-none focus:border-b-primary text-lg border-x-0 border-t-0 w-full rounded-none"
+                    <fieldset class="border border-solid px-3 text-gray-600 border-gray-300">
+                        <legend class="text-lg">Password</legend>
+                        <input
+                            {...register('displayName', {
+                                required: {
+                                    value: true,
+                                    message: 'name is required'
+                                }
+                            })}
+                            type="text" placeholder="Your Name"
+                            className="input border-none focus:border-none  outline-0 focus:outline-none w-full rounded-none"
 
-                    />
+                        />
+                    </fieldset>
+
                     <label className="label">
                         {errors.name?.type === 'required' && <span className="label-text-alt text-error">{errors.name.message}</span>}
                     </label>
@@ -61,21 +62,23 @@ const SignUp = () => {
                     {/* <label className="label">
                         <span className="label-text">Email</span>
                     </label> */}
-                    <input
-                        {...register('email', {
-                            required: {
-                                value: true,
-                                message: 'Email is required'
-                            },
-                            pattern: {
-                                value: /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/,
-                                message: 'Provide a valid email'
-                            }
-                        })}
-                        type="email" placeholder="Enter Your Email"
-                        className="input border-b-gray-300 outline-0 focus:outline-none focus:border-b-primary text-lg border-x-0 border-t-0 w-full rounded-none"
-
-                    />
+                    <fieldset class="border border-solid px-3 text-gray-600 border-gray-300">
+                        <legend class="text-lg">Email</legend>
+                        <input
+                            {...register('email', {
+                                required: {
+                                    value: true,
+                                    message: 'Email is required'
+                                },
+                                pattern: {
+                                    value: /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/,
+                                    message: 'Provide a valid email'
+                                }
+                            })}
+                            type="email" placeholder="Enter Your Email"
+                            className="input border-none focus:border-none  outline-0 focus:outline-none w-full rounded-none"
+                        />
+                    </fieldset>
                     <label className="label">
                         {errors.email?.type === 'required' && <span className="label-text-alt text-error">{errors.email.message}</span>}
                         {errors.email?.type === 'pattern' && <span className="label-text-alt text-error">{errors.email.message}</span>}
@@ -85,21 +88,23 @@ const SignUp = () => {
                     {/* <label className="label">
                         <span className="label-text">Password</span>
                     </label> */}
-                    <input
-                        {...register('password', {
-                            required: {
-                                value: true,
-                                message: 'password is required'
-                            },
-                            minLength: {
-                                value: 6,
-                                message: 'The password must be at least 6 characters long'
-                            }
-                        })}
-                        type="password" placeholder="Enter Your Password"
-                        className="input border-b-gray-300 outline-0 focus:outline-none focus:border-b-primary text-lg border-x-0 border-t-0 w-full rounded-none"
-
-                    />
+                    <fieldset class="border border-solid px-3 text-gray-600 border-gray-300">
+                        <legend class="text-lg">Password</legend>
+                        <input
+                            {...register('password', {
+                                required: {
+                                    value: true,
+                                    message: 'password is required'
+                                },
+                                minLength: {
+                                    value: 6,
+                                    message: 'The password must be at least 6 characters long'
+                                }
+                            })}
+                            type="password" placeholder="Enter Your Password"
+                            className="input border-none focus:border-none  outline-0 focus:outline-none w-full rounded-none"
+                        />
+                    </fieldset>
                     <label className="label">
                         {errors.password?.type === 'required' && <span className="label-text-alt text-error">{errors.password.message}</span>}
                         {errors.password?.type === 'pattern' && <span className="label-text-alt text-error">{errors.password.message}</span>}
@@ -109,7 +114,7 @@ const SignUp = () => {
                 <input className='w-full btn bg-green-300 border-none text-green-800 text-lg' type="submit" value='sign up' />
                 <p className='mt-6 text-sm'>Already have an account? <Link className='text-primary' to='/login'>please Login</Link></p>
             </form>
-            <SocialLogin/>
+            <SocialLogin />
         </div>
     );
 };

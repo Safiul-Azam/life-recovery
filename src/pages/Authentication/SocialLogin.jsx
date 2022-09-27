@@ -10,7 +10,7 @@ const SocialLogin = () => {
         errorMessage = <p className='text-red-400'>{error.message}</p>
     }
     if(loading){
-        return <p>Loading...</p>
+        return <p className='text-green-600 text-xl text-center mt-20'>Loading...</p>
     }
     return (
         <div className="flex flex-col w-full border-opacity-50">

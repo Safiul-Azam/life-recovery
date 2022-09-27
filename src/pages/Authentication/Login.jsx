@@ -16,7 +16,7 @@ const Login = () => {
         error,
     ] = useSignInWithEmailAndPassword(auth);
     if (loading) {
-        return <p>Loading...</p>
+        return <p className='text-green-600 text-xl text-center mt-20'>Loading...</p>
     }
     if (user) {
         navigate('/')
@@ -38,21 +38,23 @@ const Login = () => {
                     {/* <label className="label">
                         <span className="label-text">Email</span>
                     </label> */}
-                    <input
-                        {...register('email', {
-                            required: {
-                                value: true,
-                                message: 'Email is required'
-                            },
-                            pattern: {
-                                value: /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/,
-                                message: 'Provide a valid email'
-                            }
-                        })}
-                        type="email" placeholder="Enter Your Email"
-                        className="input border-b-gray-300 outline-0 focus:outline-none focus:border-b-primary text-lg border-x-0 border-t-0 w-full rounded-none"
-
-                    />
+                    <fieldset class="border border-solid px-3 text-gray-600 border-gray-300">
+                        <legend class="text-lg">Email</legend>
+                        <input
+                            {...register('email', {
+                                required: {
+                                    value: true,
+                                    message: 'Email is required'
+                                },
+                                pattern: {
+                                    value: /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/,
+                                    message: 'Provide a valid email'
+                                }
+                            })}
+                            type="email" placeholder="Enter Your Email"
+                            className="input border-none focus:border-none  outline-0 focus:outline-none w-full rounded-none"
+                        />
+                    </fieldset>
                     <label className="label">
                         {errors.email?.type === 'required' && <span className="label-text-alt text-error">{errors.email.message}</span>}
                         {errors.email?.type === 'pattern' && <span className="label-text-alt text-error">{errors.email.message}</span>}
@@ -62,21 +64,23 @@ const Login = () => {
                     {/* <label className="label">
                         <span className="label-text">Password</span>
                     </label> */}
-                    <input
-                        {...register('password', {
-                            required: {
-                                value: true,
-                                message: 'password is required'
-                            },
-                            minLength: {
-                                value: 6,
-                                message: 'The password must be at least 6 characters long'
-                            }
-                        })}
-                        type="password" placeholder="Enter Your Password"
-                        className="input border-b-gray-300 outline-0 focus:outline-none focus:border-b-primary text-lg border-x-0 border-t-0 w-full rounded-none"
-
-                    />
+                    <fieldset class="border border-solid px-3 text-gray-600 border-gray-300">
+                        <legend class="text-lg">Password</legend>
+                        <input
+                            {...register('password', {
+                                required: {
+                                    value: true,
+                                    message: 'password is required'
+                                },
+                                minLength: {
+                                    value: 6,
+                                    message: 'The password must be at least 6 characters long'
+                                }
+                            })}
+                            type="password" placeholder="Enter Your Password"
+                            className="input border-none focus:border-none  outline-0 focus:outline-none w-full rounded-none"
+                        />
+                    </fieldset>
                     <label className="label">
                         {errors.password?.type === 'required' && <span className="label-text-alt text-error">{errors.password.message}</span>}
                         {errors.password?.type === 'pattern' && <span className="label-text-alt text-error">{errors.password.message}</span>}
