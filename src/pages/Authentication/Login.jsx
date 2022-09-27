@@ -3,45 +3,26 @@ import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import auth from '../../firebase.inite';
 import logo from '../../images/logo.png'
-import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useCreateUserWithEmailAndPassword, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 
-const SignUp = () => {
+const Login = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
     const [
-        createUserWithEmailAndPassword,
+        signInWithEmailAndPassword,
         user,
         loading,
         error,
-    ] = useCreateUserWithEmailAndPassword(auth);
+      ] = useSignInWithEmailAndPassword(auth);
     
     const onSubmit = data => {
-        createUserWithEmailAndPassword(data.email, data.password)
+        signInWithEmailAndPassword(data.email, data.password)
         console.log(data)
     };
     return (
         <div className='lg:w-1/3 md:w-1/2 w-full mx-auto border rounded-xl p-10 shadow-inner mt-24 mb-14'>
             <img src={logo} className='bg-green-500 w-20 mx-auto mb-2' alt="" />
-            <h2 className="text-2xl text-green-700 font-bold text-center mb-4 uppercase">Registration</h2>
+            <h2 className="text-2xl text-green-700 font-bold text-center mb-4 uppercase">Log In</h2>
             <form className='' onSubmit={handleSubmit(onSubmit)}>
-                <div className="form-control w-full">
-                    {/* <label className="label">
-                        <span className="label-text">Your Name</span>
-                    </label> */}
-                    <input
-                        {...register('displayName', {
-                            required: {
-                                value: true,
-                                message: 'name is required'
-                            }
-                        })}
-                        type="text" placeholder="Your Name"
-                        className="input border-b-gray-300 outline-0 focus:outline-none focus:border-b-primary text-lg border-x-0 border-t-0 w-full rounded-none"
-
-                    />
-                    <label className="label">
-                        {errors.name?.type === 'required' && <span className="label-text-alt text-error">{errors.name.message}</span>}
-                    </label>
-                </div>
                 <div className="form-control w-full">
                     {/* <label className="label">
                         <span className="label-text">Email</span>
@@ -97,4 +78,4 @@ const SignUp = () => {
     );
 };
 
-export default SignUp;
+export default Login;
