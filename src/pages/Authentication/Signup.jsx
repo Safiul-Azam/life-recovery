@@ -1,11 +1,23 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
+import auth from '../../firebase.inite';
 import logo from '../../images/logo.png'
+import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 
 const Login = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
-    const onSubmit = data => console.log(data);
+    const [
+        createUserWithEmailAndPassword,
+        user,
+        loading,
+        error,
+    ] = useCreateUserWithEmailAndPassword(auth);
+    
+    const onSubmit = data => {
+        createUserWithEmailAndPassword(data.email, data.password)
+        console.log(data)
+    };
     return (
         <div className='lg:w-1/3 md:w-1/2 w-full mx-auto border rounded-xl p-10 shadow-inner mt-24 mb-14'>
             <img src={logo} className='bg-green-500 w-20 mx-auto mb-2' alt="" />
