@@ -1,7 +1,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
-import auth from '../../firebase.inite';
+import auth from '../../firebase.init';
 import logo from '../../images/logo.png'
 import { useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
 import SocialLogin from './SocialLogin';
@@ -23,11 +23,18 @@ const SignUp = () => {
         await updateProfile({displayName})
         console.log(data)
     };
+    if(loading||updating){
+        return <p>Loading...</p>
+    }
+    let errorMessage;
+    if(error || updateError){
+        errorMessage = <p className='text-red-400'>{error.message || updateError.message}</p>
+    }
     if(user){
         navigate('/')
     }
     return (
-        <div className='lg:w-1/3 md:w-1/2 w-full mx-auto border rounded-xl p-10 shadow-inner mt-24 mb-14'>
+        <div className='lg:w-1/3 md:w-1/2 w-full mx-auto border rounded-xl p-10 shadow-inner my-16'>
             <img src={logo} className='bg-green-500 w-20 mx-auto mb-2' alt="" />
             <h2 className="text-2xl text-green-700 font-bold text-center mb-4 uppercase">Registration</h2>
             <form className='' onSubmit={handleSubmit(onSubmit)}>
@@ -98,6 +105,7 @@ const SignUp = () => {
                         {errors.password?.type === 'pattern' && <span className="label-text-alt text-error">{errors.password.message}</span>}
                     </label>
                 </div>
+                {errorMessage}
                 <input className='w-full btn bg-green-300 border-none text-green-800 text-lg' type="submit" value='sign up' />
                 <p className='mt-6 text-sm'>Already have an account? <Link className='text-primary' to='/login'>please Login</Link></p>
             </form>
