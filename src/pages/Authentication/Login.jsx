@@ -3,61 +3,37 @@ import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
 import logo from '../../images/logo.png'
-import { useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
+import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import SocialLogin from './SocialLogin';
 
-const SignUp = () => {
+const Login = () => {
     const navigate = useNavigate()
     const { register, formState: { errors }, handleSubmit } = useForm();
     const [
-        createUserWithEmailAndPassword,
+        signInWithEmailAndPassword,
         user,
         loading,
         error,
-    ] = useCreateUserWithEmailAndPassword(auth);
-    console.log(user);
-    const [updateProfile, updating, updateError] = useUpdateProfile(auth);
-    const onSubmit = async data => {
-        const displayName = data.displayName
-        await createUserWithEmailAndPassword(data.email, data.password)
-        await updateProfile({ displayName })
-        console.log(data)
-    };
-    if (loading || updating) {
+    ] = useSignInWithEmailAndPassword(auth);
+    if (loading) {
         return <p className='text-green-600 text-xl text-center mt-20'>Loading...</p>
-    }
-    let errorMessage;
-    if (error || updateError) {
-        errorMessage = <p className='text-red-400'>{error.message || updateError.message}</p>
     }
     if (user) {
         navigate('/')
     }
+    let errorMessage;
+    if (error) {
+        errorMessage = <p className='text-red-400'>{error.message}</p>
+    }
+    const onSubmit = data => {
+        signInWithEmailAndPassword(data.email, data.password)
+        console.log(data)
+    };
     return (
         <div className='lg:w-1/3 md:w-1/2 w-full mx-auto border rounded-xl p-10 shadow-inner my-16'>
             <img src={logo} className='bg-green-500 w-20 mx-auto mb-2' alt="" />
-            <h2 className="text-2xl text-green-700 font-bold text-center mb-4 uppercase">Registration</h2>
+            <h2 className="text-2xl text-green-700 font-bold text-center mb-4 uppercase">Log In</h2>
             <form className='' onSubmit={handleSubmit(onSubmit)}>
-                <div className="form-control w-full">
-                    <fieldset class="border border-solid px-3 text-gray-600 border-gray-300">
-                        <legend class="text-lg">Password</legend>
-                        <input
-                            {...register('displayName', {
-                                required: {
-                                    value: true,
-                                    message: 'name is required'
-                                }
-                            })}
-                            type="text" placeholder="Your Name"
-                            className="input border-none focus:border-none  outline-0 focus:outline-none w-full rounded-none"
-
-                        />
-                    </fieldset>
-
-                    <label className="label">
-                        {errors.name?.type === 'required' && <span className="label-text-alt text-error">{errors.name.message}</span>}
-                    </label>
-                </div>
                 <div className="form-control w-full">
                     {/* <label className="label">
                         <span className="label-text">Email</span>
@@ -112,11 +88,11 @@ const SignUp = () => {
                 </div>
                 {errorMessage}
                 <input className='w-full btn bg-green-300 border-none text-green-800 text-lg' type="submit" value='sign up' />
-                <p className='mt-6 text-sm'>Already have an account? <Link className='text-primary' to='/login'>please Login</Link></p>
+                <p className='mt-6 text-sm'>New to Life-Recovery? <Link className='text-primary' to='/signUp'>please sign up</Link></p>
             </form>
             <SocialLogin />
         </div>
     );
 };
 
-export default SignUp;
+export default Login;
