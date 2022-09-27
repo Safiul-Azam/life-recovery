@@ -76,7 +76,7 @@ const Login = () => {
                     </label>
                 </div>
                 <input className='w-full btn bg-green-300 border-none text-green-800 text-lg' type="submit" value='sign up' />
-                <p className='mt-6 text-sm'>Already have an account? <Link className='text-primary' to='/login'>please Login</Link></p>
+                <p className='mt-6 text-sm'>New to Life-Recovery? <Link className='text-primary' to='/signUp'>please sign up</Link></p>
             </form>
             <SocialLogin/>
         </div>

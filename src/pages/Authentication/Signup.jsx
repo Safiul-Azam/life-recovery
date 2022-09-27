@@ -1,11 +1,13 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import auth from '../../firebase.inite';
 import logo from '../../images/logo.png'
-import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
+import SocialLogin from './SocialLogin';
 
 const SignUp = () => {
+    const navigate = useNavigate()
     const { register, formState: { errors }, handleSubmit } = useForm();
     const [
         createUserWithEmailAndPassword,
@@ -13,11 +15,17 @@ const SignUp = () => {
         loading,
         error,
     ] = useCreateUserWithEmailAndPassword(auth);
-    
-    const onSubmit = data => {
-        createUserWithEmailAndPassword(data.email, data.password)
+    console.log(user);
+    const [updateProfile, updating, updateError] = useUpdateProfile(auth);
+    const onSubmit =async data => {
+        const displayName = data.displayName
+        await createUserWithEmailAndPassword(data.email, data.password)
+        await updateProfile({displayName})
         console.log(data)
     };
+    if(user){
+        navigate('/')
+    }
     return (
         <div className='lg:w-1/3 md:w-1/2 w-full mx-auto border rounded-xl p-10 shadow-inner mt-24 mb-14'>
             <img src={logo} className='bg-green-500 w-20 mx-auto mb-2' alt="" />
@@ -93,6 +101,7 @@ const SignUp = () => {
                 <input className='w-full btn bg-green-300 border-none text-green-800 text-lg' type="submit" value='sign up' />
                 <p className='mt-6 text-sm'>Already have an account? <Link className='text-primary' to='/login'>please Login</Link></p>
             </form>
+            <SocialLogin/>
         </div>
     );
 };
