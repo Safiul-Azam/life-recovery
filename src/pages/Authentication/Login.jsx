@@ -1,11 +1,13 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import auth from '../../firebase.inite';
 import logo from '../../images/logo.png'
 import { useCreateUserWithEmailAndPassword, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import SocialLogin from './SocialLogin';
 
 const Login = () => {
+    const navigate =useNavigate()
     const { register, formState: { errors }, handleSubmit } = useForm();
     const [
         signInWithEmailAndPassword,
@@ -13,7 +15,9 @@ const Login = () => {
         loading,
         error,
       ] = useSignInWithEmailAndPassword(auth);
-    
+    if(user){
+        navigate('/')
+    }
     const onSubmit = data => {
         signInWithEmailAndPassword(data.email, data.password)
         console.log(data)
@@ -74,6 +78,7 @@ const Login = () => {
                 <input className='w-full btn bg-green-300 border-none text-green-800 text-lg' type="submit" value='sign up' />
                 <p className='mt-6 text-sm'>Already have an account? <Link className='text-primary' to='/login'>please Login</Link></p>
             </form>
+            <SocialLogin/>
         </div>
     );
 };
