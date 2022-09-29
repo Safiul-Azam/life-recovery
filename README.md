@@ -12,4 +12,3 @@
 - firebase
 - react-firebase-hooks
 - react-hook-form
-- 
