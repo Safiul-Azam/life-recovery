@@ -1,9 +1,9 @@
 import React from "react";
+import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
 import logo from "../../images/logo.png";
-import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import SocialLogin from "./SocialLogin";
 
 const Login = () => {
@@ -47,8 +47,8 @@ const Login = () => {
           {/* <label className="label">
                         <span className="label-text">Email</span>
                     </label> */}
-          <fieldset class="border border-solid px-3 text-gray-600 border-gray-300">
-            <legend class="text-lg">Email</legend>
+          <fieldset className="border border-solid px-3 text-gray-600 border-gray-300">
+            <legend className="text-lg">Email</legend>
             <input
               {...register("email", {
                 required: {
@@ -82,8 +82,8 @@ const Login = () => {
           {/* <label className="label">
                         <span className="label-text">Password</span>
                     </label> */}
-          <fieldset class="border border-solid px-3 text-gray-600 border-gray-300">
-            <legend class="text-lg">Password</legend>
+          <fieldset className="border border-solid px-3 text-gray-600 border-gray-300">
+            <legend className="text-lg">Password</legend>
             <input
               {...register("password", {
                 required: {
