@@ -13,7 +13,7 @@ const Banner = () => {
       }}
   */
   return (
-    <section className="pt-6 min-h-screen">
+    <section className="pt-6 pb-10 min-h-screen">
       <Navbar />
       <div className="flex flex-col md:flex-row justify-center md:justify-evenly items-center gap-10 min-h-[90vh] my-auto px-10 mt-16 md:mt-0">
         <DayManage />

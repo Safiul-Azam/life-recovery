@@ -1,13 +1,16 @@
 import React from "react";
+import TwoSimplePieChart from "../chart/TwoSimplePieChart";
 
 const Calculation = () => {
   return (
-    <section className="max-w-7xl px-10 bg-white">
-      <div>
-        <h1>namaz name</h1>
+    <section className="bg-white m-20 rounded-xl p-10 pt-5">
+      <div className="flex flex-col justify-center items-center text-center">
+        <h1 className="text-primary text-2xl font-semibold font-mono border-b-2 border-secondary w-full pb-2">ফজর</h1>
+
+        <TwoSimplePieChart />
       </div>
       <div>
-        <h2>kaja namaz = 10</h2>
+        <h2>kaja namaz</h2>
       </div>
       <div>
         <h3>7 bay avarage </h3>
