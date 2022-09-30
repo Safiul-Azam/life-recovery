@@ -1,12 +1,12 @@
 import React from "react";
 import Banner from "../components/home/Banner";
-import Calculation from "../components/home/Calculation";
+import Calculations from "../components/home/Calculations";
 
 const Home = () => {
   return (
     <main className=" bg-[#0b1121] pb-20">
       <Banner />
-      <Calculation />
+      <Calculations />
     </main>
   );
 };
