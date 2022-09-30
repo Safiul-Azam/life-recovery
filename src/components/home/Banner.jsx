@@ -1,6 +1,6 @@
 import React from "react";
-import banner from "../../images/banner1.png";
 import Navbar from "../Shared/Navbar";
+import Calculate from "./Calculate";
 import DayManage from "./DayManage";
 import Namaz from "./Namaz";
 
@@ -13,11 +13,14 @@ const Banner = () => {
       }}
   */
   return (
-    <section className="pt-6 pb-10 min-h-screen">
+    <section className="pt-6 min-h-screen">
       <Navbar />
-      <div className="flex flex-col md:flex-row justify-center md:justify-evenly items-center gap-10 min-h-[80vh] px-10 mt-16 md:mt-0">
+      <div className="flex flex-col md:flex-row justify-center md:justify-evenly items-center gap-10 min-h-[50vh] px-10 mt-16 md:mt-0">
         <DayManage />
         <Namaz />
+      </div>
+      <div className="flex justify-center items-center bg-">
+      <Calculate />
       </div>
     </section>
   );
