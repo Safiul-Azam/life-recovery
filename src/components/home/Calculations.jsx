@@ -9,6 +9,7 @@ const Calculations = () => {
       <Calculation namaz="আসর" />
       <Calculation namaz="মাগরিব" />
       <Calculation namaz="এশা" />
+      
     </section>
   );
 };
