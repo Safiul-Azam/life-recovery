@@ -1,27 +1,60 @@
-import React, { useState } from 'react';
-import { format } from 'date-fns';
-import { DayPicker } from 'react-day-picker';
-const DayManage = () => {
-    const [selectedDay, setSelectedDay] = useState(new Date())
-    const formattedDate = format(selectedDay, "PP");
-    const footer = selectedDay ? (
-        <p>You selected {formattedDate}.</p>
-    ) : (
-        <p>Please pick a day.</p>
-    );
+import React, { useState } from "react";
+import "react-modern-calendar-datepicker/lib/DatePicker.css";
+import { Calendar } from "react-modern-calendar-datepicker";
 
-    return (
-        <div className='grid grid-cols-3 gap-4'>
-            <div className=''>
-                <DayPicker
-                    mode="single"
-                    selected={selectedDay}
-                    onSelect={setSelectedDay}
-                    footer={footer}
-                />
-            </div>
-        </div>
-    );
-}
+const DayManage = () => {
+  const toDay = new Date();
+
+  const [selectedDay, setSelectedDay] = useState({
+    year: toDay.getFullYear(),
+    month: toDay.getMonth() + 1,
+    day: toDay.getDate(),
+  });
+
+  const highlightDay = [
+    {
+      year: 2022,
+      month: 9,
+      day: 4,
+      className: "purpleDay",
+    },
+    {
+      year: 2022,
+      month: 9,
+      day: 12,
+      className: "orangeDay",
+    },
+    {
+      year: 2022,
+      month: 9,
+      day: 18,
+      className: "yellowDay",
+    },
+    {
+      year: 2022,
+      month: 9,
+      day: 20,
+      className: "greenDay",
+    },
+    {
+      year: 2022,
+      month: 9,
+      day: 26,
+      className: "navyBlueDay",
+    },
+  ];
+
+  return (
+    <div className=" rounded-xl flex justify-center items-center">
+      <Calendar
+        value={selectedDay}
+        onChange={setSelectedDay}
+        shouldHighlightWeekends
+        calendarClassName="responsive-calendar bg-white"
+        customDaysClassName={highlightDay}
+      />
+    </div>
+  );
+};
 
 export default DayManage;

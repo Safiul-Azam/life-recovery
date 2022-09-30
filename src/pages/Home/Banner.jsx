@@ -1,21 +1,26 @@
-import React from 'react';
-import banner from '../../images/banner1.png'
-import Navbar from '../Shared/Navbar'
-import DayManage from './DayManage';
-const Banner = () => {
-    return (
-        <div className='pt-6 min-h-screen' style={
-            {
-              background: `linear-gradient(rgb(0,0,0,0.3),rgb(0,0,0,0.3)),url(${banner})`,
-              backgroundPosition: 'center',
-              backgroundSize: 'cover'
-            }
-          }>
-            <Navbar/>
-            <DayManage/>
+import React from "react";
+import banner from "../../images/banner1.png";
+import Navbar from "../Shared/Navbar";
+import DayManage from "./DayManage";
+import Namaz from "../../components/home/Namaz";
 
-    </div>
-    );
+const Banner = () => {
+  return (
+    <section
+      className="pt-6 min-h-screen "
+      style={{
+        background: `linear-gradient(rgb(0,0,0,0.3),rgb(0,0,0,0.3)),url(${banner})`,
+        backgroundPosition: "center",
+        backgroundSize: "cover",
+      }}
+    >
+      <Navbar />
+      <div className="flex flex-col md:flex-row justify-center md:justify-evenly items-center gap-10 min-h-[90vh] my-auto ">
+        <DayManage />
+        <Namaz />
+      </div>
+    </section>
+  );
 };
 
 export default Banner;

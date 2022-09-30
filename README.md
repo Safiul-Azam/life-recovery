@@ -1,5 +1,5 @@
+- `npm install` // yarn error
 # Project Technology
-
 - React
 - React Router Dom
 - Tailwind CSS
@@ -12,4 +12,3 @@
 - firebase
 - react-firebase-hooks
 - react-hook-form
-- 
