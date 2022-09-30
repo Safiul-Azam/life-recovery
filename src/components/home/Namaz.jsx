@@ -11,10 +11,8 @@ const Namaz = () => {
 
       {/* ফজর */}
       <div className="form-control">
-        <label className="label cursor-pointer">
-          <span className="label-text text-lg text-primary font-semibold">
-            ফজর
-          </span>
+        <label className="label cursor-pointer flex justify-between">
+          <h1 className="label-text text-lg text-primary font-semibold">ফজর</h1>
           <div className="flex justify-center items-center gap-2">
             <span className="label-text">জামাত</span>
             <input
@@ -37,10 +35,10 @@ const Namaz = () => {
 
       {/* যোহর */}
       <div className="form-control">
-        <label className="label cursor-pointer">
-          <span className="label-text text-lg text-primary font-semibold">
+        <label className="label cursor-pointer flex justify-between">
+          <h1 className="label-text text-lg text-primary font-semibold">
             যোহর
-          </span>
+          </h1>
           <div className="flex justify-center items-center gap-2">
             <span className="label-text">জামাত</span>
             <input
@@ -63,10 +61,8 @@ const Namaz = () => {
 
       {/* আসর */}
       <div className="form-control">
-        <label className="label cursor-pointer">
-          <span className="label-text text-lg text-primary font-semibold">
-            আসর
-          </span>
+        <label className="label cursor-pointer flex justify-between">
+          <h1 className="label-text text-lg text-primary font-semibold">আসর</h1>
           <div className="flex justify-center items-center gap-2">
             <span className="label-text">জামাত</span>
             <input
@@ -89,10 +85,10 @@ const Namaz = () => {
 
       {/* মাগরিব */}
       <div className="form-control">
-        <label className="label cursor-pointer">
-          <span className="label-text text-lg text-primary font-semibold">
+        <label className="label cursor-pointer flex justify-between">
+          <h1 className="label-text text-lg text-primary font-semibold">
             মাগরিব
-          </span>
+          </h1>
           <div className="flex justify-center items-center gap-2">
             <span className="label-text">জামাত</span>
             <input
@@ -115,10 +111,8 @@ const Namaz = () => {
 
       {/* এশা */}
       <div className="form-control">
-        <label className="label cursor-pointer">
-          <span className="label-text text-lg text-primary font-semibold">
-            এশা
-          </span>
+        <label className="label cursor-pointer flex justify-between">
+          <h1 className="label-text text-lg text-primary font-semibold">এশা</h1>
           <div className="flex justify-center items-center gap-2">
             <span className="label-text">জামাত</span>
             <input
