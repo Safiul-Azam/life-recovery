@@ -1,5 +1,5 @@
+- `npm install` // yarn error
 # Project Technology
-
 - React
 - React Router Dom
 - Tailwind CSS

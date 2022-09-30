@@ -27,7 +27,7 @@ const Navbar = () => {
   );
 
   return (
-    <div className=" bg-transparent">
+    <nav className=" bg-transparent">
       <div className="container mx-auto navbar">
         <div className="flex-1">
           <Link
@@ -64,7 +64,7 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-    </div>
+    </nav>
   );
 };
 
