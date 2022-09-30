@@ -37,13 +37,13 @@ const data = [
 const Calculate = () => {
   return (
     <RadarChart
-      cx={200}
-      cy={240}
-      outerRadius={150}
-      width={450}
-      height={450}
+      cx={185}
+      cy={192}
+      outerRadius={125}
+      width={380}
+      height={380}
       data={data}
-      className="bg-base-100 rounded-full mt-5 shadow-inner shadow-secondary pl-5"
+      className="bg-base-100 rounded-full shadow-inner shadow-secondary"
     >
       <PolarGrid />
       <PolarAngleAxis dataKey="namaz" />
