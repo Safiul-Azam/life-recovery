@@ -1,60 +1,64 @@
 import React from "react";
 import { PieChart, Pie, Legend, Tooltip, Cell } from "recharts";
 
-const data01 = [
-  { name: "Group A", value: 450 },
-  { name: "Group B", value: 300 },
-  { name: "Group C", value: 550 },
-];
 
-const data02 = [
-  { name: "Group A", value: 60 },
-  { name: "Group B", value: 40 },
-];
+const RADIAN = Math.PI / 190;
+const renderCustomizedLabel = ({
+  cx,
+  cy,
+  midAngle,
+  innerRadius,
+  outerRadius,
+  percent,
+  index,
+}) => {
 
-const COLORS1 = ["#00ff00", "#7FFF00", "#00008B"];
-const COLORS2 = ["#0088FE", "#ff4000"];
+  const radius = innerRadius + (outerRadius - innerRadius) * 0.2;
+
+  const x = cx + radius * Math.cos(-midAngle * RADIAN);
+
+  const y = cy + radius * Math.sin(-midAngle * RADIAN);
+
+  return (
+    <text
+      x={x}
+      y={y}
+      fill="white"
+      textAnchor={x > cx ? "start" : "end"}
+      dominantBaseline="central"
+    >
+      {`${(percent * 100).toFixed(0)}%`}
+    </text>
+  );
+};
 
 const TwoSimplePieChart = () => {
+  const data = [
+    { name: "নামাজ", value: 100 },
+    { name: "কাজা", value: 50 },
+  ];
+
+  const COLORS = ["#0A993C", "#FF4500"];
+  
   return (
-    <section className="-mt-16">
-      <PieChart width={700} height={330}>
-        <Pie
-          dataKey="value"
-          isAnimationActive={false}
-          data={data01}
-          cx={200}
-          cy={200}
-          outerRadius={80}
-          fill="#00FF7F"
-          label
-        >
-          {data02.map((entry, index) => (
-            <Cell
-              key={`cell-${index}`}
-              fill={COLORS1[index % COLORS1.length]}
-            />
-          ))}
-        </Pie>
-        <Pie
-          dataKey="value"
-          data={data02}
-          cx={500}
-          cy={200}
-          innerRadius={40}
-          outerRadius={80}
-          fill="#82ca9d"
-        >
-          {data02.map((entry, index) => (
-            <Cell
-              key={`cell-${index}`}
-              fill={COLORS2[index % COLORS2.length]}
-            />
-          ))}
-        </Pie>
-        <Tooltip />
-      </PieChart>
-    </section>
+    <PieChart width={110} height={110}>
+      <Pie
+        dataKey="value"
+        data={data}
+        cx={50}
+        cy={50}
+        labelLine={false}
+        label={renderCustomizedLabel}
+        innerRadius={15}
+        outerRadius={55}
+        fill="#82ca9d"
+      >
+        {data.map((entry, index) => (
+          <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+        ))}
+      </Pie>
+      <Tooltip />
+    </PieChart>
   );
 };
 
