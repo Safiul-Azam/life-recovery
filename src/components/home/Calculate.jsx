@@ -37,11 +37,11 @@ const data = [
 const Calculate = () => {
   return (
     <RadarChart
-      cx={170}
-      cy={180}
-      outerRadius={100}
-      width={350}
-      height={350}
+      cx={185}
+      cy={192}
+      outerRadius={125}
+      width={380}
+      height={380}
       data={data}
       className="bg-base-100 rounded-full shadow-inner shadow-secondary"
     >

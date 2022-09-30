@@ -4,7 +4,7 @@ import {
   Line,
   Bar,
   XAxis,
-  YAxis,
+//   YAxis,
   CartesianGrid,
   Tooltip,
   Legend,
@@ -14,72 +14,79 @@ import {
 const ComposedCharts = () => {
   const data = [
     {
-      name: "Page A",
-      uv: 590,
-      pv: 800,
-      amt: 1400,
+      day: "1",
+      Takbire_Ula: 100,
+      Namaz: 100,
+      Jamat: 100,
       cnt: 490,
     },
     {
-      name: "Page B",
-      uv: 868,
-      pv: 967,
-      amt: 1506,
+      day: "2",
+      Takbire_Ula: 70,
+      Namaz: 70,
+      Jamat: 70,
       cnt: 590,
     },
     {
-      name: "Page C",
-      uv: 1397,
-      pv: 1098,
-      amt: 989,
+      day: "3",
+      Takbire_Ula: 50,
+      Namaz: 50,
+      Jamat: 50,
       cnt: 350,
     },
     {
-      name: "Page D",
-      uv: 1480,
-      pv: 1200,
-      amt: 1228,
+      day: "4",
+      Takbire_Ula: 60,
+      Namaz: 60,
+      Jamat: 60,
       cnt: 480,
     },
     {
-      name: "Page E",
-      uv: 1520,
-      pv: 1108,
-      amt: 1100,
+      day: "5",
+      Takbire_Ula: 75,
+      Namaz: 75,
+      Jamat: 75,
       cnt: 460,
     },
     {
-      name: "Page F",
-      uv: 1400,
-      pv: 680,
-      amt: 1700,
+      day: "6",
+      Takbire_Ula: 80,
+      Namaz: 80,
+      Jamat: 80,
       cnt: 380,
     },
   ];
   return (
     <ComposedChart
-      width={500}
+      width={400}
       height={400}
       data={data}
       margin={{
         top: 20,
-        right: 80,
+        right: 20,
         bottom: 20,
         left: 20,
       }}
+      className="bg-white rounded-xl"
     >
-      <CartesianGrid stroke="#f5f5f5" />
+      <CartesianGrid stroke="#f5f5f5"  />
+
       <XAxis
-        dataKey="name"
-        label={{ value: "Pages", position: "insideBottomRight", offset: 0 }}
+        dataKey="day"
+        label={{ value: "Day", position: "insideBottomRight", offset: 0 }}
         scale="band"
       />
-      <YAxis label={{ value: "Index", angle: -90, position: "insideLeft" }} />
+
+      {/* <YAxis label={{ value: "", angle: -90, position: "insideLeft" }}/> */}
+
       <Tooltip />
       <Legend />
-      <Area type="monotone" dataKey="amt" fill="#8884d8" stroke="#8884d8" />
-      <Bar dataKey="pv" barSize={20} fill="#413ea0" />
-      <Line type="monotone" dataKey="uv" stroke="#ff7300" />
+
+      <Area type="monotone" dataKey="Jamat" fill="#f6d860" stroke="##0eca2d" />
+
+      <Bar dataKey="Namaz" barSize={20} fill="#0eca2d" />
+
+      <Line type="monotone" dataKey="Takbire_Ula" stroke="#ff7300" />
     </ComposedChart>
   );
 };
