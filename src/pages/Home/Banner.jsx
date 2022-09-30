@@ -15,7 +15,7 @@ const Banner = () => {
       }}
     >
       <Navbar />
-      <div className="flex flex-col md:flex-row justify-center items-center gap-10">
+      <div className="flex flex-col md:flex-row justify-center md:justify-evenly items-center gap-10 min-h-[90vh] my-auto ">
         <DayManage />
         <Namaz />
       </div>

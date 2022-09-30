@@ -4,7 +4,7 @@ import { Calendar } from "react-modern-calendar-datepicker";
 
 const DayManage = () => {
   const toDay = new Date();
-  
+
   const [selectedDay, setSelectedDay] = useState({
     year: toDay.getFullYear(),
     month: toDay.getMonth() + 1,
@@ -45,12 +45,12 @@ const DayManage = () => {
   ];
 
   return (
-    <div className="">
+    <div className=" rounded-xl flex justify-center items-center">
       <Calendar
         value={selectedDay}
         onChange={setSelectedDay}
         shouldHighlightWeekends
-        calendarClassName="responsive-calendar"
+        calendarClassName="responsive-calendar bg-white"
         customDaysClassName={highlightDay}
       />
     </div>
