@@ -50,7 +50,7 @@ const DayManage = () => {
         value={selectedDay}
         onChange={setSelectedDay}
         shouldHighlightWeekends
-        calendarClassName="responsive-calendar"
+        calendarClassName="md:text-xs"
         customDaysClassName={highlightDay}
       />
     </div>

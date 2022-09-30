@@ -1,6 +1,7 @@
 import React from "react";
 import Navbar from "../Shared/Navbar";
 import Calculate from "./Calculate";
+import ComposedCharts from "./ComposedCharts";
 import DayManage from "./DayManage";
 import Namaz from "./Namaz";
 
@@ -19,8 +20,9 @@ const Banner = () => {
         <DayManage />
         <Namaz />
       </div>
-      <div className="flex justify-center items-center bg-">
-      <Calculate />
+      <div className="flex flex-col md:flex-row justify-center items-center py-10 max-w-7xl px-10 mx-auto">
+        <ComposedCharts />
+        <Calculate />
       </div>
     </section>
   );
