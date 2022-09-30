@@ -1,6 +1,5 @@
 import React from "react";
-import { PieChart, Pie, Legend, Tooltip, Cell } from "recharts";
-
+import { PieChart, Pie, Legend, Tooltip, Cell, ResponsiveContainer } from "recharts";
 
 const RADIAN = Math.PI / 190;
 const renderCustomizedLabel = ({
@@ -12,7 +11,6 @@ const renderCustomizedLabel = ({
   percent,
   index,
 }) => {
-
   const radius = innerRadius + (outerRadius - innerRadius) * 0.2;
 
   const x = cx + radius * Math.cos(-midAngle * RADIAN);
@@ -39,26 +37,26 @@ const TwoSimplePieChart = () => {
   ];
 
   const COLORS = ["#0A993C", "#FF4500"];
-  
+
   return (
-    <PieChart width={110} height={110}>
-      <Pie
-        dataKey="value"
-        data={data}
-        cx={50}
-        cy={50}
-        labelLine={false}
-        label={renderCustomizedLabel}
-        innerRadius={15}
-        outerRadius={55}
-        fill="#82ca9d"
-      >
-        {data.map((entry, index) => (
-          <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-        ))}
-      </Pie>
-      <Tooltip />
-    </PieChart>
+      <PieChart width={110} height={110}>
+        <Pie
+          dataKey="value"
+          data={data}
+          cx="50%"
+          cy="50%"
+          labelLine={false}
+          label={renderCustomizedLabel}
+          innerRadius={16}
+          outerRadius={50}
+          fill="#82ca9d"
+        >
+          {data.map((entry, index) => (
+            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+          ))}
+        </Pie>
+        <Tooltip />
+      </PieChart>
   );
 };
 
