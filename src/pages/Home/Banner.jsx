@@ -2,6 +2,8 @@ import React from "react";
 import banner from "../../images/banner1.png";
 import Navbar from "../Shared/Navbar";
 import DayManage from "./DayManage";
+import Namaz from "../../components/home/Namaz";
+
 const Banner = () => {
   return (
     <section
@@ -13,8 +15,10 @@ const Banner = () => {
       }}
     >
       <Navbar />
-      <div></div>
-      <DayManage />
+      <div className="flex flex-col md:flex-row justify-center items-center gap-10">
+        <DayManage />
+        <Namaz />
+      </div>
     </section>
   );
 };
