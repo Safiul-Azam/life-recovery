@@ -9,13 +9,13 @@ const Calculations = () => {
   return (
     <section className="max-w-7xl px-10 mx-auto">
       <div className="flex gap-1 justify-center items-center content-center mt-16 mb-5">
-        {namazName.map((namaz) => (
-          <h6
+        {namazName.map((namaz, index) => (
+          <h6 key={index}
             onClick={() => setSelectedNamaz(namaz)}
             className={`px-4 py-2 btn ${
               selectedNamaz === namaz
-                ? "btn-secondary text-black"
-                : "btn-primary text-white"
+                ? "btn-secondary text-primary"
+                : "btn-primary text-secondary"
             } `}
           >
             {namaz}
