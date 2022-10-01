@@ -2,7 +2,7 @@ import { signOut } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link } from "react-router-dom";
 import auth from "../../firebase.init";
-import logo from "../../images/logo.png";
+import logo from "../../Assets/life-recovery.png";
 
 const Navbar = () => {
   const [user] = useAuthState(auth);

@@ -3,7 +3,7 @@ import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
-import logo from "../../images/logo.png";
+import logo from "../../Assets/life-recovery.png";
 import SocialLogin from "./SocialLogin";
 
 const Login = () => {
