@@ -21,7 +21,7 @@ const Namaz = () => {
               <span className="label-text">জামাত</span>
               <input
                 type="checkbox"
-                checked
+                defaultChecked
                 className="checkbox checkbox-xs checkbox-secondary"
               />
             </div>
@@ -29,7 +29,7 @@ const Namaz = () => {
               <span className="label-text">তাকবীরে উলা</span>
               <input
                 type="checkbox"
-                checked
+                defaultChecked
                 className="checkbox checkbox-xs checkbox-secondary"
               />
             </div>
@@ -46,7 +46,7 @@ const Namaz = () => {
               <span className="label-text">জামাত</span>
               <input
                 type="checkbox"
-                checked
+                defaultChecked
                 className="checkbox checkbox-xs checkbox-secondary"
               />
             </div>
@@ -54,7 +54,7 @@ const Namaz = () => {
               <span className="label-text">তাকবীরে উলা</span>
               <input
                 type="checkbox"
-                checked
+                defaultChecked
                 className="checkbox checkbox-xs checkbox-secondary"
               />
             </div>
@@ -71,7 +71,7 @@ const Namaz = () => {
               <span className="label-text">জামাত</span>
               <input
                 type="checkbox"
-                checked
+                defaultChecked
                 className="checkbox checkbox-xs checkbox-secondary"
               />
             </div>
@@ -79,7 +79,7 @@ const Namaz = () => {
               <span className="label-text">তাকবীরে উলা</span>
               <input
                 type="checkbox"
-                checked
+                defaultChecked
                 className="checkbox checkbox-xs checkbox-secondary"
               />
             </div>
@@ -96,7 +96,7 @@ const Namaz = () => {
               <span className="label-text">জামাত</span>
               <input
                 type="checkbox"
-                checked
+                defaultChecked
                 className="checkbox checkbox-xs checkbox-secondary"
               />
             </div>
@@ -104,7 +104,7 @@ const Namaz = () => {
               <span className="label-text">তাকবীরে উলা</span>
               <input
                 type="checkbox"
-                checked
+                defaultChecked
                 className="checkbox checkbox-xs checkbox-secondary"
               />
             </div>
@@ -121,7 +121,7 @@ const Namaz = () => {
               <span className="label-text">জামাত</span>
               <input
                 type="checkbox"
-                checked
+                defaultChecked
                 className="checkbox checkbox-xs checkbox-secondary"
               />
             </div>
@@ -129,7 +129,7 @@ const Namaz = () => {
               <span className="label-text">তাকবীরে উলা</span>
               <input
                 type="checkbox"
-                checked
+                defaultChecked
                 className="checkbox checkbox-xs checkbox-secondary"
               />
             </div>

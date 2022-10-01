@@ -55,6 +55,13 @@ const ComposedCharts = () => {
       Jamat: 80,
       cnt: 380,
     },
+    {
+      day: "7",
+      Takbire_Ula: 90,
+      Namaz: 90,
+      Jamat: 90,
+      cnt: 380,
+    },
   ];
   return (
     <ComposedChart

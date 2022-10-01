@@ -12,3 +12,4 @@
 - firebase
 - react-firebase-hooks
 - react-hook-form
+- react-icons

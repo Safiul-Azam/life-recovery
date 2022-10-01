@@ -3,7 +3,7 @@ import TwoSimplePieChart from "../chart/TwoSimplePieChart";
 
 const Calculation = ({namaz}) => {
   return (
-    <section className="max-w-7xl mx-10 2xl:mx-auto bg-white m-20 rounded-xl px-10 py-5">
+    <section className="max-w-7xl mx-10 2xl:mx-auto bg-white rounded-xl px-10 py-5">
       <h1 className="text-primary text-2xl font-semibold font-mono border-b-2 border-secondary w-full pb-2 text-center mb-3">
       {namaz}
       </h1>
