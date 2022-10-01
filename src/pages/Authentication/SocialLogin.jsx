@@ -1,6 +1,7 @@
 import React from "react";
 import { useSignInWithGoogle } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
+import Loading from "../../components/Shared/Loading";
 import auth from "../../firebase.init";
 
 const SocialLogin = () => {
@@ -18,9 +19,7 @@ const SocialLogin = () => {
   }
 
   if (loading) {
-    return (
-      <p className="text-green-600 text-xl text-center mt-20">Loading...</p>
-    );
+    return <Loading />
   }
 
   return (

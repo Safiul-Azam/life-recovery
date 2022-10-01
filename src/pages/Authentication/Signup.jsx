@@ -1,13 +1,14 @@
 import React from "react";
 import {
-    useCreateUserWithEmailAndPassword,
-    useUpdateProfile
+  useCreateUserWithEmailAndPassword,
+  useUpdateProfile,
 } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
 import logo from "../../Assets/life-recovery.png";
 import SocialLogin from "./SocialLogin";
+import Loading from "../../components/Shared/Loading";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -31,9 +32,7 @@ const SignUp = () => {
   };
 
   if (loading || updating) {
-    return (
-      <p className="text-green-600 text-xl text-center mt-20">Loading...</p>
-    );
+    return <Loading />;
   }
 
   let errorMessage;

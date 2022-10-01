@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
 import logo from "../../Assets/life-recovery.png";
 import SocialLogin from "./SocialLogin";
+import Loading from "../../components/Shared/Loading";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -17,9 +18,7 @@ const Login = () => {
     useSignInWithEmailAndPassword(auth);
 
   if (loading) {
-    return (
-      <p className="text-green-600 text-xl text-center mt-20">Loading...</p>
-    );
+    return <Loading />;
   }
 
   if (user) {
