@@ -16,8 +16,9 @@ export const namazApi = apiSlice.injectEndpoints({
         method: "POST",
         body: data,
       }),
+      
     }),
-    
+
     editNamaz: builder.mutation({
       query: ({ id, data }) => ({
         url: `/namaz/${id}`,
