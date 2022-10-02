@@ -1,20 +1,54 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { useEditNamazMutation } from "../../features/namaz/namazApi";
 
 const Namaz = () => {
   const namaz = useSelector((state) => state.namaz.namaz[0]);
+  const [editNamaz, { data, isLoading, error }] = useEditNamazMutation();
 
-  const { fajr, dhuhr, asr, maghrib, isha } = namaz || {};
+  const { fajr, dhuhr, asr, maghrib, isha, _id } = namaz || {};
 
-  const [fajrChecked, setFajrChecked] = useState({
+  const [fajrCheck, setFajrCheck] = useState({
     complete: fajr?.complete || false,
     jamaat: fajr?.jamaat || true,
     takbir_e_ula: fajr?.takbir_e_ula || true,
   });
+  const [dhuhrCheck, setDhuhrCheck] = useState({
+    complete: dhuhr?.complete || false,
+    jamaat: dhuhr?.jamaat || true,
+    takbir_e_ula: dhuhr?.takbir_e_ula || true,
+  });
+  const [asrCheck, setAsrCheck] = useState({
+    complete: asr?.complete || false,
+    jamaat: asr?.jamaat || true,
+    takbir_e_ula: asr?.takbir_e_ula || true,
+  });
+  const [maghribCheck, setMaghribCheck] = useState({
+    complete: maghrib?.complete || false,
+    jamaat: maghrib?.jamaat || true,
+    takbir_e_ula: maghrib?.takbir_e_ula || true,
+  });
+  const [ishaCheck, setIshaCheck] = useState({
+    complete: isha?.complete || false,
+    jamaat: isha?.jamaat || true,
+    takbir_e_ula: isha?.takbir_e_ula || true,
+  });
 
-  // console.log(fajr, dhuhr, asr, maghrib, isha);
+  const handleChange = (data) => {
+    editNamaz({
+      id: _id,
+      data,
+    });
+  };
 
-  console.log(fajrChecked);
+  useEffect(() => {
+    console.log({
+      fajr: fajrCheck,
+    });
+    handleChange({
+      fajr: fajrCheck,
+    });
+  }, [fajrCheck]);
 
   return (
     <section className="bg-white w-96 h-96 px-5 py-5 rounded-xl">
@@ -36,25 +70,45 @@ const Namaz = () => {
               <span className="label-text">জামাত</span>
               <input
                 onChange={(e) =>
-                  setFajrChecked((prv) => ({
+                  setFajrCheck((prv) => ({
                     ...prv,
                     jamaat: e.target.checked,
                   }))
                 }
+                // disabled={isLoading}
+                // onClick={() => handleChange(fajrCheck)}
+                checked={fajrCheck.jamaat}
                 type="checkbox"
-                checked={fajrChecked.jamaat}
                 className="checkbox checkbox-xs checkbox-secondary"
               />
             </div>
             <div className="flex justify-center items-center gap-2">
               <span className="label-text">তাকবীরে উলা</span>
               <input
+                onChange={(e) =>
+                  setFajrCheck((prv) => ({
+                    ...prv,
+                    takbir_e_ula: e.target.checked,
+                  }))
+                }
+                // onClick={() => handleChange(fajrCheck)}
+                checked={fajrCheck.takbir_e_ula}
                 type="checkbox"
-                defaultChecked
                 className="checkbox checkbox-xs checkbox-secondary"
               />
             </div>
-            <input type="checkbox" className="checkbox checkbox-primary" />
+            <input
+              onChange={(e) =>
+                setFajrCheck((prv) => ({
+                  ...prv,
+                  complete: e.target.checked,
+                }))
+              }
+              // onClick={() => handleChange(fajrCheck)}
+              checked={fajrCheck.complete}
+              type="checkbox"
+              className="checkbox checkbox-primary"
+            />
           </div>
         </div>
         {/* যোহর */}
