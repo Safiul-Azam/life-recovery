@@ -39,22 +39,6 @@ export const namazApi = apiSlice.injectEndpoints({
       async onQueryStarted(arg, { queryFulfilled, dispatch }) {
         try {
           const result = await queryFulfilled;
-
-          // console.log(result);
-
-          // localStorage.setItem(
-          //   "auth",
-          //   JSON.stringify({
-          //     accessToken: result.data.accessToken,
-          //     user: result.data.user,
-          //   })
-          // );
-          // dispatch(
-          //   toDay({
-          //     accessToken: result.data.accessToken,
-          //     user: result.data.user,
-          //   })
-          // );
         } catch (err) {
           // do nothing
         }
@@ -62,7 +46,7 @@ export const namazApi = apiSlice.injectEndpoints({
     }),
 
     addNamaz: builder.mutation({
-      query: ({ data }) => ({
+      query: (data) => ({
         url: "/namaz",
         method: "POST",
         body: data,
@@ -71,22 +55,20 @@ export const namazApi = apiSlice.injectEndpoints({
       async onQueryStarted(arg, { queryFulfilled, dispatch }) {
         try {
           const result = await queryFulfilled;
+          // let initDate = [1, 2, 3];
+          // const allData = result?.data;
 
-          const initDate = result?.data[0]?.createdAt
-            ?.slice(0, 10)
-            ?.split("-")
-            ?.reverse();
+          // if (allData.length !== 0) {
+          //   initDate = allData[0].date?.split("-");
+          // }
 
-          // dispatch(
-          //   toDay({
-          //     namaz: result.data,
-          //     date: {
-          //       day: Number(initDate[0]),
-          //       month: Number(initDate[1]),
-          //       year: Number(initDate[2]),
-          //     },
-          //   })
-          // );
+          // // const initDate = result?.data[0].date?.split("-"); */
+          dispatch(
+            toDay({
+              namaz: result.data,
+              date: result?.data[0]?.date,
+            })
+          );
         } catch (err) {
           // do nothing
         }

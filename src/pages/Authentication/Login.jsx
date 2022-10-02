@@ -37,18 +37,6 @@ const Login = () => {
     }
   }, [data, responseError, navigate, from]);
 
-  const { displayName } = user?.user || {};
-
-  // useEffect(() => {
-  //   if (displayName) {
-  //     login({
-  //       username: displayName,
-  //       email: "salman@mail.com",
-  //       password: "112233",
-  //     });
-  //   }
-  // }, [displayName, login]);
-
   if (isLoading || loading) {
     return <Loading />;
   }

@@ -4,7 +4,7 @@ import { useGetNamazQuery } from "../../features/namaz/namazApi";
 import { dateFormat } from "../../utils/dateFormat";
 
 const Namaz = () => {
-  const namaz = useSelector((state) => state.namaz);
+  const namaz = useSelector((state) => state.namaz.namaz);
   // const formatDate = dateFormat(date);
 
   // const { data } = useGetNamazQuery({
