@@ -9,14 +9,16 @@ const Namaz = () => {
   const { fajr, dhuhr, asr, maghrib, isha, _id } = namaz || {};
 
   const [fajrCheck, setFajrCheck] = useState({
-    complete: fajr?.complete || false,
-    jamaat: fajr?.jamaat || true,
-    takbir_e_ula: fajr?.takbir_e_ula || true,
+    complete: false,
+    jamaat: true,
+    takbir_e_ula: true,
+    update: false,
   });
   const [dhuhrCheck, setDhuhrCheck] = useState({
     complete: dhuhr?.complete || false,
     jamaat: dhuhr?.jamaat || true,
     takbir_e_ula: dhuhr?.takbir_e_ula || true,
+    update: false,
   });
   const [asrCheck, setAsrCheck] = useState({
     complete: asr?.complete || false,
@@ -34,6 +36,41 @@ const Namaz = () => {
     takbir_e_ula: isha?.takbir_e_ula || true,
   });
 
+  useEffect(() => {
+    if (namaz) {
+      setFajrCheck({
+        complete: fajr?.complete,
+        jamaat: fajr?.jamaat,
+        takbir_e_ula: fajr?.takbir_e_ula,
+        update: false,
+      });
+      setDhuhrCheck({
+        complete: dhuhr?.complete,
+        jamaat: dhuhr?.jamaat,
+        takbir_e_ula: dhuhr?.takbir_e_ula,
+        update: false,
+      });
+      setAsrCheck({
+        complete: asr?.complete,
+        jamaat: asr?.jamaat,
+        takbir_e_ula: asr?.takbir_e_ula,
+        update: false,
+      });
+      setMaghribCheck({
+        complete: maghrib?.complete,
+        jamaat: maghrib?.jamaat,
+        takbir_e_ula: maghrib?.takbir_e_ula,
+        update: false,
+      });
+      setIshaCheck({
+        complete: isha?.complete,
+        jamaat: isha?.jamaat,
+        takbir_e_ula: isha?.takbir_e_ula,
+        update: false,
+      });
+    }
+  }, [namaz]);
+
   const handleChange = (data) => {
     editNamaz({
       id: _id,
@@ -45,10 +82,13 @@ const Namaz = () => {
     console.log({
       fajr: fajrCheck,
     });
-    handleChange({
-      fajr: fajrCheck,
-    });
-  }, [fajrCheck]);
+    if (_id && fajrCheck.update === true) {
+      console.log(fajrCheck.update);
+      handleChange({
+        fajr: fajrCheck,
+      });
+    }
+  }, [fajrCheck, _id]);
 
   return (
     <section className="bg-white w-96 h-96 px-5 py-5 rounded-xl">
@@ -73,6 +113,7 @@ const Namaz = () => {
                   setFajrCheck((prv) => ({
                     ...prv,
                     jamaat: e.target.checked,
+                    update: true,
                   }))
                 }
                 // disabled={isLoading}
