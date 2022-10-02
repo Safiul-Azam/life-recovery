@@ -7,18 +7,22 @@ import logo from "../../Assets/life-recovery.png";
 const Navbar = () => {
   const [user] = useAuthState(auth);
 
+  const handleSignOut = () => {
+    signOut(auth);
+  };
+
   const profileMenu = (
     <>
       <li>
         <Link to="/" className="justify-between">
-          {user && user?.displayName.slice(0, 10)}
+          {user && user?.displayName?.slice(0, 10)}
           <span className="badge badge-primary text-white">New</span>
         </Link>
       </li>
 
       <li>
         {user ? (
-          <button onClick={() => signOut(auth)}>Logout</button>
+          <button onClick={() => handleSignOut()}>Logout</button>
         ) : (
           <Link to="/login">Login</Link>
         )}

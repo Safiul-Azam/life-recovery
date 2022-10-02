@@ -6,12 +6,13 @@ import { dateFormat } from "../../utils/dateFormat";
 const Namaz = () => {
   const { date, email } = useSelector((state) => state.namaz);
   const formatDate = dateFormat(date);
-  console.log(date, email);
+
   const { data } = useGetNamazsQuery({
     email: email || "mdsalmanahamad90@gmail.com",
     date: formatDate,
   });
-  console.log(data);
+
+  
 
   return (
     <section className="bg-white w-96 h-96 px-5 py-5 rounded-xl">
