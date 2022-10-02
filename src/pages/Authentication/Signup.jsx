@@ -17,7 +17,8 @@ const SignUp = () => {
   const dispatch = useDispatch();
   let location = useLocation();
 
-  const [registration, { isLoading, isSuccess }] = useRegistrationMutation();
+  const [registration, { data, isLoading, isSuccess, error: responseError }] =
+    useRegistrationMutation();
 
   const [createUserWithEmailAndPassword, user, loading, error] =
     useCreateUserWithEmailAndPassword(auth);
@@ -33,14 +34,13 @@ const SignUp = () => {
   let from = location.state?.from?.pathname || "/";
 
   useEffect(() => {
-    // if (data?.accessToken && data?.user) {
-    //   navigate(from, { replace: true });
-    // }
-
-    if (!isLoading && isSuccess) {
+    if (responseError?.data) {
+      console.log(responseError.data);
+    }
+    if (data?.accessToken && data?.user) {
       navigate(from, { replace: true });
     }
-  }, [navigate, from, user, isLoading, isSuccess]);
+  }, [data, responseError, navigate, from]);
 
   const { photoURL } = user?.user || {};
 
@@ -49,9 +49,12 @@ const SignUp = () => {
 
     await createUserWithEmailAndPassword(email, password);
     await updateProfile({ displayName });
-    await dispatch(
-      registration({ username: displayName, email, password, img: photoURL })
-    );
+    await registration({
+      username: displayName,
+      email,
+      password,
+      img: photoURL,
+    });
   };
 
   // Decided to render
@@ -68,10 +71,6 @@ const SignUp = () => {
     errorMessage = (
       <p className="text-red-400">{error.message || updateError.message}</p>
     );
-  }
-
-  if (user) {
-    // console.log(user);
   }
 
   return (
