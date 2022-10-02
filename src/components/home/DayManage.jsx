@@ -1,20 +1,16 @@
 import React, { useState } from "react";
 import { Calendar } from "react-modern-calendar-datepicker";
 import "react-modern-calendar-datepicker/lib/DatePicker.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useAddNamazMutation } from "../../features/namaz/namazApi";
-import { toDay } from "../../features/namaz/namazSlice";
 import { dateFormat } from "../../utils/dateFormat";
 
 const DayManage = () => {
-  const dispatch = useDispatch();
   // const [user] = useAuthState(auth);
 
   const { email } = useSelector((state) => state.auth.user);
-  const date = useSelector((state) => state.namaz.date);
 
-  const [addNamaz, { data, isSuccess, isLoading, error: responseError }] =
-    useAddNamazMutation();
+  const [addNamaz, { data, error: responseError }] = useAddNamazMutation();
 
   const [selectedDay, setSelectedDay] = useState({
     day: new Date().getDate(),
@@ -22,10 +18,15 @@ const DayManage = () => {
     year: new Date().getFullYear(),
   });
 
+  if (data) {
+    console.log("DayManage - addNamaz data:", data);
+  }
+  if (responseError) {
+    console.log("DayManage - addNamaz error:", responseError);
+  }
+
   const namazAdd = (selectedDate) => {
     const formattedDate = dateFormat(selectedDate);
-    console.log("selectedDate:", selectedDate);
-    console.log("formattedDate:", formattedDate);
     addNamaz({
       date: formattedDate,
       email,
@@ -34,11 +35,7 @@ const DayManage = () => {
 
   const handleChange = async (selectedDate) => {
     setSelectedDay(selectedDate);
-    console.log(selectedDate);
-
     namazAdd(selectedDate);
-    // console.log({ date: selectedDate, namaz: data })
-    // dispatch(toDay({ date: selectedDate, namaz: data }));
   };
 
   const highlightDay = [

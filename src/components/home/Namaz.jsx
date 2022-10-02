@@ -1,18 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { useGetNamazQuery } from "../../features/namaz/namazApi";
-import { dateFormat } from "../../utils/dateFormat";
 
 const Namaz = () => {
-  const namaz = useSelector((state) => state.namaz.namaz);
-  // const formatDate = dateFormat(date);
+  const namaz = useSelector((state) => state.namaz.namaz[0]);
 
-  // const { data } = useGetNamazQuery({
-  //   email: email || "salman@mail.com",
-  //   date: formatDate,
-  // });
+  const { fajr, dhuhr, asr, maghrib, isha } = namaz || {};
 
-  console.log(namaz);
+  const [fajrChecked, setFajrChecked] = useState({
+    complete: fajr?.complete || false,
+    jamaat: fajr?.jamaat || true,
+    takbir_e_ula: fajr?.takbir_e_ula || true,
+  });
+
+  // console.log(fajr, dhuhr, asr, maghrib, isha);
+
+  console.log(fajrChecked);
 
   return (
     <section className="bg-white w-96 h-96 px-5 py-5 rounded-xl">
@@ -33,8 +35,14 @@ const Namaz = () => {
             <div className="flex justify-center items-center gap-2">
               <span className="label-text">জামাত</span>
               <input
+                onChange={(e) =>
+                  setFajrChecked((prv) => ({
+                    ...prv,
+                    jamaat: e.target.checked,
+                  }))
+                }
                 type="checkbox"
-                defaultChecked
+                checked={fajrChecked.jamaat}
                 className="checkbox checkbox-xs checkbox-secondary"
               />
             </div>

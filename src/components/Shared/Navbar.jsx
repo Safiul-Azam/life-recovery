@@ -1,6 +1,5 @@
-import { signOut } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import auth from "../../firebase.init";
 import logo from "../../Assets/life-recovery.png";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,7 +8,7 @@ import { userLoggedOut } from "../../features/auth/authSlice";
 const Navbar = () => {
   const dispatch = useDispatch();
   const { username } = useSelector((state) => state.auth.user);
-  
+
   const [user] = useAuthState(auth);
 
   const handleSignOut = async () => {
