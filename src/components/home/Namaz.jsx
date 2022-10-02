@@ -1,17 +1,18 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { useGetNamazsQuery } from "../../features/namaz/namazApi";
+import { useGetNamazQuery } from "../../features/namaz/namazApi";
 import { dateFormat } from "../../utils/dateFormat";
 
 const Namaz = () => {
-  const { date, email } = useSelector((state) => state.namaz);
-  const formatDate = dateFormat(date);
-  console.log(date, email);
-  const { data } = useGetNamazsQuery({
-    email: email || "mdsalmanahamad90@gmail.com",
-    date: formatDate,
-  });
-  console.log(data);
+  const namaz = useSelector((state) => state.namaz.namaz);
+  // const formatDate = dateFormat(date);
+
+  // const { data } = useGetNamazQuery({
+  //   email: email || "salman@mail.com",
+  //   date: formatDate,
+  // });
+
+  console.log(namaz);
 
   return (
     <section className="bg-white w-96 h-96 px-5 py-5 rounded-xl">

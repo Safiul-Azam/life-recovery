@@ -1,22 +1,78 @@
 import { apiSlice } from "../api/apiSlice";
+import { toDay } from "./namazSlice";
 
 export const namazApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getNamazs: builder.query({
-      query: ({ email, date }) => `/namaz?email=${email}&date=${date}`,
+      query: ({ email, date }) => {
+        return `/namaz?email=${email}`;
+      },
+      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+        try {
+          const result = await queryFulfilled;
+
+          // console.log(result);
+
+          // localStorage.setItem(
+          //   "auth",
+          //   JSON.stringify({
+          //     accessToken: result.data.accessToken,
+          //     user: result.data.user,
+          //   })
+          // );
+          // dispatch(
+          //   toDay({
+          //     accessToken: result.data.accessToken,
+          //     user: result.data.user,
+          //   })
+          // );
+        } catch (err) {
+          // do nothing
+        }
+      },
     }),
 
     getNamaz: builder.query({
-      query: (id) => `/namaz/find/${id}`,
+      query: ({ email, date }) => {
+        return `/namaz?email=${email}&date=${date}`;
+      },
+      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+        try {
+          const result = await queryFulfilled;
+        } catch (err) {
+          // do nothing
+        }
+      },
     }),
 
     addNamaz: builder.mutation({
-      query: ({ data }) => ({
+      query: (data) => ({
         url: "/namaz",
         method: "POST",
         body: data,
       }),
-      
+
+      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+        try {
+          const result = await queryFulfilled;
+          // let initDate = [1, 2, 3];
+          // const allData = result?.data;
+
+          // if (allData.length !== 0) {
+          //   initDate = allData[0].date?.split("-");
+          // }
+
+          // // const initDate = result?.data[0].date?.split("-"); */
+          dispatch(
+            toDay({
+              namaz: result.data,
+              date: result?.data[0]?.date,
+            })
+          );
+        } catch (err) {
+          // do nothing
+        }
+      },
     }),
 
     editNamaz: builder.mutation({

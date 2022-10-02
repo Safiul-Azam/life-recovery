@@ -1,28 +1,48 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
 import logo from "../../Assets/life-recovery.png";
 import SocialLogin from "./SocialLogin";
 import Loading from "../../components/Shared/Loading";
+import { useLoginMutation } from "../../features/auth/authApi";
+import { useDispatch } from "react-redux";
 
 const Login = () => {
   const navigate = useNavigate();
+  let location = useLocation();
+
+  const [login, { data, isSuccess, isLoading, error: responseError }] =
+    useLoginMutation();
+
+  const [signInWithEmailAndPassword, user, loading, error] =
+    useSignInWithEmailAndPassword(auth);
+
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm();
-  const [signInWithEmailAndPassword, user, loading, error] =
-    useSignInWithEmailAndPassword(auth);
 
-  if (loading) {
+  let from = location.state?.from?.pathname || "/";
+
+  useEffect(() => {
+    if (responseError?.data) {
+      console.log(responseError?.data);
+    }
+
+    if (data?.accessToken && data?.user) {
+      navigate(from, { replace: true });
+    }
+  }, [data, responseError, navigate, from]);
+
+  if (isLoading || loading) {
     return <Loading />;
   }
 
   if (user) {
-    navigate("/");
+    // navigate("/");
   }
 
   let errorMessage;
@@ -30,9 +50,10 @@ const Login = () => {
     errorMessage = <p className="text-red-400">{error.message}</p>;
   }
 
-  const onSubmit = (data) => {
-    signInWithEmailAndPassword(data.email, data.password);
-    console.log(data);
+  const onSubmit = async (data) => {
+    const { email, password } = data;
+    await login({ email, password });
+    await signInWithEmailAndPassword(email, password);
   };
 
   return (

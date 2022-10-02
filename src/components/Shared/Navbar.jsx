@@ -1,24 +1,34 @@
 import { signOut } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
 import logo from "../../Assets/life-recovery.png";
+import { useDispatch, useSelector } from "react-redux";
+import { userLoggedOut } from "../../features/auth/authSlice";
 
 const Navbar = () => {
+  const dispatch = useDispatch();
+  const { username } = useSelector((state) => state.auth.user);
+  
   const [user] = useAuthState(auth);
+
+  const handleSignOut = async () => {
+    dispatch(userLoggedOut());
+    localStorage.clear();
+  };
 
   const profileMenu = (
     <>
       <li>
         <Link to="/" className="justify-between">
-          {user && user?.displayName.slice(0, 10)}
+          {username && username?.slice(0, 10)}
           <span className="badge badge-primary text-white">New</span>
         </Link>
       </li>
 
       <li>
         {user ? (
-          <button onClick={() => signOut(auth)}>Logout</button>
+          <button onClick={handleSignOut}>Logout</button>
         ) : (
           <Link to="/login">Login</Link>
         )}

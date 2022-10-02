@@ -1,17 +1,29 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   useCreateUserWithEmailAndPassword,
   useUpdateProfile,
 } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
 import logo from "../../Assets/life-recovery.png";
 import SocialLogin from "./SocialLogin";
 import Loading from "../../components/Shared/Loading";
+import { useDispatch } from "react-redux";
+import { useRegistrationMutation } from "../../features/auth/authApi";
 
 const SignUp = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  let location = useLocation();
+
+  const [registration, { data, isLoading, isSuccess, error: responseError }] =
+    useRegistrationMutation();
+
+  const [createUserWithEmailAndPassword, user, loading, error] =
+    useCreateUserWithEmailAndPassword(auth);
+
+  const [updateProfile, updating, updateError] = useUpdateProfile(auth);
 
   const {
     register,
@@ -19,20 +31,39 @@ const SignUp = () => {
     handleSubmit,
   } = useForm();
 
-  const [createUserWithEmailAndPassword, user, loading, error] =
-    useCreateUserWithEmailAndPassword(auth);
+  let from = location.state?.from?.pathname || "/";
 
-  const [updateProfile, updating, updateError] = useUpdateProfile(auth);
+  useEffect(() => {
+    if (responseError?.data) {
+      console.log(responseError.data);
+    }
+    if (data?.accessToken && data?.user) {
+      navigate(from, { replace: true });
+    }
+  }, [data, responseError, navigate, from]);
+
+  const { photoURL } = user?.user || {};
 
   const onSubmit = async (data) => {
-    const displayName = data.displayName;
-    await createUserWithEmailAndPassword(data.email, data.password);
+    const { displayName, email, password } = data || {};
+
+    await createUserWithEmailAndPassword(email, password);
     await updateProfile({ displayName });
-    console.log(data);
+    await registration({
+      username: displayName,
+      email,
+      password,
+      img: photoURL,
+    });
   };
 
-  if (loading || updating) {
+  // Decided to render
+  if (loading || updating || isLoading) {
     return <Loading />;
+  }
+
+  if (!isLoading && isSuccess) {
+    console.log("OAuth done");
   }
 
   let errorMessage;
@@ -40,10 +71,6 @@ const SignUp = () => {
     errorMessage = (
       <p className="text-red-400">{error.message || updateError.message}</p>
     );
-  }
-
-  if (user) {
-    navigate("/");
   }
 
   return (
@@ -55,7 +82,7 @@ const SignUp = () => {
       <form className="" onSubmit={handleSubmit(onSubmit)}>
         <div className="form-control w-full">
           <fieldset className="border border-solid px-3 text-gray-600 border-gray-300">
-            <legend className="text-lg">Password</legend>
+            <legend className="text-lg"> Name</legend>
             <input
               {...register("displayName", {
                 required: {
