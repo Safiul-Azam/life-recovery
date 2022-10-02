@@ -6,7 +6,7 @@ const Namaz = () => {
   const namaz = useSelector((state) => state.namaz.namaz[0]);
   const [editNamaz, { data, isLoading, error }] = useEditNamazMutation();
 
-  const { fajr, dhuhr, asr, maghrib, isha, _id } = namaz || {};
+  const { _id } = namaz || {};
 
   const [fajrCheck, setFajrCheck] = useState({
     complete: false,
@@ -15,53 +15,63 @@ const Namaz = () => {
     update: false,
   });
   const [dhuhrCheck, setDhuhrCheck] = useState({
-    complete: dhuhr?.complete || false,
-    jamaat: dhuhr?.jamaat || true,
-    takbir_e_ula: dhuhr?.takbir_e_ula || true,
+    complete: false,
+    jamaat: true,
+    takbir_e_ula: true,
     update: false,
   });
   const [asrCheck, setAsrCheck] = useState({
-    complete: asr?.complete || false,
-    jamaat: asr?.jamaat || true,
-    takbir_e_ula: asr?.takbir_e_ula || true,
+    complete: false,
+    jamaat: true,
+    takbir_e_ula: true,
   });
   const [maghribCheck, setMaghribCheck] = useState({
-    complete: maghrib?.complete || false,
-    jamaat: maghrib?.jamaat || true,
-    takbir_e_ula: maghrib?.takbir_e_ula || true,
+    complete: false,
+    jamaat: true,
+    takbir_e_ula: true,
   });
   const [ishaCheck, setIshaCheck] = useState({
-    complete: isha?.complete || false,
-    jamaat: isha?.jamaat || true,
-    takbir_e_ula: isha?.takbir_e_ula || true,
+    complete: false,
+    jamaat: true,
+    takbir_e_ula: true,
   });
 
   useEffect(() => {
+    const { fajr, dhuhr, asr, maghrib, isha } = namaz || {};
     if (namaz) {
+      // fajr
       setFajrCheck({
         complete: fajr?.complete,
         jamaat: fajr?.jamaat,
         takbir_e_ula: fajr?.takbir_e_ula,
         update: false,
       });
+
+      // dhuhr
       setDhuhrCheck({
         complete: dhuhr?.complete,
         jamaat: dhuhr?.jamaat,
         takbir_e_ula: dhuhr?.takbir_e_ula,
         update: false,
       });
+
+      // asr
       setAsrCheck({
         complete: asr?.complete,
         jamaat: asr?.jamaat,
         takbir_e_ula: asr?.takbir_e_ula,
         update: false,
       });
+
+      // maghrib
       setMaghribCheck({
         complete: maghrib?.complete,
         jamaat: maghrib?.jamaat,
         takbir_e_ula: maghrib?.takbir_e_ula,
         update: false,
       });
+
+      // isha
       setIshaCheck({
         complete: isha?.complete,
         jamaat: isha?.jamaat,
@@ -79,11 +89,7 @@ const Namaz = () => {
   };
 
   useEffect(() => {
-    console.log({
-      fajr: fajrCheck,
-    });
     if (_id && fajrCheck.update === true) {
-      console.log(fajrCheck.update);
       handleChange({
         fajr: fajrCheck,
       });
@@ -116,8 +122,7 @@ const Namaz = () => {
                     update: true,
                   }))
                 }
-                // disabled={isLoading}
-                // onClick={() => handleChange(fajrCheck)}
+                disabled={isLoading}
                 checked={fajrCheck.jamaat}
                 type="checkbox"
                 className="checkbox checkbox-xs checkbox-secondary"
@@ -132,7 +137,7 @@ const Namaz = () => {
                     takbir_e_ula: e.target.checked,
                   }))
                 }
-                // onClick={() => handleChange(fajrCheck)}
+                disabled={isLoading}
                 checked={fajrCheck.takbir_e_ula}
                 type="checkbox"
                 className="checkbox checkbox-xs checkbox-secondary"
@@ -145,7 +150,7 @@ const Namaz = () => {
                   complete: e.target.checked,
                 }))
               }
-              // onClick={() => handleChange(fajrCheck)}
+              disabled={isLoading}
               checked={fajrCheck.complete}
               type="checkbox"
               className="checkbox checkbox-primary"
