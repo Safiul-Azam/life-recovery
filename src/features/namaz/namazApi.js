@@ -55,16 +55,10 @@ export const namazApi = apiSlice.injectEndpoints({
       async onQueryStarted(arg, { queryFulfilled, dispatch }) {
         try {
           const result = await queryFulfilled;
-          // let initDate = [1, 2, 3];
-          // const allData = result?.data;
-
-          // if (allData.length !== 0) {
-          //   initDate = allData[0].date?.split("-");
-          // }
-
-          // // const initDate = result?.data[0].date?.split("-"); */
+          
           dispatch(
             toDay({
+              id: result?.data[0]?._id,
               namaz: result.data,
               date: result?.data[0]?.date,
             })

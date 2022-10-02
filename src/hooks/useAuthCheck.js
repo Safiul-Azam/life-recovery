@@ -2,44 +2,32 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { userLoggedIn } from "../features/auth/authSlice";
 import { useAddNamazMutation } from "../features/namaz/namazApi";
-import { toDay } from "../features/namaz/namazSlice";
 import { dateFormat } from "../utils/dateFormat";
 
 const useAuthCheck = () => {
   const dispatch = useDispatch();
 
   const date = useSelector((state) => state.namaz.date);
+  const [addNamaz, { data, error }] = useAddNamazMutation();
   const [authLoading, setAuthLoading] = useState(true);
-  const [addNamaz, { data, isSuccess, isLoading, error: responseError }] =
-    useAddNamazMutation();
+  const [email, setEmail] = useState("");
 
-    const today = {
-      day: new Date().getDate(),
-      month: new Date().getMonth() + 1,
-      year: new Date().getFullYear(),
-    };
+  if (data) {
+    console.log("useAuthCheck - addNamaz data:", data);
+  }
 
-  useEffect( () => {
+  if (error) {
+    console.log("useAuthCheck - addNamaz error:", error);
+  }
+
+  useEffect(() => {
     const localAuth = localStorage?.getItem("auth");
 
     if (localAuth) {
       const auth = JSON.parse(localAuth);
 
       if (auth?.accessToken && auth?.user) {
-       
-
-        // if (!isLoading && data?.length !== 0) {
-        //   // console.log(data?.length !== 0, data)
-        //   dispatch(toDay({ date: date, namaz: data }));
-        // }
-
-        const formattedDate = dateFormat(date);
-        console.log(formattedDate);
-        addNamaz({
-          email: auth?.user?.email,
-          date: formattedDate,
-        });
-
+        setEmail(auth?.user?.email);
 
         dispatch(
           userLoggedIn({
@@ -52,6 +40,17 @@ const useAuthCheck = () => {
     setAuthLoading(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    const formattedDate = dateFormat(date);
+    if (email) {
+      addNamaz({
+        email: email,
+        date: formattedDate,
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [email]);
 
   return authLoading;
 };
