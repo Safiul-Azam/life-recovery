@@ -1,12 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  date: {
-    day: new Date().getDate(),
-    month: new Date().getMonth() + 1,
-    year: new Date().getFullYear(),
-  },
-  email: "",
+  date: "",
+  namaz: [],
 };
 
 const namazSlice = createSlice({
@@ -15,7 +11,9 @@ const namazSlice = createSlice({
   reducers: {
     toDay: (state, action) => {
       state.date = action.payload.date;
-      state.email = action.payload.email;
+      if (action.payload.namaz) {
+        state.namaz = action.payload.namaz;
+      }
     },
   },
 });

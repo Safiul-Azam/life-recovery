@@ -1,47 +1,109 @@
-import React from "react";
-import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
+import React, { useEffect } from "react";
+import {
+  useCreateUserWithEmailAndPassword,
+  useUpdateProfile,
+} from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
 import logo from "../../Assets/life-recovery.png";
 import SocialLogin from "./SocialLogin";
 import Loading from "../../components/Shared/Loading";
+import { useRegistrationMutation } from "../../features/auth/authApi";
 
-const Login = () => {
+const SignUp = () => {
   const navigate = useNavigate();
+  let location = useLocation();
+
+  const [registration, { data, isLoading, isSuccess, error: responseError }] =
+    useRegistrationMutation();
+
+  const [createUserWithEmailAndPassword, user, loading, error] =
+    useCreateUserWithEmailAndPassword(auth);
+
+  const [updateProfile, updating, updateError] = useUpdateProfile(auth);
+
+  // from
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm();
-  const [signInWithEmailAndPassword, user, loading, error] =
-    useSignInWithEmailAndPassword(auth);
 
-  if (loading) {
+  // navigate
+  let from = location.state?.from?.pathname || "/";
+
+  useEffect(() => {
+    if (responseError?.data) {
+      console.log(responseError.data);
+    }
+    if (data?.accessToken && data?.user) {
+      navigate(from, { replace: true });
+    }
+  }, [data, responseError, navigate, from]);
+
+  const { photoURL } = user?.user || {};
+
+  const onSubmit = async (data) => {
+    const { displayName, email, password } = data || {};
+
+    await createUserWithEmailAndPassword(email, password);
+    await updateProfile({ displayName });
+    await registration({
+      username: displayName,
+      email,
+      password,
+      img: photoURL,
+    });
+  };
+
+  // Decided to render
+  if (loading || updating || isLoading) {
     return <Loading />;
   }
 
-  if (user) {
-    navigate("/");
+  if (!isLoading && isSuccess) {
+    console.log("OAuth done");
   }
 
   let errorMessage;
-  if (error) {
-    errorMessage = <p className="text-red-400">{error.message}</p>;
+  if (error || updateError) {
+    errorMessage = (
+      <p className="text-red-400">{error.message || updateError.message}</p>
+    );
   }
-
-  const onSubmit = (data) => {
-    signInWithEmailAndPassword(data.email, data.password);
-    console.log(data);
-  };
 
   return (
     <div className="lg:w-1/3 md:w-1/2 w-full mx-auto border rounded-xl p-10 shadow-inner my-16">
       <img src={logo} className="bg-green-500 w-20 mx-auto mb-2" alt="" />
       <h2 className="text-2xl text-green-700 font-bold text-center mb-4 uppercase">
-        Log In
+        Registration
       </h2>
       <form className="" onSubmit={handleSubmit(onSubmit)}>
+        <div className="form-control w-full">
+          <fieldset className="border border-solid px-3 text-gray-600 border-gray-300">
+            <legend className="text-lg"> Name</legend>
+            <input
+              {...register("displayName", {
+                required: {
+                  value: true,
+                  message: "name is required",
+                },
+              })}
+              type="text"
+              placeholder="Your Name"
+              className="input border-none focus:border-none  outline-0 focus:outline-none w-full rounded-none"
+            />
+          </fieldset>
+
+          <label className="label">
+            {errors.name?.type === "required" && (
+              <span className="label-text-alt text-error">
+                {errors.name.message}
+              </span>
+            )}
+          </label>
+        </div>
         <div className="form-control w-full">
           {/* <label className="label">
                         <span className="label-text">Email</span>
@@ -119,15 +181,15 @@ const Login = () => {
           value="sign up"
         />
         <p className="mt-6 text-sm">
-          New to Life-Recovery?{" "}
-          <Link className="text-primary" to="/signUp">
-            please sign up
+          Already have an account?{" "}
+          <Link className="text-primary" to="/login">
+            please Login
           </Link>
         </p>
       </form>
-      <SocialLogin />
+      <SocialLogin signUp />
     </div>
   );
 };
 
-export default Login;
+export default SignUp;

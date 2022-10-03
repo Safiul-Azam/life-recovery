@@ -1,28 +1,22 @@
 import React, { useEffect } from "react";
-import {
-  useCreateUserWithEmailAndPassword,
-  useUpdateProfile,
-} from "react-firebase-hooks/auth";
+import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
 import logo from "../../Assets/life-recovery.png";
 import SocialLogin from "./SocialLogin";
 import Loading from "../../components/Shared/Loading";
-import { useDispatch } from "react-redux";
-import { useRegistrationMutation } from "../../features/auth/authApi";
+import { useLoginMutation } from "../../features/auth/authApi";
 
-const SignUp = () => {
+const Login = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   let location = useLocation();
 
-  const [registration, { isLoading, isSuccess }] = useRegistrationMutation();
+  const [login, { data, isSuccess, isLoading, error: responseError }] =
+    useLoginMutation();
 
-  const [createUserWithEmailAndPassword, user, loading, error] =
-    useCreateUserWithEmailAndPassword(auth);
-
-  const [updateProfile, updating, updateError] = useUpdateProfile(auth);
+  const [signInWithEmailAndPassword, user, loading, error] =
+    useSignInWithEmailAndPassword(auth);
 
   const {
     register,
@@ -33,78 +27,42 @@ const SignUp = () => {
   let from = location.state?.from?.pathname || "/";
 
   useEffect(() => {
-    // if (data?.accessToken && data?.user) {
-    //   navigate(from, { replace: true });
-    // }
+    if (responseError?.data) {
+      console.log(responseError?.data);
+    }
 
-    if (!isLoading && isSuccess) {
+    if (data?.accessToken && data?.user) {
       navigate(from, { replace: true });
     }
-  }, [navigate, from, user, isLoading, isSuccess]);
+  }, [data, responseError, navigate, from]);
 
-  const { photoURL } = user?.user || {};
-
-  const onSubmit = async (data) => {
-    const { displayName, email, password } = data || {};
-
-    await createUserWithEmailAndPassword(email, password);
-    await updateProfile({ displayName });
-    await dispatch(
-      registration({ username: displayName, email, password, img: photoURL })
-    );
-  };
-
-  // Decided to render
-  if (loading || updating || isLoading) {
+  if (isLoading || loading) {
     return <Loading />;
   }
 
-  if (!isLoading && isSuccess) {
-    console.log("OAuth done");
+  if (user && isSuccess) {
+    // navigate("/");
+    console.log("Login Success");
   }
 
   let errorMessage;
-  if (error || updateError) {
-    errorMessage = (
-      <p className="text-red-400">{error.message || updateError.message}</p>
-    );
+  if (error) {
+    errorMessage = <p className="text-red-400">{error.message}</p>;
   }
 
-  if (user) {
-    // console.log(user);
-  }
+  const onSubmit = async (data) => {
+    const { email, password } = data;
+    await login({ email, password });
+    await signInWithEmailAndPassword(email, password);
+  };
 
   return (
     <div className="lg:w-1/3 md:w-1/2 w-full mx-auto border rounded-xl p-10 shadow-inner my-16">
       <img src={logo} className="bg-green-500 w-20 mx-auto mb-2" alt="" />
       <h2 className="text-2xl text-green-700 font-bold text-center mb-4 uppercase">
-        Registration
+        Log In
       </h2>
       <form className="" onSubmit={handleSubmit(onSubmit)}>
-        <div className="form-control w-full">
-          <fieldset className="border border-solid px-3 text-gray-600 border-gray-300">
-            <legend className="text-lg"> Name</legend>
-            <input
-              {...register("displayName", {
-                required: {
-                  value: true,
-                  message: "name is required",
-                },
-              })}
-              type="text"
-              placeholder="Your Name"
-              className="input border-none focus:border-none  outline-0 focus:outline-none w-full rounded-none"
-            />
-          </fieldset>
-
-          <label className="label">
-            {errors.name?.type === "required" && (
-              <span className="label-text-alt text-error">
-                {errors.name.message}
-              </span>
-            )}
-          </label>
-        </div>
         <div className="form-control w-full">
           {/* <label className="label">
                         <span className="label-text">Email</span>
@@ -182,9 +140,9 @@ const SignUp = () => {
           value="sign up"
         />
         <p className="mt-6 text-sm">
-          Already have an account?{" "}
-          <Link className="text-primary" to="/login">
-            please Login
+          New to Life-Recovery?{" "}
+          <Link className="text-primary" to="/signUp">
+            please sign up
           </Link>
         </p>
       </form>
@@ -193,4 +151,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default Login;

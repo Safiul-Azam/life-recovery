@@ -1,28 +1,33 @@
-import { signOut } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link } from "react-router-dom";
 import auth from "../../firebase.init";
 import logo from "../../Assets/life-recovery.png";
+import { useDispatch, useSelector } from "react-redux";
+import { userLoggedOut } from "../../features/auth/authSlice";
 
 const Navbar = () => {
-  const [user] = useAuthState(auth);
+  const dispatch = useDispatch();
+  const { user, accessToken } = useSelector((state) => state.auth);
 
-  const handleSignOut = () => {
-    signOut(auth);
+  const { username, img } = user;
+
+  const handleSignOut = async () => {
+    dispatch(userLoggedOut());
+    localStorage.clear();
   };
 
   const profileMenu = (
     <>
       <li>
         <Link to="/" className="justify-between">
-          {user && user?.displayName?.slice(0, 10)}
+          {username && username?.slice(0, 10)}
           <span className="badge badge-primary text-white">New</span>
         </Link>
       </li>
 
       <li>
-        {user ? (
-          <button onClick={() => handleSignOut()}>Logout</button>
+        {accessToken ? (
+          <button onClick={handleSignOut}>Logout</button>
         ) : (
           <Link to="/login">Login</Link>
         )}
@@ -51,8 +56,9 @@ const Navbar = () => {
               <div className="w-10 rounded-full">
                 <img
                   src={
-                    (user && user?.photoURL) ||
-                    "https://res.cloudinary.com/dev-shahriyar/image/upload/v1664434575/Avater/avater-islamic-man_qwwstv.jpg"
+                    img
+                      ? `${img}`
+                      : "https://res.cloudinary.com/dev-shahriyar/image/upload/v1664434575/Avater/avater-islamic-man_qwwstv.jpg"
                   }
                   alt=""
                 />
