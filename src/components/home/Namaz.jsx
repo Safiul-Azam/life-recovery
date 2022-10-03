@@ -372,6 +372,15 @@ const Namaz = () => {
             <div className="flex justify-center items-center gap-2">
               <span className="label-text">জামাত</span>
               <input
+                onChange={(e) =>
+                  setIshaCheck((prv) => ({
+                    ...prv,
+                    jamaat: e.target.checked,
+                  }))
+                }
+                onClick={() => setUpdate(true)}
+                disabled={isLoading}
+                checked={ishaCheck.jamaat}
                 type="checkbox"
                 className="checkbox checkbox-xs checkbox-secondary"
               />
@@ -379,11 +388,32 @@ const Namaz = () => {
             <div className="flex justify-center items-center gap-2">
               <span className="label-text">তাকবীরে উলা</span>
               <input
+                onChange={(e) =>
+                  setIshaCheck((prv) => ({
+                    ...prv,
+                    takbir_e_ula: e.target.checked,
+                  }))
+                }
+                onClick={() => setUpdate(true)}
+                disabled={isLoading}
+                checked={ishaCheck.takbir_e_ula}
                 type="checkbox"
                 className="checkbox checkbox-xs checkbox-secondary"
               />
             </div>
-            <input type="checkbox" className="checkbox checkbox-primary" />
+            <input
+              onChange={(e) =>
+                setIshaCheck((prv) => ({
+                  ...prv,
+                  complete: e.target.checked,
+                }))
+              }
+              onClick={() => setUpdate(true)}
+              disabled={isLoading}
+              checked={ishaCheck.complete}
+              type="checkbox"
+              className="checkbox checkbox-primary"
+            />
           </div>
         </div>
       </div>
