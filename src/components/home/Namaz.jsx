@@ -266,6 +266,15 @@ const Namaz = () => {
             <div className="flex justify-center items-center gap-2">
               <span className="label-text">জামাত</span>
               <input
+                onChange={(e) =>
+                  setAsrCheck((prv) => ({
+                    ...prv,
+                    jamaat: e.target.checked,
+                  }))
+                }
+                onClick={() => setUpdate(true)}
+                disabled={isLoading}
+                checked={asrCheck.jamaat}
                 type="checkbox"
                 className="checkbox checkbox-xs checkbox-secondary"
               />
@@ -273,11 +282,32 @@ const Namaz = () => {
             <div className="flex justify-center items-center gap-2">
               <span className="label-text">তাকবীরে উলা</span>
               <input
+                onChange={(e) =>
+                  setAsrCheck((prv) => ({
+                    ...prv,
+                    takbir_e_ula: e.target.checked,
+                  }))
+                }
+                onClick={() => setUpdate(true)}
+                disabled={isLoading}
+                checked={asrCheck.takbir_e_ula}
                 type="checkbox"
                 className="checkbox checkbox-xs checkbox-secondary"
               />
             </div>
-            <input type="checkbox" className="checkbox checkbox-primary" />
+            <input
+              onChange={(e) =>
+                setAsrCheck((prv) => ({
+                  ...prv,
+                  complete: e.target.checked,
+                }))
+              }
+              onClick={() => setUpdate(true)}
+              disabled={isLoading}
+              checked={asrCheck.complete}
+              type="checkbox"
+              className="checkbox checkbox-primary"
+            />
           </div>
         </div>
         {/* মাগরিব */}
