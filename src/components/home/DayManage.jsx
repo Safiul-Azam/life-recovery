@@ -7,7 +7,6 @@ import { dateFormat } from "../../utils/dateFormat";
 
 const DayManage = () => {
   const { email } = useSelector((state) => state.auth.user);
-  const { date } = useSelector((state) => state.namaz);
 
   const [addNamaz, { data, error: responseError }] = useAddNamazMutation();
 
