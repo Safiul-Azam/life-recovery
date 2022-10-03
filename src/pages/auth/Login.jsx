@@ -7,7 +7,6 @@ import logo from "../../Assets/life-recovery.png";
 import SocialLogin from "./SocialLogin";
 import Loading from "../../components/Shared/Loading";
 import { useLoginMutation } from "../../features/auth/authApi";
-import { useDispatch } from "react-redux";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -41,8 +40,9 @@ const Login = () => {
     return <Loading />;
   }
 
-  if (user) {
+  if (user && isSuccess) {
     // navigate("/");
+    console.log("Login Success");
   }
 
   let errorMessage;
