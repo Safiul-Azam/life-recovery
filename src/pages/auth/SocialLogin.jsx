@@ -40,7 +40,7 @@ const SocialLogin = ({ signUp }) => {
     if (user) {
       // navigate("/");
       const { displayName, email, photoURL } = user?.user || {};
-      console.log(photoURL);
+      
       const password = "social-login";
       if (signUp) {
         registration({

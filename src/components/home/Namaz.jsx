@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useEditNamazMutation } from "../../features/namaz/namazApi";
+import { dateFormat } from "../../utils/dateFormat";
 
 const Namaz = () => {
   const namaz = useSelector((state) => state.namaz.namaz[0]);
+  const date = useSelector((state) => state.namaz.date);
+
   const [editNamaz, { data, isSuccess, isLoading, error }] =
     useEditNamazMutation();
   const [update, setUpdate] = useState(false);
@@ -152,6 +155,9 @@ const Namaz = () => {
 
   return (
     <section className="bg-white w-96 h-96 px-5 py-5 rounded-xl">
+      <p className="text-center -mt-3 text-orange-600">
+        {date || dateFormat(date)}
+      </p>
       <h1 className="text-primary text-center text-2xl font-serif font-semibold py-5 pt-0">
         নামাজের চেকলিস্ট
       </h1>
