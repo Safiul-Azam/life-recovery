@@ -4,7 +4,9 @@ import { useEditNamazMutation } from "../../features/namaz/namazApi";
 
 const Namaz = () => {
   const namaz = useSelector((state) => state.namaz.namaz[0]);
-  const [editNamaz, { data, isLoading, error }] = useEditNamazMutation();
+  const [editNamaz, { data, isSuccess, isLoading, error }] =
+    useEditNamazMutation();
+  const [update, setUpdate] = useState(false);
 
   const { _id } = namaz || {};
 
@@ -12,13 +14,11 @@ const Namaz = () => {
     complete: false,
     jamaat: true,
     takbir_e_ula: true,
-    update: false,
   });
   const [dhuhrCheck, setDhuhrCheck] = useState({
     complete: false,
     jamaat: true,
     takbir_e_ula: true,
-    update: false,
   });
   const [asrCheck, setAsrCheck] = useState({
     complete: false,
@@ -44,7 +44,6 @@ const Namaz = () => {
         complete: fajr?.complete,
         jamaat: fajr?.jamaat,
         takbir_e_ula: fajr?.takbir_e_ula,
-        update: false,
       });
 
       // dhuhr
@@ -52,7 +51,6 @@ const Namaz = () => {
         complete: dhuhr?.complete,
         jamaat: dhuhr?.jamaat,
         takbir_e_ula: dhuhr?.takbir_e_ula,
-        update: false,
       });
 
       // asr
@@ -60,7 +58,6 @@ const Namaz = () => {
         complete: asr?.complete,
         jamaat: asr?.jamaat,
         takbir_e_ula: asr?.takbir_e_ula,
-        update: false,
       });
 
       // maghrib
@@ -68,7 +65,6 @@ const Namaz = () => {
         complete: maghrib?.complete,
         jamaat: maghrib?.jamaat,
         takbir_e_ula: maghrib?.takbir_e_ula,
-        update: false,
       });
 
       // isha
@@ -76,7 +72,6 @@ const Namaz = () => {
         complete: isha?.complete,
         jamaat: isha?.jamaat,
         takbir_e_ula: isha?.takbir_e_ula,
-        update: false,
       });
     }
   }, [namaz]);
@@ -89,12 +84,19 @@ const Namaz = () => {
   };
 
   useEffect(() => {
-    if (_id && fajrCheck.update === true) {
+    if (!isLoading && isSuccess) {
+      setUpdate(false);
+    }
+  }, [isLoading, isSuccess]);
+
+  useEffect(() => {
+    if (_id && update === true) {
       handleChange({
         fajr: fajrCheck,
       });
     }
-  }, [fajrCheck, _id]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [_id, fajrCheck]);
 
   return (
     <section className="bg-white w-96 h-96 px-5 py-5 rounded-xl">
@@ -122,6 +124,7 @@ const Namaz = () => {
                     update: true,
                   }))
                 }
+                onClick={() => setUpdate(true)}
                 disabled={isLoading}
                 checked={fajrCheck.jamaat}
                 type="checkbox"
@@ -137,6 +140,7 @@ const Namaz = () => {
                     takbir_e_ula: e.target.checked,
                   }))
                 }
+                onClick={() => setUpdate(true)}
                 disabled={isLoading}
                 checked={fajrCheck.takbir_e_ula}
                 type="checkbox"
@@ -150,6 +154,7 @@ const Namaz = () => {
                   complete: e.target.checked,
                 }))
               }
+              onClick={() => setUpdate(true)}
               disabled={isLoading}
               checked={fajrCheck.complete}
               type="checkbox"

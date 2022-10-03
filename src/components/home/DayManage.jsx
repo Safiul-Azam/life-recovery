@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Calendar } from "react-modern-calendar-datepicker";
 import "react-modern-calendar-datepicker/lib/DatePicker.css";
 import { useSelector } from "react-redux";
@@ -18,12 +18,14 @@ const DayManage = () => {
     year: new Date().getFullYear(),
   });
 
-  if (data) {
-    console.log("DayManage - addNamaz data:", data);
-  }
-  if (responseError) {
-    console.log("DayManage - addNamaz error:", responseError);
-  }
+  useEffect(() => {
+    if (data) {
+      console.log("DayManage - addNamaz data:", data);
+    }
+    if (responseError) {
+      console.log("DayManage - addNamaz error:", responseError);
+    }
+  }, [data, responseError]);
 
   const namazAdd = (selectedDate) => {
     const formattedDate = dateFormat(selectedDate);

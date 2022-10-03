@@ -12,13 +12,15 @@ const useAuthCheck = () => {
   const [authLoading, setAuthLoading] = useState(true);
   const [email, setEmail] = useState("");
 
-  if (data) {
-    console.log("useAuthCheck - addNamaz data:", data);
-  }
+  useEffect(() => {
+    if (data) {
+      console.log("useAuthCheck - addNamaz data:", data);
+    }
 
-  if (error) {
-    console.log("useAuthCheck - addNamaz error:", error);
-  }
+    if (error) {
+      console.log("useAuthCheck - addNamaz error:", error);
+    }
+  }, [data, error]);
 
   useEffect(() => {
     const localAuth = localStorage?.getItem("auth");
@@ -38,8 +40,7 @@ const useAuthCheck = () => {
       }
     }
     setAuthLoading(false);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     const formattedDate = dateFormat(date);
