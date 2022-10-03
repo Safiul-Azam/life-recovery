@@ -76,6 +76,7 @@ const Namaz = () => {
     }
   }, [namaz]);
 
+  // update db
   const handleChange = (data) => {
     editNamaz({
       id: _id,
@@ -83,12 +84,14 @@ const Namaz = () => {
     });
   };
 
+  // update state
   useEffect(() => {
     if (!isLoading && isSuccess) {
       setUpdate(false);
     }
   }, [isLoading, isSuccess]);
 
+  // fajr
   useEffect(() => {
     if (_id && update === true) {
       handleChange({
@@ -97,6 +100,46 @@ const Namaz = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [_id, fajrCheck]);
+
+  // dhuhr
+  useEffect(() => {
+    if (_id && update === true) {
+      handleChange({
+        dhuhr: dhuhrCheck,
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [_id, dhuhrCheck]);
+
+  // asr
+  useEffect(() => {
+    if (_id && update === true) {
+      handleChange({
+        asr: asrCheck,
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [_id, asrCheck]);
+
+  // maghrib
+  useEffect(() => {
+    if (_id && update === true) {
+      handleChange({
+        maghrib: maghribCheck,
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [_id, maghribCheck]);
+
+  // isha
+  useEffect(() => {
+    if (_id && update === true) {
+      handleChange({
+        isha: ishaCheck,
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [_id, ishaCheck]);
 
   return (
     <section className="bg-white w-96 h-96 px-5 py-5 rounded-xl">
@@ -121,7 +164,6 @@ const Namaz = () => {
                   setFajrCheck((prv) => ({
                     ...prv,
                     jamaat: e.target.checked,
-                    update: true,
                   }))
                 }
                 onClick={() => setUpdate(true)}
@@ -171,20 +213,48 @@ const Namaz = () => {
             <div className="flex justify-center items-center gap-2">
               <span className="label-text">জামাত</span>
               <input
+                onChange={(e) =>
+                  setDhuhrCheck((prv) => ({
+                    ...prv,
+                    jamaat: e.target.checked,
+                  }))
+                }
+                onClick={() => setUpdate(true)}
+                disabled={isLoading}
+                checked={dhuhrCheck.jamaat}
                 type="checkbox"
-                defaultChecked
                 className="checkbox checkbox-xs checkbox-secondary"
               />
             </div>
             <div className="flex justify-center items-center gap-2">
               <span className="label-text">তাকবীরে উলা</span>
               <input
+                onChange={(e) =>
+                  setDhuhrCheck((prv) => ({
+                    ...prv,
+                    takbir_e_ula: e.target.checked,
+                  }))
+                }
+                onClick={() => setUpdate(true)}
+                disabled={isLoading}
+                checked={dhuhrCheck.takbir_e_ula}
                 type="checkbox"
-                defaultChecked
                 className="checkbox checkbox-xs checkbox-secondary"
               />
             </div>
-            <input type="checkbox" className="checkbox checkbox-primary" />
+            <input
+              onChange={(e) =>
+                setDhuhrCheck((prv) => ({
+                  ...prv,
+                  complete: e.target.checked,
+                }))
+              }
+              onClick={() => setUpdate(true)}
+              disabled={isLoading}
+              checked={dhuhrCheck.complete}
+              type="checkbox"
+              className="checkbox checkbox-primary"
+            />
           </div>
         </div>
         {/* আসর */}
@@ -197,7 +267,6 @@ const Namaz = () => {
               <span className="label-text">জামাত</span>
               <input
                 type="checkbox"
-                defaultChecked
                 className="checkbox checkbox-xs checkbox-secondary"
               />
             </div>
@@ -205,7 +274,6 @@ const Namaz = () => {
               <span className="label-text">তাকবীরে উলা</span>
               <input
                 type="checkbox"
-                defaultChecked
                 className="checkbox checkbox-xs checkbox-secondary"
               />
             </div>
@@ -222,7 +290,6 @@ const Namaz = () => {
               <span className="label-text">জামাত</span>
               <input
                 type="checkbox"
-                defaultChecked
                 className="checkbox checkbox-xs checkbox-secondary"
               />
             </div>
@@ -230,7 +297,6 @@ const Namaz = () => {
               <span className="label-text">তাকবীরে উলা</span>
               <input
                 type="checkbox"
-                defaultChecked
                 className="checkbox checkbox-xs checkbox-secondary"
               />
             </div>
@@ -247,7 +313,6 @@ const Namaz = () => {
               <span className="label-text">জামাত</span>
               <input
                 type="checkbox"
-                defaultChecked
                 className="checkbox checkbox-xs checkbox-secondary"
               />
             </div>
@@ -255,7 +320,6 @@ const Namaz = () => {
               <span className="label-text">তাকবীরে উলা</span>
               <input
                 type="checkbox"
-                defaultChecked
                 className="checkbox checkbox-xs checkbox-secondary"
               />
             </div>
