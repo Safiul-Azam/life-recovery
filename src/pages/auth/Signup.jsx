@@ -9,12 +9,10 @@ import auth from "../../firebase.init";
 import logo from "../../Assets/life-recovery.png";
 import SocialLogin from "./SocialLogin";
 import Loading from "../../components/Shared/Loading";
-import { useDispatch } from "react-redux";
 import { useRegistrationMutation } from "../../features/auth/authApi";
 
 const SignUp = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   let location = useLocation();
 
   const [registration, { data, isLoading, isSuccess, error: responseError }] =
@@ -25,12 +23,14 @@ const SignUp = () => {
 
   const [updateProfile, updating, updateError] = useUpdateProfile(auth);
 
+  // from
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm();
 
+  // navigate
   let from = location.state?.from?.pathname || "/";
 
   useEffect(() => {
@@ -187,7 +187,7 @@ const SignUp = () => {
           </Link>
         </p>
       </form>
-      <SocialLogin />
+      <SocialLogin signUp />
     </div>
   );
 };

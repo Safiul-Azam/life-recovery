@@ -7,9 +7,9 @@ import { userLoggedOut } from "../../features/auth/authSlice";
 
 const Navbar = () => {
   const dispatch = useDispatch();
-  const { username } = useSelector((state) => state.auth.user);
+  const { user, accessToken } = useSelector((state) => state.auth);
 
-  const [user] = useAuthState(auth);
+  const { username, img } = user;
 
   const handleSignOut = async () => {
     dispatch(userLoggedOut());
@@ -26,7 +26,7 @@ const Navbar = () => {
       </li>
 
       <li>
-        {user ? (
+        {accessToken ? (
           <button onClick={handleSignOut}>Logout</button>
         ) : (
           <Link to="/login">Login</Link>
@@ -56,8 +56,9 @@ const Navbar = () => {
               <div className="w-10 rounded-full">
                 <img
                   src={
-                    (user && user?.photoURL) ||
-                    "https://res.cloudinary.com/dev-shahriyar/image/upload/v1664434575/Avater/avater-islamic-man_qwwstv.jpg"
+                    img
+                      ? `${img}`
+                      : "https://res.cloudinary.com/dev-shahriyar/image/upload/v1664434575/Avater/avater-islamic-man_qwwstv.jpg"
                   }
                   alt=""
                 />

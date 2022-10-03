@@ -1,10 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useEditNamazMutation } from "../../features/namaz/namazApi";
+import { dateFormat } from "../../utils/dateFormat";
 
 const Namaz = () => {
   const namaz = useSelector((state) => state.namaz.namaz[0]);
-  const [editNamaz, { data, isLoading, error }] = useEditNamazMutation();
+  const date = useSelector((state) => state.namaz.date);
+
+  const [editNamaz, { data, isSuccess, isLoading, error }] =
+    useEditNamazMutation();
+  const [update, setUpdate] = useState(false);
+
+  useEffect(() => {
+    if (data) {
+      console.log("Namaz Update:- ", data);
+    }
+    if (error) {
+      console.log("Namaz Update error: ", error);
+    }
+  }, [data, error]);
 
   const { _id } = namaz || {};
 
@@ -12,13 +26,11 @@ const Namaz = () => {
     complete: false,
     jamaat: true,
     takbir_e_ula: true,
-    update: false,
   });
   const [dhuhrCheck, setDhuhrCheck] = useState({
     complete: false,
     jamaat: true,
     takbir_e_ula: true,
-    update: false,
   });
   const [asrCheck, setAsrCheck] = useState({
     complete: false,
@@ -44,7 +56,6 @@ const Namaz = () => {
         complete: fajr?.complete,
         jamaat: fajr?.jamaat,
         takbir_e_ula: fajr?.takbir_e_ula,
-        update: false,
       });
 
       // dhuhr
@@ -52,7 +63,6 @@ const Namaz = () => {
         complete: dhuhr?.complete,
         jamaat: dhuhr?.jamaat,
         takbir_e_ula: dhuhr?.takbir_e_ula,
-        update: false,
       });
 
       // asr
@@ -60,7 +70,6 @@ const Namaz = () => {
         complete: asr?.complete,
         jamaat: asr?.jamaat,
         takbir_e_ula: asr?.takbir_e_ula,
-        update: false,
       });
 
       // maghrib
@@ -68,7 +77,6 @@ const Namaz = () => {
         complete: maghrib?.complete,
         jamaat: maghrib?.jamaat,
         takbir_e_ula: maghrib?.takbir_e_ula,
-        update: false,
       });
 
       // isha
@@ -76,11 +84,11 @@ const Namaz = () => {
         complete: isha?.complete,
         jamaat: isha?.jamaat,
         takbir_e_ula: isha?.takbir_e_ula,
-        update: false,
       });
     }
   }, [namaz]);
 
+  // update db
   const handleChange = (data) => {
     editNamaz({
       id: _id,
@@ -88,16 +96,68 @@ const Namaz = () => {
     });
   };
 
+  // update state
   useEffect(() => {
-    if (_id && fajrCheck.update === true) {
+    if (!isLoading && isSuccess) {
+      setUpdate(false);
+    }
+  }, [isLoading, isSuccess]);
+
+  // fajr
+  useEffect(() => {
+    if (_id && update === true) {
       handleChange({
         fajr: fajrCheck,
       });
     }
-  }, [fajrCheck, _id]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [_id, fajrCheck]);
+
+  // dhuhr
+  useEffect(() => {
+    if (_id && update === true) {
+      handleChange({
+        dhuhr: dhuhrCheck,
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [_id, dhuhrCheck]);
+
+  // asr
+  useEffect(() => {
+    if (_id && update === true) {
+      handleChange({
+        asr: asrCheck,
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [_id, asrCheck]);
+
+  // maghrib
+  useEffect(() => {
+    if (_id && update === true) {
+      handleChange({
+        maghrib: maghribCheck,
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [_id, maghribCheck]);
+
+  // isha
+  useEffect(() => {
+    if (_id && update === true) {
+      handleChange({
+        isha: ishaCheck,
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [_id, ishaCheck]);
 
   return (
     <section className="bg-white w-96 h-96 px-5 py-5 rounded-xl">
+      <p className="text-center -mt-3 text-orange-600">
+        {date || dateFormat(date)}
+      </p>
       <h1 className="text-primary text-center text-2xl font-serif font-semibold py-5 pt-0">
         নামাজের চেকলিস্ট
       </h1>
@@ -119,9 +179,9 @@ const Namaz = () => {
                   setFajrCheck((prv) => ({
                     ...prv,
                     jamaat: e.target.checked,
-                    update: true,
                   }))
                 }
+                onClick={() => setUpdate(true)}
                 disabled={isLoading}
                 checked={fajrCheck.jamaat}
                 type="checkbox"
@@ -137,6 +197,7 @@ const Namaz = () => {
                     takbir_e_ula: e.target.checked,
                   }))
                 }
+                onClick={() => setUpdate(true)}
                 disabled={isLoading}
                 checked={fajrCheck.takbir_e_ula}
                 type="checkbox"
@@ -150,6 +211,7 @@ const Namaz = () => {
                   complete: e.target.checked,
                 }))
               }
+              onClick={() => setUpdate(true)}
               disabled={isLoading}
               checked={fajrCheck.complete}
               type="checkbox"
@@ -166,20 +228,48 @@ const Namaz = () => {
             <div className="flex justify-center items-center gap-2">
               <span className="label-text">জামাত</span>
               <input
+                onChange={(e) =>
+                  setDhuhrCheck((prv) => ({
+                    ...prv,
+                    jamaat: e.target.checked,
+                  }))
+                }
+                onClick={() => setUpdate(true)}
+                disabled={isLoading}
+                checked={dhuhrCheck.jamaat}
                 type="checkbox"
-                defaultChecked
                 className="checkbox checkbox-xs checkbox-secondary"
               />
             </div>
             <div className="flex justify-center items-center gap-2">
               <span className="label-text">তাকবীরে উলা</span>
               <input
+                onChange={(e) =>
+                  setDhuhrCheck((prv) => ({
+                    ...prv,
+                    takbir_e_ula: e.target.checked,
+                  }))
+                }
+                onClick={() => setUpdate(true)}
+                disabled={isLoading}
+                checked={dhuhrCheck.takbir_e_ula}
                 type="checkbox"
-                defaultChecked
                 className="checkbox checkbox-xs checkbox-secondary"
               />
             </div>
-            <input type="checkbox" className="checkbox checkbox-primary" />
+            <input
+              onChange={(e) =>
+                setDhuhrCheck((prv) => ({
+                  ...prv,
+                  complete: e.target.checked,
+                }))
+              }
+              onClick={() => setUpdate(true)}
+              disabled={isLoading}
+              checked={dhuhrCheck.complete}
+              type="checkbox"
+              className="checkbox checkbox-primary"
+            />
           </div>
         </div>
         {/* আসর */}
@@ -191,20 +281,48 @@ const Namaz = () => {
             <div className="flex justify-center items-center gap-2">
               <span className="label-text">জামাত</span>
               <input
+                onChange={(e) =>
+                  setAsrCheck((prv) => ({
+                    ...prv,
+                    jamaat: e.target.checked,
+                  }))
+                }
+                onClick={() => setUpdate(true)}
+                disabled={isLoading}
+                checked={asrCheck.jamaat}
                 type="checkbox"
-                defaultChecked
                 className="checkbox checkbox-xs checkbox-secondary"
               />
             </div>
             <div className="flex justify-center items-center gap-2">
               <span className="label-text">তাকবীরে উলা</span>
               <input
+                onChange={(e) =>
+                  setAsrCheck((prv) => ({
+                    ...prv,
+                    takbir_e_ula: e.target.checked,
+                  }))
+                }
+                onClick={() => setUpdate(true)}
+                disabled={isLoading}
+                checked={asrCheck.takbir_e_ula}
                 type="checkbox"
-                defaultChecked
                 className="checkbox checkbox-xs checkbox-secondary"
               />
             </div>
-            <input type="checkbox" className="checkbox checkbox-primary" />
+            <input
+              onChange={(e) =>
+                setAsrCheck((prv) => ({
+                  ...prv,
+                  complete: e.target.checked,
+                }))
+              }
+              onClick={() => setUpdate(true)}
+              disabled={isLoading}
+              checked={asrCheck.complete}
+              type="checkbox"
+              className="checkbox checkbox-primary"
+            />
           </div>
         </div>
         {/* মাগরিব */}
@@ -216,20 +334,48 @@ const Namaz = () => {
             <div className="flex justify-center items-center gap-2">
               <span className="label-text">জামাত</span>
               <input
+                onChange={(e) =>
+                  setMaghribCheck((prv) => ({
+                    ...prv,
+                    jamaat: e.target.checked,
+                  }))
+                }
+                onClick={() => setUpdate(true)}
+                disabled={isLoading}
+                checked={maghribCheck.jamaat}
                 type="checkbox"
-                defaultChecked
                 className="checkbox checkbox-xs checkbox-secondary"
               />
             </div>
             <div className="flex justify-center items-center gap-2">
               <span className="label-text">তাকবীরে উলা</span>
               <input
+                onChange={(e) =>
+                  setMaghribCheck((prv) => ({
+                    ...prv,
+                    takbir_e_ula: e.target.checked,
+                  }))
+                }
+                onClick={() => setUpdate(true)}
+                disabled={isLoading}
+                checked={maghribCheck.takbir_e_ula}
                 type="checkbox"
-                defaultChecked
                 className="checkbox checkbox-xs checkbox-secondary"
               />
             </div>
-            <input type="checkbox" className="checkbox checkbox-primary" />
+            <input
+              onChange={(e) =>
+                setMaghribCheck((prv) => ({
+                  ...prv,
+                  complete: e.target.checked,
+                }))
+              }
+              onClick={() => setUpdate(true)}
+              disabled={isLoading}
+              checked={maghribCheck.complete}
+              type="checkbox"
+              className="checkbox checkbox-primary"
+            />
           </div>
         </div>
         {/* এশা */}
@@ -241,20 +387,48 @@ const Namaz = () => {
             <div className="flex justify-center items-center gap-2">
               <span className="label-text">জামাত</span>
               <input
+                onChange={(e) =>
+                  setIshaCheck((prv) => ({
+                    ...prv,
+                    jamaat: e.target.checked,
+                  }))
+                }
+                onClick={() => setUpdate(true)}
+                disabled={isLoading}
+                checked={ishaCheck.jamaat}
                 type="checkbox"
-                defaultChecked
                 className="checkbox checkbox-xs checkbox-secondary"
               />
             </div>
             <div className="flex justify-center items-center gap-2">
               <span className="label-text">তাকবীরে উলা</span>
               <input
+                onChange={(e) =>
+                  setIshaCheck((prv) => ({
+                    ...prv,
+                    takbir_e_ula: e.target.checked,
+                  }))
+                }
+                onClick={() => setUpdate(true)}
+                disabled={isLoading}
+                checked={ishaCheck.takbir_e_ula}
                 type="checkbox"
-                defaultChecked
                 className="checkbox checkbox-xs checkbox-secondary"
               />
             </div>
-            <input type="checkbox" className="checkbox checkbox-primary" />
+            <input
+              onChange={(e) =>
+                setIshaCheck((prv) => ({
+                  ...prv,
+                  complete: e.target.checked,
+                }))
+              }
+              onClick={() => setUpdate(true)}
+              disabled={isLoading}
+              checked={ishaCheck.complete}
+              type="checkbox"
+              className="checkbox checkbox-primary"
+            />
           </div>
         </div>
       </div>
