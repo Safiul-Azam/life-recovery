@@ -9,23 +9,8 @@ export const namazApi = apiSlice.injectEndpoints({
       },
       async onQueryStarted(arg, { queryFulfilled, dispatch }) {
         try {
-          const result = await queryFulfilled;
+          // const result = await queryFulfilled;
 
-          // console.log(result);
-
-          // localStorage.setItem(
-          //   "auth",
-          //   JSON.stringify({
-          //     accessToken: result.data.accessToken,
-          //     user: result.data.user,
-          //   })
-          // );
-          // dispatch(
-          //   toDay({
-          //     accessToken: result.data.accessToken,
-          //     user: result.data.user,
-          //   })
-          // );
         } catch (err) {
           // do nothing
         }
@@ -38,7 +23,8 @@ export const namazApi = apiSlice.injectEndpoints({
       },
       async onQueryStarted(arg, { queryFulfilled, dispatch }) {
         try {
-          const result = await queryFulfilled;
+          // const result = await queryFulfilled;
+
         } catch (err) {
           // do nothing
         }

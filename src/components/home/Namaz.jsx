@@ -8,6 +8,15 @@ const Namaz = () => {
     useEditNamazMutation();
   const [update, setUpdate] = useState(false);
 
+  useEffect(() => {
+    if (data) {
+      console.log("Namaz Update:- ", data);
+    }
+    if (error) {
+      console.log("Namaz Update error: ", error);
+    }
+  }, [data, error]);
+
   const { _id } = namaz || {};
 
   const [fajrCheck, setFajrCheck] = useState({
