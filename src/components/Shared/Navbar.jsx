@@ -8,13 +8,15 @@ import { useEffect } from "react";
 
 const Navbar = () => {
   const { user, accessToken } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const { username, img } = user || {};
 
   const handleSignOut = () => {
+    signOut(auth);
     // dispatch(userLoggedOut());
     localStorage.clear();
-    signOut(auth);
   };
 
   const profileMenu = (
