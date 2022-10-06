@@ -10,11 +10,18 @@ import {
   Legend,
   Area,
 } from "recharts";
+import { useGetNamazsQuery } from "../../features/namaz/namazApi";
 import { pastDays } from "../../utils/pastDays";
 
 const ComposedCharts = () => {
-  console.log(pastDays(7));
-  
+  const prvDays = pastDays(7);
+
+  const { data: resData } = useGetNamazsQuery({ email: "", date: prvDays });
+
+  if (resData) {
+    // console.log(resData);
+  }
+
   const data = [
     {
       day: "1",
