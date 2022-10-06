@@ -15,52 +15,52 @@ const ComposedCharts = () => {
   const data = [
     {
       day: "1",
-      Takbire_Ula: 100,
-      Namaz: 100,
-      Jamat: 100,
-      cnt: 490,
+      Takbire_Ula: 5,
+      Namaz: 5,
+      Jamat: 5,
+      max: 5,
     },
     {
       day: "2",
-      Takbire_Ula: 70,
-      Namaz: 70,
-      Jamat: 70,
-      cnt: 590,
+      Takbire_Ula: 4,
+      Namaz: 4,
+      Jamat: 4,
+      max: 5,
     },
     {
       day: "3",
-      Takbire_Ula: 50,
-      Namaz: 50,
-      Jamat: 50,
-      cnt: 350,
+      Takbire_Ula: 2,
+      Namaz: 2,
+      Jamat: 2,
+      max: 5,
     },
     {
       day: "4",
-      Takbire_Ula: 60,
-      Namaz: 60,
-      Jamat: 60,
-      cnt: 480,
+      Takbire_Ula: 3,
+      Namaz: 3,
+      Jamat: 3,
+      max: 5,
     },
     {
       day: "5",
-      Takbire_Ula: 75,
-      Namaz: 75,
-      Jamat: 75,
-      cnt: 460,
+      Takbire_Ula: 4,
+      Namaz: 4,
+      Jamat: 4,
+      max: 5,
     },
     {
       day: "6",
-      Takbire_Ula: 80,
-      Namaz: 80,
-      Jamat: 80,
-      cnt: 380,
+      Takbire_Ula: 4,
+      Namaz: 4,
+      Jamat: 4,
+      max: 5,
     },
     {
       day: "7",
-      Takbire_Ula: 90,
-      Namaz: 90,
-      Jamat: 90,
-      cnt: 380,
+      Takbire_Ula: 5,
+      Namaz: 5,
+      Jamat: 5,
+      max: 5,
     },
   ];
   return (
@@ -74,24 +74,36 @@ const ComposedCharts = () => {
         bottom: 20,
         left: 20,
       }}
-      className="bg-slate-800/[0.5] text-slate-200 backdrop-blur-sm rounded-xl"
+      className="bg-slate-800/[0.5] backdrop-blur-sm rounded-xl"
     >
       <CartesianGrid stroke="#e2e8f0" />
 
       <XAxis
+        className="text-slate-200"
         dataKey="day"
-        label={{ value: "Day", position: "insideBottomRight", offset: 0 }}
+        label={{
+          value: "Day",
+          position: "insideBottomRight",
+          offset: 0,
+          fill: "#e2e8f0",
+        }}
         scale="band"
+        stroke="#e2e8f0"
       />
 
       <Tooltip />
       <Legend />
 
-      <Area type="monotone" dataKey="Jamat" fill="#8b5cf6" stroke="##0eca2d" />
+      <Line
+        type="monotone"
+        dataKey="Takbire_Ula"
+        stroke="#f6d860"
+        fill="#ff6161"
+      />
+
+      <Area type="monotone" dataKey="Jamat" fill="#daadff" stroke="#00fbff" />
 
       <Bar dataKey="Namaz" barSize={20} fill="#0eca2d" />
-
-      <Line type="monotone" dataKey="Takbire_Ula" stroke="#ff7300" />
     </ComposedChart>
   );
 };
