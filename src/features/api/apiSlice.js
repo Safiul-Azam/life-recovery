@@ -3,6 +3,8 @@ import { signOut } from "firebase/auth";
 import auth from "../../firebase.init";
 import { userLoggedOut } from "../auth/authSlice";
 
+// http://localhost:8800
+// https://stormy-temple-90642.herokuapp.com
 const baseQuery = fetchBaseQuery({
   baseUrl: "http://localhost:8800/api",
   prepareHeaders: async (headers, { getState, endpoint }) => {

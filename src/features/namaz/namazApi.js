@@ -5,12 +5,13 @@ export const namazApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getNamazs: builder.query({
       query: ({ email, date }) => {
-        return `/namaz?email=${email}`;
+        return `/namaz?email=mdsalmanahamad90@gmail.com`;
       },
       async onQueryStarted(arg, { queryFulfilled, dispatch }) {
         try {
-          // const result = await queryFulfilled;
+          const result = await queryFulfilled;
 
+          console.log(result?.data);
         } catch (err) {
           // do nothing
         }
@@ -24,7 +25,6 @@ export const namazApi = apiSlice.injectEndpoints({
       async onQueryStarted(arg, { queryFulfilled, dispatch }) {
         try {
           // const result = await queryFulfilled;
-
         } catch (err) {
           // do nothing
         }
@@ -41,7 +41,7 @@ export const namazApi = apiSlice.injectEndpoints({
       async onQueryStarted(arg, { queryFulfilled, dispatch }) {
         try {
           const result = await queryFulfilled;
-          
+
           dispatch(
             toDay({
               id: result?.data[0]?._id,

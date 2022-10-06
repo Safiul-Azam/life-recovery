@@ -10,8 +10,11 @@ import {
   Legend,
   Area,
 } from "recharts";
+import { pastDays } from "../../utils/pastDays";
 
 const ComposedCharts = () => {
+  console.log(pastDays(7));
+  
   const data = [
     {
       day: "1",
