@@ -1,4 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { signOut } from "firebase/auth";
+import auth from "../../firebase.init";
 import { userLoggedOut } from "../auth/authSlice";
 
 const baseQuery = fetchBaseQuery({
@@ -18,10 +20,11 @@ export const apiSlice = createApi({
   baseQuery: async (args, api, extraOptions) => {
     let result = await baseQuery(args, api, extraOptions);
 
-    // if (result?.error?.status === 401) {
-    //   api.dispatch(userLoggedOut());
-    //   localStorage.clear();
-    // }
+    if (result?.error?.status === 401) {
+      api.dispatch(userLoggedOut());
+      localStorage.clear();
+      signOut(auth)
+    }
     return result;
   },
   tagTypes: [],

@@ -6,8 +6,7 @@ import { useAddNamazMutation } from "../../features/namaz/namazApi";
 import { dateFormat } from "../../utils/dateFormat";
 
 const DayManage = () => {
-  const user = useSelector((state) => state?.auth);
-  const { email } = user || {};
+  const { email } = useSelector((state) => state.auth.user);
 
   const [addNamaz, { data, error: responseError }] = useAddNamazMutation();
 

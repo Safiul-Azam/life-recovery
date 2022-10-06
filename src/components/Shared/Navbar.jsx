@@ -1,21 +1,18 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { Link } from "react-router-dom";
 import auth from "../../firebase.init";
 import logo from "../../Assets/life-recovery.png";
 import { useDispatch, useSelector } from "react-redux";
 import { userLoggedOut } from "../../features/auth/authSlice";
-import { signOut } from "firebase/auth";
-import { useEffect } from "react";
 
 const Navbar = () => {
-  const { user, accessToken } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const { user, accessToken } = useSelector((state) => state.auth);
 
-  const { username, img } = user || {};
+  const { username, img } = user;
 
-  const handleSignOut = () => {
-    signOut(auth);
-    // dispatch(userLoggedOut());
+  const handleSignOut = async () => {
+    dispatch(userLoggedOut());
     localStorage.clear();
   };
 
