@@ -36,15 +36,15 @@ const Navbar = () => {
   );
 
   return (
-    <nav className=" bg-transparent">
-      <div className="container mx-auto navbar">
+    <nav className="bg-[#080d18]">
+      <div className="container max-w-7xl py-3 mx-auto navbar">
         <div className="flex-1">
           <Link
             to="/"
-            className="text-xl text-white font-bold uppercase flex justify-center items-center gap-1"
+            className="text-lg text-slate-100 font-bold uppercase flex justify-center items-center gap-1"
           >
-            <img width={50} src={logo} alt="" />
-            Life<span className="ml-2 "> Recovery</span>
+            <img width={45} src={logo} alt="" />
+            Life Recovery
           </Link>
         </div>
         <div className="flex-none">
@@ -53,9 +53,9 @@ const Navbar = () => {
               tabIndex={0}
               className="btn btn-ghost btn-circle avatar flex"
             >
-              <div className="w-10 rounded-full">
+              <div className="w-8 rounded-full">
                 <img
-                  src={
+                   src={
                     img
                       ? `${img}`
                       : "https://res.cloudinary.com/dev-shahriyar/image/upload/v1664434575/Avater/avater-islamic-man_qwwstv.jpg"
@@ -67,7 +67,7 @@ const Navbar = () => {
 
             <ul
               tabIndex={0}
-              className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+              className="menu menu-compact bg-[#080d18] text-slate-100 dropdown-content mt-4 p-2 shadow rounded-md w-52"
             >
               {profileMenu}
             </ul>

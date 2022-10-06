@@ -154,15 +154,15 @@ const Namaz = () => {
   }, [_id, ishaCheck]);
 
   return (
-    <section className="bg-white w-96 h-96 px-5 py-5 rounded-xl">
-      <p className="text-center -mt-3 text-orange-600">
+    <section className="bg-slate-800/[0.5] backdrop-blur-sm w-96 h-full p-6 rounded-md z-10">
+      {/* <p className="text-center -mt-3 text-orange-600">
         {date || dateFormat(date)}
-      </p>
+      </p> */}
       <h1 className="text-primary text-center text-2xl font-serif font-semibold py-5 pt-0">
         নামাজের চেকলিস্ট
       </h1>
 
-      <hr className="border-secondary" />
+      {/* <hr className="border-secondary" /> */}
 
       <div className=" flex flex-col gap-7 pt-5">
         {" "}
@@ -173,7 +173,7 @@ const Namaz = () => {
               ফজর
             </h1>
             <div className="flex justify-center items-center gap-2">
-              <span className="label-text">জামাত</span>
+              <span className="label-text  text-slate-100">জামাত</span>
               <input
                 onChange={(e) =>
                   setFajrCheck((prv) => ({
@@ -185,11 +185,11 @@ const Namaz = () => {
                 disabled={isLoading}
                 checked={fajrCheck.jamaat}
                 type="checkbox"
-                className="checkbox checkbox-xs checkbox-secondary"
+                className="checkbox  checkbox-xs checkbox-secondary"
               />
             </div>
             <div className="flex justify-center items-center gap-2">
-              <span className="label-text">তাকবীরে উলা</span>
+              <span className="label-text text-slate-100">তাকবীরে উলা</span>
               <input
                 onChange={(e) =>
                   setFajrCheck((prv) => ({
@@ -226,7 +226,7 @@ const Namaz = () => {
               যোহর
             </h1>
             <div className="flex justify-center items-center gap-2">
-              <span className="label-text">জামাত</span>
+              <span className="label-text text-slate-100">জামাত</span>
               <input
                 onChange={(e) =>
                   setDhuhrCheck((prv) => ({
@@ -242,7 +242,7 @@ const Namaz = () => {
               />
             </div>
             <div className="flex justify-center items-center gap-2">
-              <span className="label-text">তাকবীরে উলা</span>
+              <span className="label-text text-slate-100">তাকবীরে উলা</span>
               <input
                 onChange={(e) =>
                   setDhuhrCheck((prv) => ({
@@ -279,7 +279,7 @@ const Namaz = () => {
               আসর
             </h1>
             <div className="flex justify-center items-center gap-2">
-              <span className="label-text">জামাত</span>
+              <span className="label-text text-slate-100">জামাত</span>
               <input
                 onChange={(e) =>
                   setAsrCheck((prv) => ({
@@ -295,7 +295,7 @@ const Namaz = () => {
               />
             </div>
             <div className="flex justify-center items-center gap-2">
-              <span className="label-text">তাকবীরে উলা</span>
+              <span className="label-text text-slate-100">তাকবীরে উলা</span>
               <input
                 onChange={(e) =>
                   setAsrCheck((prv) => ({
@@ -332,7 +332,7 @@ const Namaz = () => {
               মাগরিব
             </h1>
             <div className="flex justify-center items-center gap-2">
-              <span className="label-text">জামাত</span>
+              <span className="label-text text-slate-100">জামাত</span>
               <input
                 onChange={(e) =>
                   setMaghribCheck((prv) => ({
@@ -348,7 +348,7 @@ const Namaz = () => {
               />
             </div>
             <div className="flex justify-center items-center gap-2">
-              <span className="label-text">তাকবীরে উলা</span>
+              <span className="label-text text-slate-100">তাকবীরে উলা</span>
               <input
                 onChange={(e) =>
                   setMaghribCheck((prv) => ({
@@ -385,7 +385,7 @@ const Namaz = () => {
               এশা
             </h1>
             <div className="flex justify-center items-center gap-2">
-              <span className="label-text">জামাত</span>
+              <span className="label-text text-slate-100">জামাত</span>
               <input
                 onChange={(e) =>
                   setIshaCheck((prv) => ({
@@ -401,7 +401,7 @@ const Namaz = () => {
               />
             </div>
             <div className="flex justify-center items-center gap-2">
-              <span className="label-text">তাকবীরে উলা</span>
+              <span className="label-text text-slate-100">তাকবীরে উলা</span>
               <input
                 onChange={(e) =>
                   setIshaCheck((prv) => ({
