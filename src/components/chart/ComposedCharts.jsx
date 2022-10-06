@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import {
   ComposedChart,
   Line,
@@ -10,8 +11,79 @@ import {
   Legend,
   Area,
 } from "recharts";
+import { useGetNamazsQuery } from "../../features/namaz/namazApi";
+import { pastDays } from "../../utils/pastDays";
 
 const ComposedCharts = () => {
+  const resData = useSelector((state) => state.namaz.data);
+  const prvDays = pastDays(7);
+  const [chartData, setChartData] = useState(
+    prvDays.reverse().map((date) => ({
+      day: date.slice(0, 2),
+      Takbire_Ula: 0,
+      Namaz: 0,
+      Jamat: 0,
+      max: 5,
+    }))
+  );
+
+  // const initChartDate = prvDays.map((date) => ({
+  //   day: date.slice(0, 2),
+  //   Takbire_Ula: 0,
+  //   Namaz: 0,
+  //   Jamat: 0,
+  //   max: 5,
+  // }));
+
+  let finalData = [];
+
+  useEffect(() => {
+    // setChartData(initChartDate);
+
+    if (resData.length !== 0) {
+      prvDays.reverse().map((d) => {
+        // findDate
+        return resData.find(
+          (namaz) =>
+            namaz.date === d &&
+            finalData.push({
+              day: d.slice(0, 2),
+              Namaz:
+                0 +
+                (namaz.fajr.complete === true ? 1 : 0) +
+                (namaz.dhuhr.complete === true ? 1 : 0) +
+                (namaz.asr.complete === true ? 1 : 0) +
+                (namaz.maghrib.complete === true ? 1 : 0) +
+                (namaz.isha.complete === true ? 1 : 0),
+              Jamat:
+                0 +
+                (namaz.fajr.jamaat === true ? 1 : 0) +
+                (namaz.dhuhr.jamaat === true ? 1 : 0) +
+                (namaz.asr.jamaat === true ? 1 : 0) +
+                (namaz.maghrib.jamaat === true ? 1 : 0) +
+                (namaz.isha.jamaat === true ? 1 : 0),
+              Takbire_Ula:
+                0 +
+                (namaz.fajr.takbir_e_ula === true ? 1 : 0) +
+                (namaz.dhuhr.takbir_e_ula === true ? 1 : 0) +
+                (namaz.asr.takbir_e_ula === true ? 1 : 0) +
+                (namaz.maghrib.takbir_e_ula === true ? 1 : 0) +
+                (namaz.isha.takbir_e_ula === true ? 1 : 0),
+              max: 5,
+            })
+        );
+      });
+    }
+  }, [resData, prvDays, finalData]);
+
+  useEffect(() => {
+    if (finalData.length !== 0) {
+      // setChartData(finalData)
+      console.log(finalData);
+    }
+  }, [finalData])
+  
+
   const data = [
     {
       day: "1",
@@ -67,7 +139,7 @@ const ComposedCharts = () => {
     <ComposedChart
       width={400}
       height={400}
-      data={data}
+      data={chartData}
       margin={{
         top: 20,
         right: 20,

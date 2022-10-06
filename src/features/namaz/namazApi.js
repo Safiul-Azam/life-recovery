@@ -1,16 +1,30 @@
 import { apiSlice } from "../api/apiSlice";
-import { toDay } from "./namazSlice";
+import { FilterData, toDay } from "./namazSlice";
 
 export const namazApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getNamazs: builder.query({
-      query: ({ email, date }) => {
-        return `/namaz?email=${email}`;
+      query: ({ email, limit, date }) => {
+        return `/namaz?email=mdsalmanahamad90@gmail.com`;
       },
-      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+      async onQueryStarted({ date }, { queryFulfilled, dispatch }) {
         try {
-          // const result = await queryFulfilled;
+          const result = await queryFulfilled;
+          const resData = result?.data;
 
+          let finalData = [];
+
+          // mainData
+          date.forEach((d) => {
+            // findDate
+            resData.find((namaz) => namaz.date === d && finalData.push(namaz));
+          });
+
+          // console.log(finalData.reverse());
+
+          dispatch(
+            FilterData(finalData)
+          );
         } catch (err) {
           // do nothing
         }
@@ -24,7 +38,6 @@ export const namazApi = apiSlice.injectEndpoints({
       async onQueryStarted(arg, { queryFulfilled, dispatch }) {
         try {
           // const result = await queryFulfilled;
-
         } catch (err) {
           // do nothing
         }
@@ -41,7 +54,7 @@ export const namazApi = apiSlice.injectEndpoints({
       async onQueryStarted(arg, { queryFulfilled, dispatch }) {
         try {
           const result = await queryFulfilled;
-          
+
           dispatch(
             toDay({
               id: result?.data[0]?._id,
