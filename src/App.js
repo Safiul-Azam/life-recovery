@@ -5,12 +5,15 @@ import Login from "./pages/auth/Login";
 import Home from "./pages/Home";
 import RequireAuth from "./pages/auth/RequireAuth";
 import useAuthCheck from "./hooks/useAuthCheck";
+import Loading from "./components/Shared/Loading";
 
 const App = () => {
   const authLoading = useAuthCheck();
 
   return authLoading ? (
-    <div>Checking Authentication ...</div>
+    <div>
+      <Loading />
+    </div>
   ) : (
     <main>
       <Routes>
