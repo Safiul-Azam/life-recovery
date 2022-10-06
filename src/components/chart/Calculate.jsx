@@ -1,7 +1,10 @@
 import React from "react";
 import {
-    PolarAngleAxis, PolarGrid, PolarRadiusAxis, Radar,
-    RadarChart
+  PolarAngleAxis,
+  PolarGrid,
+  PolarRadiusAxis,
+  Radar,
+  RadarChart,
 } from "recharts";
 
 const fullMark = 100;
@@ -41,9 +44,9 @@ const Calculate = () => {
       cy={192}
       outerRadius={125}
       width={380}
-      height={380}
+      height={400}
       data={data}
-      className="bg-base-100 rounded-full shadow-inner shadow-secondary"
+      className="bg-slate-800/[0.5] backdrop-blur-sm rounded-xl h-full shadow-inner"
     >
       <PolarGrid />
       <PolarAngleAxis dataKey="namaz" />

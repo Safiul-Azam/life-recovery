@@ -4,7 +4,7 @@ import {
   Line,
   Bar,
   XAxis,
-//   YAxis,
+  //   YAxis,
   CartesianGrid,
   Tooltip,
   Legend,
@@ -74,9 +74,9 @@ const ComposedCharts = () => {
         bottom: 20,
         left: 20,
       }}
-      className="bg-white rounded-xl"
+      className="bg-slate-800/[0.5] text-slate-200 backdrop-blur-sm rounded-xl"
     >
-      <CartesianGrid stroke="#f5f5f5"  />
+      <CartesianGrid stroke="#e2e8f0" />
 
       <XAxis
         dataKey="day"
@@ -84,12 +84,10 @@ const ComposedCharts = () => {
         scale="band"
       />
 
-      {/* <YAxis label={{ value: "", angle: -90, position: "insideLeft" }}/> */}
-
       <Tooltip />
       <Legend />
 
-      <Area type="monotone" dataKey="Jamat" fill="#f6d860" stroke="##0eca2d" />
+      <Area type="monotone" dataKey="Jamat" fill="#8b5cf6" stroke="##0eca2d" />
 
       <Bar dataKey="Namaz" barSize={20} fill="#0eca2d" />
 

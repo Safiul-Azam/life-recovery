@@ -72,13 +72,13 @@ const DayManage = () => {
   ];
 
   return (
-    <div className=" rounded-xl flex justify-center items-center">
+    <div className="flex justify-center items-center">
       <Calendar
         value={selectedDay}
         onChange={handleChange}
         shouldHighlightWeekends
-        calendarClassName="md:text-xs"
-        customDaysClassName={highlightDay}
+        calendarClassName="date-picker md:text-xs rounded-xl bg-white"
+        // customDaysClassName={highlightDay}
       />
     </div>
   );
