@@ -36,7 +36,7 @@ const TwoSimplePieChart = () => {
     { name: "কাজা", value: 50 },
   ];
 
-  const COLORS = ["#0A993C", "#FF4500"];
+  const COLORS = ["#00bd42", "#ff4d4d"];
 
   return (
     <PieChart width={110} height={110}>

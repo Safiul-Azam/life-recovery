@@ -46,17 +46,17 @@ const Calculate = () => {
       width={380}
       height={400}
       data={data}
-      className="bg-slate-800/[0.5] backdrop-blur-sm rounded-xl h-full shadow-inner"
+      className="bg-slate-800/[0.5] backdrop-blur-sm rounded-xl h-full shadow-inner "
     >
       <PolarGrid />
-      <PolarAngleAxis dataKey="namaz" />
-      <PolarRadiusAxis />
+      <PolarAngleAxis dataKey="namaz" stroke="#e2e8f0" fill="#0eca2d" />
+      <PolarRadiusAxis stroke="#f6d860" fill="#0eca2d" />
       <Radar
         name="Mike"
         dataKey="A"
-        stroke="#f6d860"
-        fill="#0eca2d"
-        fillOpacity={0.6}
+        stroke="#00fbff"
+        fill="#24ff48"
+        fillOpacity={0.5}
       />
     </RadarChart>
   );
