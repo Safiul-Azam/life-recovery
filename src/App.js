@@ -4,9 +4,14 @@ import SignUp from "./pages/auth/Signup";
 import Login from "./pages/auth/Login";
 import Home from "./pages/Home";
 import RequireAuth from "./pages/auth/RequireAuth";
+import useAuthCheck from "./hooks/useAuthCheck";
 
 const App = () => {
-  return (
+  const authLoading = useAuthCheck();
+
+  return authLoading ? (
+    <div>Checking Authentication ...</div>
+  ) : (
     <main>
       <Routes>
         <Route

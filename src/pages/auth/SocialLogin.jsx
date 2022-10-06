@@ -39,25 +39,21 @@ const SocialLogin = ({ signUp }) => {
   useEffect(() => {
     if (user) {
       // navigate("/");
-      // const { displayName, email, photoURL } = user?.user || {};
-
-      // const password = "social-login";
-      // if (signUp) {
-      //   registration({
-      //     username: displayName,
-      //     email,
-      //     password,
-      //     img: photoURL,
-      //   });
-      // } else {
-      //   login({ email, password });
-      // }
-
-      if (user) {
-        navigate(from, { replace: true });
+      const { displayName, email, photoURL } = user?.user || {};
+      
+      const password = "social-login";
+      if (signUp) {
+        registration({
+          username: displayName,
+          email,
+          password,
+          img: photoURL,
+        });
+      } else {
+        login({ email, password });
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
   let errorMessage;
@@ -69,8 +65,9 @@ const SocialLogin = ({ signUp }) => {
     return <Loading />;
   }
 
-  const handleSignIn = () => {
-    signInWithGoogle();
+  const handleSignIn = async () => {
+    await signInWithGoogle();
+    // await
   };
 
   return (

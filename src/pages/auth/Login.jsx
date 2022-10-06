@@ -27,14 +27,14 @@ const Login = () => {
   let from = location.state?.from?.pathname || "/";
 
   useEffect(() => {
-    // if (responseError?.data) {
-    //   console.log(responseError?.data);
-    // }
+    if (responseError?.data) {
+      console.log(responseError?.data);
+    }
 
-    if (user) {
+    if (data?.accessToken && data?.user) {
       navigate(from, { replace: true });
     }
-  }, [data, responseError, user, navigate, from]);
+  }, [data, responseError, navigate, from]);
 
   if (isLoading || loading) {
     return <Loading />;
@@ -52,7 +52,7 @@ const Login = () => {
 
   const onSubmit = async (data) => {
     const { email, password } = data;
-    // await login({ email, password });
+    await login({ email, password });
     await signInWithEmailAndPassword(email, password);
   };
 
