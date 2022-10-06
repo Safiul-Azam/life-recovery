@@ -20,7 +20,7 @@ export const namazApi = apiSlice.injectEndpoints({
             resData.find((namaz) => namaz.date === d && finalData.push(namaz));
           });
 
-          console.log(finalData.reverse());
+          // console.log(finalData.reverse());
 
           dispatch(
             FilterData(finalData)
