@@ -9,17 +9,22 @@ import { pastDays } from "../../utils/pastDays";
 const Namaz = () => {
   const namaz = useSelector((state) => state.namaz.namaz[0]);
   const email = useSelector((state) => state.auth.user.email);
+  const day = useSelector((state) => state.filter.day);
 
   const [editNamaz, { data, isSuccess, isLoading, error }] =
     useEditNamazMutation();
   const [update, setUpdate] = useState(false);
 
-  const prvDays = pastDays(7);
+  const prvDays = pastDays(day);
 
   const { refetch } = useGetNamazsQuery({
     email,
     date: prvDays,
   });
+
+  useEffect(() => {
+    refetch();
+  }, [refetch, day]);
 
   useEffect(() => {
     if (data) {
@@ -29,7 +34,7 @@ const Namaz = () => {
     if (error) {
       console.log("Namaz Update error: ", error);
     }
-  }, [data, error, refetch]);
+  }, [data, error, refetch, day]);
 
   const { _id } = namaz || {};
 
