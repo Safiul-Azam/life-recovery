@@ -41,47 +41,48 @@ const ComposedCharts = () => {
     // setChartData(initChartDate);
 
     if (resData.length !== 0) {
-      prvDays.reverse().map((d) => {
-        // findDate
-        return resData.find(
-          (namaz) =>
-            namaz.date === d &&
-            finalData.push({
-              day: d.slice(0, 2),
-              Namaz:
-                0 +
-                (namaz.fajr.complete === true ? 1 : 0) +
-                (namaz.dhuhr.complete === true ? 1 : 0) +
-                (namaz.asr.complete === true ? 1 : 0) +
-                (namaz.maghrib.complete === true ? 1 : 0) +
-                (namaz.isha.complete === true ? 1 : 0),
-              Jamat:
-                0 +
-                (namaz.fajr.jamaat === true ? 1 : 0) +
-                (namaz.dhuhr.jamaat === true ? 1 : 0) +
-                (namaz.asr.jamaat === true ? 1 : 0) +
-                (namaz.maghrib.jamaat === true ? 1 : 0) +
-                (namaz.isha.jamaat === true ? 1 : 0),
-              Takbire_Ula:
-                0 +
-                (namaz.fajr.takbir_e_ula === true ? 1 : 0) +
-                (namaz.dhuhr.takbir_e_ula === true ? 1 : 0) +
-                (namaz.asr.takbir_e_ula === true ? 1 : 0) +
-                (namaz.maghrib.takbir_e_ula === true ? 1 : 0) +
-                (namaz.isha.takbir_e_ula === true ? 1 : 0),
-              max: 5,
-            })
-        );
-      });
+      
+      // prvDays.reverse().map((d) => {
+      //   // findDate
+      //   return resData.find(
+      //     (namaz) =>
+      //       namaz.date === d &&
+      //       finalData.push({
+      //         day: d.slice(0, 2),
+      //         Namaz:
+      //           0 +
+      //           (namaz.fajr.complete === true ? 1 : 0) +
+      //           (namaz.dhuhr.complete === true ? 1 : 0) +
+      //           (namaz.asr.complete === true ? 1 : 0) +
+      //           (namaz.maghrib.complete === true ? 1 : 0) +
+      //           (namaz.isha.complete === true ? 1 : 0),
+      //         Jamat:
+      //           0 +
+      //           (namaz.fajr.jamaat === true ? 1 : 0) +
+      //           (namaz.dhuhr.jamaat === true ? 1 : 0) +
+      //           (namaz.asr.jamaat === true ? 1 : 0) +
+      //           (namaz.maghrib.jamaat === true ? 1 : 0) +
+      //           (namaz.isha.jamaat === true ? 1 : 0),
+      //         Takbire_Ula:
+      //           0 +
+      //           (namaz.fajr.takbir_e_ula === true ? 1 : 0) +
+      //           (namaz.dhuhr.takbir_e_ula === true ? 1 : 0) +
+      //           (namaz.asr.takbir_e_ula === true ? 1 : 0) +
+      //           (namaz.maghrib.takbir_e_ula === true ? 1 : 0) +
+      //           (namaz.isha.takbir_e_ula === true ? 1 : 0),
+      //         max: 5,
+      //       })
+      //   );
+      // });
     }
   }, [resData, prvDays, finalData]);
 
   useEffect(() => {
-    if (finalData.length !== 0) {
-      // setChartData(finalData)
-      console.log(finalData);
+    if (resData.length !== 0) {
+      setChartData(resData)
+      console.log(resData);
     }
-  }, [finalData])
+  }, [resData])
   
 
   const data = [
@@ -166,16 +167,16 @@ const ComposedCharts = () => {
       <Tooltip />
       <Legend />
 
+
+      <Area type="monotone" dataKey="Jamat" fill="#daadff" stroke="#00fbff" />
+
+      <Bar dataKey="Namaz" barSize={20} fill="#0eca2d" />
       <Line
         type="monotone"
         dataKey="Takbire_Ula"
         stroke="#f6d860"
         fill="#ff6161"
       />
-
-      <Area type="monotone" dataKey="Jamat" fill="#daadff" stroke="#00fbff" />
-
-      <Bar dataKey="Namaz" barSize={20} fill="#0eca2d" />
     </ComposedChart>
   );
 };

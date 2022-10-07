@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BiFilterAlt } from "react-icons/bi";
 import { useSelector } from "react-redux";
 import { useGetNamazsQuery } from "../../features/namaz/namazApi";
@@ -8,13 +8,18 @@ const Filter = () => {
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState("৭");
   const email = useSelector((state) => state.auth.user.email);
+  const namaz = useSelector((state) => state.namaz.namaz[0]);
 
   const prvDays = pastDays(7);
 
-  const { data: resData } = useGetNamazsQuery({
+  const { refetch } = useGetNamazsQuery({
     email,
     date: prvDays,
   });
+
+  useEffect(() => {
+    // refetch()
+  }, [namaz, refetch]);
 
   return (
     <div className="fixed top-[50vh] right-2 z-10">
