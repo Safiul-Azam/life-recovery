@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { PieChart, Pie, Tooltip, Cell } from "recharts";
 
 const RADIAN = Math.PI / 190;
@@ -30,13 +30,32 @@ const renderCustomizedLabel = ({
   );
 };
 
-const TwoSimplePieChart = () => {
-  const data = [
-    { name: "নামাজ", value: 70 },
-    { name: "কাজা", value: 30 },
-  ];
+const TwoSimplePieChart = ({ name, count, days, kaja }) => {
+  const [data, setData] = useState([
+    { name: "নামাজ", value: 5 },
+    { name: "⛔", value: 5 },
+  ]);
+  const [colors, setColors] = useState(["#00bd42", "#ff4d4d"]);
 
-  const COLORS = ["#00bd42", "#ff4d4d"];
+  useEffect(() => {
+    if (name && count && days) {
+      if (kaja) {
+        console.log(kaja);
+        setColors(["#ff4d4d", "#00bd42"]);
+        setData([
+          { name: `${name}`, value: days - count },
+          { name: "⛔", value: count },
+        ]);
+      }
+
+      setData([
+        { name: `${name}`, value: count },
+        { name: "⛔", value: days - count },
+      ]);
+    }
+  }, [name, count, days, kaja]);
+
+  // const COLORS = ["#00bd42", "#ff4d4d"];
 
   return (
     <PieChart width={110} height={110}>
@@ -52,7 +71,7 @@ const TwoSimplePieChart = () => {
         fill="#82ca9d"
       >
         {data.map((entry, index) => (
-          <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+          <Cell key={`cell-${index}`} fill={colors[index % colors.length]} />
         ))}
       </Pie>
       <Tooltip />
