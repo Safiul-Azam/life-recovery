@@ -449,7 +449,6 @@ const Namaz = () => {
         </div>
       </div>
 
-      {/* <hr className="border-secondary mt-4" /> */}
     </section>
   );
 };
