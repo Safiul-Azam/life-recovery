@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import {
   PolarAngleAxis,
@@ -8,44 +8,38 @@ import {
   RadarChart,
 } from "recharts";
 
-const fullMark = 100;
-
-const data = [
+const defaultData = [
   {
     namaz: "ফজর",
     count: 4,
-    fullMark,
   },
   {
     namaz: "যোহর",
     count: 5,
-    fullMark,
   },
   {
     namaz: "আসর",
     count: 4,
-    fullMark,
   },
   {
     namaz: "মাগরিব",
     count: 7,
-    fullMark,
   },
   {
     namaz: "এশা",
     count: 3,
-    fullMark,
   },
 ];
 
 const Calculate = () => {
-  const resData = useSelector((state) => state.namaz.data);
-  // console.log(resData);
+  const resData = useSelector((state) => state.filter.avg);
+  const [data, setData] = useState(defaultData);
+
   useEffect(() => {
     if (resData.length !== 0) {
-      
+      setData(resData);
     }
-  }, [resData])
+  }, [resData]);
 
   return (
     <RadarChart

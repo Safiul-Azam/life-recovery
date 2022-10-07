@@ -30,6 +30,8 @@ export const namazApi = apiSlice.injectEndpoints({
                 namaz.date === d &&
                 finalData.push({
                   day: d.slice(0, 2),
+
+                  // namaz count
                   Namaz:
                     0 +
                     (namaz.fajr.complete === true && (fajr = fajr + 1)
@@ -43,6 +45,8 @@ export const namazApi = apiSlice.injectEndpoints({
                       ? 1
                       : 0) +
                     (namaz.isha.complete === true && (isha = isha + 1) ? 1 : 0),
+
+                  // jamat count
                   Jamat:
                     0 +
                     (namaz.fajr.jamaat === true && (jamaat = jamaat + 1)
@@ -60,6 +64,8 @@ export const namazApi = apiSlice.injectEndpoints({
                     (namaz.isha.jamaat === true && (jamaat = jamaat + 1)
                       ? 1
                       : 0),
+
+                  // Takbire_Ula count
                   Takbire_Ula:
                     0 +
                     (namaz.fajr.takbir_e_ula === true &&
