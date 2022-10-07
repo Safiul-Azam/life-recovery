@@ -18,5 +18,5 @@ const namazSlice = createSlice({
   },
 });
 
-export const { toDay } = namazSlice.actions;
+export const { toDay, filterData } = namazSlice.actions;
 export default namazSlice.reducer;

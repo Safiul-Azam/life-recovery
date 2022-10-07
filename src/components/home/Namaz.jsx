@@ -1,24 +1,40 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { useEditNamazMutation } from "../../features/namaz/namazApi";
-import { dateFormat } from "../../utils/dateFormat";
+import {
+  useEditNamazMutation,
+  useGetNamazsQuery,
+} from "../../features/namaz/namazApi";
+import { pastDays } from "../../utils/pastDays";
 
 const Namaz = () => {
   const namaz = useSelector((state) => state.namaz.namaz[0]);
-  const date = useSelector((state) => state.namaz.date);
+  const email = useSelector((state) => state.auth.user.email);
+  const day = useSelector((state) => state.filter.day);
 
   const [editNamaz, { data, isSuccess, isLoading, error }] =
     useEditNamazMutation();
   const [update, setUpdate] = useState(false);
 
+  const prvDays = pastDays(day);
+
+  const { refetch } = useGetNamazsQuery({
+    email,
+    date: prvDays,
+  });
+
+  useEffect(() => {
+    refetch();
+  }, [refetch, day]);
+
   useEffect(() => {
     if (data) {
-      console.log("Namaz Update:- ", data);
+      refetch();
+      console.log("Namaz Update & refetch");
     }
     if (error) {
       console.log("Namaz Update error: ", error);
     }
-  }, [data, error]);
+  }, [data, error, refetch, day]);
 
   const { _id } = namaz || {};
 

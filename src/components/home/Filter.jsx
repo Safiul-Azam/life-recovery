@@ -1,9 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BiFilterAlt } from "react-icons/bi";
+import { useDispatch } from "react-redux";
+import { filterDay } from "../../features/filter/filterSlice";
 
 const Filter = () => {
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState("৭");
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const day =
+      (selected === "৭" && 7) ||
+      (selected === "১৫" && 15) ||
+      (selected === "৩০" && 15);
+      
+    dispatch(filterDay(day));
+    
+  }, [selected, dispatch]);
 
   return (
     <div className="fixed top-[50vh] right-2 z-10">
