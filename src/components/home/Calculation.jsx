@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import TwoSimplePieChart from "../chart/TwoSimplePieChart";
 
 const Calculation = ({ namaz }) => {
-  const { avg: allData, day } = useSelector((state) => state.filter);
+  const allData = useSelector((state) => state.filter.avg);
   const [data, setData] = useState({});
 
   // const selectedNamaz =
