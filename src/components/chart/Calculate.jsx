@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
 import {
   PolarAngleAxis,
   PolarGrid,
@@ -12,32 +13,40 @@ const fullMark = 100;
 const data = [
   {
     namaz: "ফজর",
-    A: 70,
+    A: 4,
     fullMark,
   },
   {
     namaz: "যোহর",
-    A: 95,
+    A: 5,
     fullMark,
   },
   {
     namaz: "আসর",
-    A: 75,
+    A: 4,
     fullMark,
   },
   {
     namaz: "মাগরিব",
-    A: 99,
+    A: 7,
     fullMark,
   },
   {
     namaz: "এশা",
-    A: 70,
+    A: 3,
     fullMark,
   },
 ];
 
 const Calculate = () => {
+  const resData = useSelector((state) => state.namaz.data);
+  // console.log(resData);
+  useEffect(() => {
+    if (resData.length !== 0) {
+      
+    }
+  }, [resData])
+
   return (
     <RadarChart
       cx={185}

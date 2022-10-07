@@ -1,11 +1,12 @@
 import { apiSlice } from "../api/apiSlice";
-import { FilterData, toDay } from "./namazSlice";
+import { fullGraph } from "../filter/filterSlice";
+import { toDay } from "./namazSlice";
 
 export const namazApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getNamazs: builder.query({
       query: ({ email, limit, date }) => {
-        return `/namaz?email=mdsalmanahamad90@gmail.com`;
+        return `/namaz?email=${email}`;
       },
       async onQueryStarted({ date }, { queryFulfilled, dispatch }) {
         try {
@@ -17,14 +18,40 @@ export const namazApi = apiSlice.injectEndpoints({
           // mainData
           date.forEach((d) => {
             // findDate
-            resData.find((namaz) => namaz.date === d && finalData.push(namaz));
+            resData.find(
+              (namaz) =>
+                namaz.date === d &&
+                finalData.push({
+                  day: d.slice(0, 2),
+                  Namaz:
+                    0 +
+                    (namaz.fajr.complete === true ? 1 : 0) +
+                    (namaz.dhuhr.complete === true ? 1 : 0) +
+                    (namaz.asr.complete === true ? 1 : 0) +
+                    (namaz.maghrib.complete === true ? 1 : 0) +
+                    (namaz.isha.complete === true ? 1 : 0),
+                  Jamat:
+                    0 +
+                    (namaz.fajr.jamaat === true ? 1 : 0) +
+                    (namaz.dhuhr.jamaat === true ? 1 : 0) +
+                    (namaz.asr.jamaat === true ? 1 : 0) +
+                    (namaz.maghrib.jamaat === true ? 1 : 0) +
+                    (namaz.isha.jamaat === true ? 1 : 0),
+                  Takbire_Ula:
+                    0 +
+                    (namaz.fajr.takbir_e_ula === true ? 1 : 0) +
+                    (namaz.dhuhr.takbir_e_ula === true ? 1 : 0) +
+                    (namaz.asr.takbir_e_ula === true ? 1 : 0) +
+                    (namaz.maghrib.takbir_e_ula === true ? 1 : 0) +
+                    (namaz.isha.takbir_e_ula === true ? 1 : 0),
+                  max: 5,
+                })
+            );
           });
-
+          // console.log(finalData);
           // console.log(finalData.reverse());
 
-          dispatch(
-            FilterData(finalData)
-          );
+          dispatch(fullGraph(finalData.reverse()));
         } catch (err) {
           // do nothing
         }
