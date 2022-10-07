@@ -12,14 +12,14 @@ const Filter = () => {
 
   const prvDays = pastDays(7);
 
-  const { refetch } = useGetNamazsQuery({
-    email,
-    date: prvDays,
-  });
+  // const { refetch } = useGetNamazsQuery({
+  //   email,
+  //   date: prvDays,
+  // });
 
-  useEffect(() => {
-    // refetch()
-  }, [namaz, refetch]);
+  // useEffect(() => {
+  //   // refetch()
+  // }, [namaz, refetch]);
 
   return (
     <div className="fixed top-[50vh] right-2 z-10">
