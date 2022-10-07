@@ -11,15 +11,15 @@ import {
 const defaultData = [
   {
     namaz: "ফজর",
-    count: 4,
+    count: 7,
   },
   {
     namaz: "যোহর",
-    count: 5,
+    count: 7,
   },
   {
     namaz: "আসর",
-    count: 4,
+    count: 7,
   },
   {
     namaz: "মাগরিব",
@@ -27,7 +27,7 @@ const defaultData = [
   },
   {
     namaz: "এশা",
-    count: 3,
+    count: 7,
   },
 ];
 
