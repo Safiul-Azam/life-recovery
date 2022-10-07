@@ -3,7 +3,6 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   date: "",
   namaz: [],
-  data: [],
 };
 
 const namazSlice = createSlice({
@@ -15,9 +14,6 @@ const namazSlice = createSlice({
       if (action.payload.namaz) {
         state.namaz = action.payload.namaz;
       }
-    },
-    filterData: (state, action) => {
-      state.data = action.payload;
     },
   },
 });
