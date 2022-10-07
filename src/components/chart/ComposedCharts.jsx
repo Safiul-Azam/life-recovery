@@ -14,7 +14,7 @@ import {
 import { pastDays } from "../../utils/pastDays";
 
 const ComposedCharts = () => {
-  const resData = useSelector((state) => state.namaz.data);
+  const resData = useSelector((state) => state.filter.fullGraph);
   const prvDays = pastDays(7);
   const [chartData, setChartData] = useState(
     prvDays.reverse().map((date) => ({
