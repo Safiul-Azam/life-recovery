@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  day: 7,
+  day: 0,
   sum: 35,
   fullGraph: [],
   avg: [],
