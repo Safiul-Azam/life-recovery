@@ -13,27 +13,27 @@ const fullMark = 100;
 const data = [
   {
     namaz: "ফজর",
-    A: 4,
+    count: 4,
     fullMark,
   },
   {
     namaz: "যোহর",
-    A: 5,
+    count: 5,
     fullMark,
   },
   {
     namaz: "আসর",
-    A: 4,
+    count: 4,
     fullMark,
   },
   {
     namaz: "মাগরিব",
-    A: 7,
+    count: 7,
     fullMark,
   },
   {
     namaz: "এশা",
-    A: 3,
+    count: 3,
     fullMark,
   },
 ];
@@ -62,7 +62,7 @@ const Calculate = () => {
       <PolarRadiusAxis stroke="#f6d860" fill="#0eca2d" />
       <Radar
         name="Mike"
-        dataKey="A"
+        dataKey="count"
         stroke="#00fbff"
         fill="#24ff48"
         fillOpacity={0.5}

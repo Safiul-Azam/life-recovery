@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   day: 7,
+  sum: 35,
   fullGraph: [],
   avg: [],
 };
@@ -12,6 +13,7 @@ const filterSlice = createSlice({
   reducers: {
     filterDay: (state, action) => {
       state.day = action.payload;
+      state.sum = action.payload * 5;
     },
     fullGraph: (state, action) => {
       state.fullGraph = action.payload;

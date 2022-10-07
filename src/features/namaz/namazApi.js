@@ -1,5 +1,5 @@
 import { apiSlice } from "../api/apiSlice";
-import { fullGraph } from "../filter/filterSlice";
+import { avg, fullGraph } from "../filter/filterSlice";
 import { toDay } from "./namazSlice";
 
 export const namazApi = apiSlice.injectEndpoints({
@@ -14,6 +14,13 @@ export const namazApi = apiSlice.injectEndpoints({
           const resData = result?.data;
 
           let finalData = [];
+          let fajr = 0;
+          let dhuhr = 0;
+          let asr = 0;
+          let maghrib = 0;
+          let isha = 0;
+          let jamaat = 0;
+          let takbir_e_ula = 0;
 
           // mainData
           date.forEach((d) => {
@@ -25,33 +32,102 @@ export const namazApi = apiSlice.injectEndpoints({
                   day: d.slice(0, 2),
                   Namaz:
                     0 +
-                    (namaz.fajr.complete === true ? 1 : 0) +
-                    (namaz.dhuhr.complete === true ? 1 : 0) +
-                    (namaz.asr.complete === true ? 1 : 0) +
-                    (namaz.maghrib.complete === true ? 1 : 0) +
-                    (namaz.isha.complete === true ? 1 : 0),
+                    (namaz.fajr.complete === true && (fajr = fajr + 1)
+                      ? 1
+                      : 0) +
+                    (namaz.dhuhr.complete === true && (dhuhr = dhuhr + 1)
+                      ? 1
+                      : 0) +
+                    (namaz.asr.complete === true && (asr = asr + 1) ? 1 : 0) +
+                    (namaz.maghrib.complete === true && (maghrib = maghrib + 1)
+                      ? 1
+                      : 0) +
+                    (namaz.isha.complete === true && (isha = isha + 1) ? 1 : 0),
                   Jamat:
                     0 +
-                    (namaz.fajr.jamaat === true ? 1 : 0) +
-                    (namaz.dhuhr.jamaat === true ? 1 : 0) +
-                    (namaz.asr.jamaat === true ? 1 : 0) +
-                    (namaz.maghrib.jamaat === true ? 1 : 0) +
-                    (namaz.isha.jamaat === true ? 1 : 0),
+                    (namaz.fajr.jamaat === true && (jamaat = jamaat + 1)
+                      ? 1
+                      : 0) +
+                    (namaz.dhuhr.jamaat === true && (jamaat = jamaat + 1)
+                      ? 1
+                      : 0) +
+                    (namaz.asr.jamaat === true && (jamaat = jamaat + 1)
+                      ? 1
+                      : 0) +
+                    (namaz.maghrib.jamaat === true && (jamaat = jamaat + 1)
+                      ? 1
+                      : 0) +
+                    (namaz.isha.jamaat === true && (jamaat = jamaat + 1)
+                      ? 1
+                      : 0),
                   Takbire_Ula:
                     0 +
-                    (namaz.fajr.takbir_e_ula === true ? 1 : 0) +
-                    (namaz.dhuhr.takbir_e_ula === true ? 1 : 0) +
-                    (namaz.asr.takbir_e_ula === true ? 1 : 0) +
-                    (namaz.maghrib.takbir_e_ula === true ? 1 : 0) +
-                    (namaz.isha.takbir_e_ula === true ? 1 : 0),
+                    (namaz.fajr.takbir_e_ula === true &&
+                    (takbir_e_ula = takbir_e_ula + 1)
+                      ? 1
+                      : 0) +
+                    (namaz.dhuhr.takbir_e_ula === true &&
+                    (takbir_e_ula = takbir_e_ula + 1)
+                      ? 1
+                      : 0) +
+                    (namaz.asr.takbir_e_ula === true &&
+                    (takbir_e_ula = takbir_e_ula + 1)
+                      ? 1
+                      : 0) +
+                    (namaz.maghrib.takbir_e_ula === true &&
+                    (takbir_e_ula = takbir_e_ula + 1)
+                      ? 1
+                      : 0) +
+                    (namaz.isha.takbir_e_ula === true &&
+                    (takbir_e_ula = takbir_e_ula + 1)
+                      ? 1
+                      : 0),
                   max: 5,
                 })
             );
           });
-          // console.log(finalData);
-          // console.log(finalData.reverse());
 
-          dispatch(fullGraph(finalData.reverse()));
+          const namazCount = [
+            {
+              namaz: "ফজর",
+              count: fajr,
+              days: date.length,
+              jamaat,
+              takbir_e_ula,
+            },
+            {
+              namaz: "যোহর",
+              count: dhuhr,
+              days: date.length,
+              jamaat,
+              takbir_e_ula,
+            },
+            {
+              namaz: "আসর",
+              count: asr,
+              days: date.length,
+              jamaat,
+              takbir_e_ula,
+            },
+            {
+              namaz: "মাগরিব",
+              count: maghrib,
+              days: date.length,
+              jamaat,
+              takbir_e_ula,
+            },
+            {
+              namaz: "এশা",
+              count: isha,
+              days: date.length,
+              jamaat,
+              takbir_e_ula,
+            },
+          ];
+
+          finalData.length !== 0 &&
+            dispatch(fullGraph(finalData.reverse())) &&
+            dispatch(avg(namazCount));
         } catch (err) {
           // do nothing
         }
