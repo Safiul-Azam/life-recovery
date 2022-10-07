@@ -16,11 +16,11 @@ const namazSlice = createSlice({
         state.namaz = action.payload.namaz;
       }
     },
-    FilterData: (state, action) => {
+    filterData: (state, action) => {
       state.data = action.payload;
     },
   },
 });
 
-export const { toDay, FilterData } = namazSlice.actions;
+export const { toDay, filterData } = namazSlice.actions;
 export default namazSlice.reducer;

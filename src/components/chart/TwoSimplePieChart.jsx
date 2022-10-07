@@ -32,8 +32,8 @@ const renderCustomizedLabel = ({
 
 const TwoSimplePieChart = () => {
   const data = [
-    { name: "নামাজ", value: 100 },
-    { name: "কাজা", value: 50 },
+    { name: "নামাজ", value: 70 },
+    { name: "কাজা", value: 30 },
   ];
 
   const COLORS = ["#00bd42", "#ff4d4d"];

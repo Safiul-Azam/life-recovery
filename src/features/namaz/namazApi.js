@@ -1,5 +1,6 @@
 import { apiSlice } from "../api/apiSlice";
-import { FilterData, toDay } from "./namazSlice";
+import { fullGraph } from "../filter/filterSlice";
+import { filterData, toDay } from "./namazSlice";
 
 export const namazApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -50,7 +51,8 @@ export const namazApi = apiSlice.injectEndpoints({
           // console.log(finalData);
           // console.log(finalData.reverse());
 
-          dispatch(FilterData(finalData.reverse()));
+          dispatch(fullGraph(finalData.reverse()));
+          dispatch(filterData(finalData.reverse()));
         } catch (err) {
           // do nothing
         }
