@@ -6,6 +6,7 @@ import {
   PolarRadiusAxis,
   Radar,
   RadarChart,
+  Tooltip,
 } from "recharts";
 
 const defaultData = [
@@ -51,11 +52,12 @@ const Calculate = () => {
       data={data}
       className="bg-slate-800/[0.5] backdrop-blur-sm rounded-xl h-full shadow-inner "
     >
+      <Tooltip />
       <PolarGrid />
       <PolarAngleAxis dataKey="namaz" stroke="#e2e8f0" fill="#0eca2d" />
       <PolarRadiusAxis stroke="#f6d860" fill="#0eca2d" />
       <Radar
-        name="Mike"
+        name="namaz"
         dataKey="count"
         stroke="#00fbff"
         fill="#24ff48"
