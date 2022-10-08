@@ -31,15 +31,15 @@ const Calculation = ({ namaz }) => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4  justify-items-center items-center gap-3">
         {/* নামাজ */}
-        <div className="grid grid-cols-2 justify-items-center items-center bg-slate-900 w-full lg:w-64 rounded-xl px-2 py-2">
-          <h2 className="text-center text-slate-100 font-bold">নামাজ</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 justify-items-center items-center bg-slate-900 w-full lg:w-64 rounded-xl px-2 py-2">
+          <h2 className="text-center text-slate-100 font-bold m-3 md:m-0">নামাজ</h2>
 
           <TwoSimplePieChart name={name} count={count} days={days} />
         </div>
 
         {/* কাজা নামাজ */}
-        <div className="grid grid-cols-2 justify-items-center items-center bg-slate-900 w-full lg:w-64 rounded-xl px-2 py-2">
-          <h2 className="text-center text-slate-100 font-bold px-2">
+        <div className="grid grid-cols-1 md:grid-cols-2 justify-items-center items-center bg-slate-900 w-full lg:w-64 rounded-xl px-2 py-2">
+          <h2 className="text-center text-slate-100 font-bold px-2 m-3 md:m-0">
             কাজা নামাজ
           </h2>
 
@@ -47,8 +47,8 @@ const Calculation = ({ namaz }) => {
         </div>
 
         {/* জামাতে পড়েছেন  */}
-        <div className="grid grid-cols-2 justify-items-center items-center bg-slate-900 w-full lg:w-64 rounded-xl px-2 py-2">
-          <h2 className="text-center text-slate-100 font-bold">
+        <div className="grid grid-cols-1 md:grid-cols-2 justify-items-center items-center bg-slate-900 w-full lg:w-64 rounded-xl px-2 py-2">
+          <h2 className="text-center text-slate-100 font-bold m-3 md:m-0">
             জামাতে পড়েছেন
           </h2>
 
@@ -56,8 +56,8 @@ const Calculation = ({ namaz }) => {
         </div>
 
         {/* তাকবীরে উলার সাথে পড়েছেন */}
-        <div className="grid grid-cols-2 justify-items-center items-center bg-slate-900 w-full lg:w-64 rounded-xl px-2 py-2">
-          <h2 className="text-center text-slate-100 font-bold">
+        <div className="grid grid-cols-1 md:grid-cols-2 justify-items-center items-center bg-slate-900 w-full lg:w-64 rounded-xl px-2 py-2">
+          <h2 className="text-center text-slate-100 font-bold m-3 md:m-0">
             তাকবীরে-উলার সাথে পড়েছেন
           </h2>
 

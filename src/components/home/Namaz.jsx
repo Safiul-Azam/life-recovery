@@ -170,7 +170,7 @@ const Namaz = () => {
   }, [_id, ishaCheck]);
 
   return (
-    <section className="bg-slate-800/[0.5] backdrop-blur-sm w-96 h-full p-6 rounded-md z-10">
+    <section className="bg-slate-800/[0.5] backdrop-blur-sm w-80 md:w-96 h-full p-6 rounded-md z-10">
       {/* <p className="text-center -mt-3 text-orange-600">
         {date || dateFormat(date)}
       </p> */}
