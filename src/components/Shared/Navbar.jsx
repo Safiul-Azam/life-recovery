@@ -1,6 +1,4 @@
-import { useAuthState } from "react-firebase-hooks/auth";
 import { Link } from "react-router-dom";
-import auth from "../../firebase.init";
 import logo from "../../Assets/life-recovery.png";
 import { useDispatch, useSelector } from "react-redux";
 import { userLoggedOut } from "../../features/auth/authSlice";
@@ -55,7 +53,7 @@ const Navbar = () => {
             >
               <div className="w-8 rounded-full">
                 <img
-                   src={
+                  src={
                     img
                       ? `${img}`
                       : "https://res.cloudinary.com/dev-shahriyar/image/upload/v1664434575/Avater/avater-islamic-man_qwwstv.jpg"
