@@ -11,7 +11,7 @@ const renderCustomizedLabel = ({
   percent,
   index,
 }) => {
-  const radius = innerRadius + (outerRadius - innerRadius) * 0.2;
+  const radius = innerRadius + (outerRadius - innerRadius) * 0.15;
 
   const x = cx + radius * Math.cos(-midAngle * RADIAN);
 
@@ -40,18 +40,18 @@ const TwoSimplePieChart = ({ name, count, days, kaja }) => {
   useEffect(() => {
     if (name && count && days) {
       if (kaja) {
-        console.log(kaja);
         setColors(["#ff4d4d", "#00bd42"]);
+
         setData([
           { name: `${name}`, value: days - count },
-          { name: "⛔", value: count },
+          { name: "✅", value: count },
+        ]);
+      } else {
+        setData([
+          { name: `${name}`, value: count },
+          { name: "⛔", value: days - count },
         ]);
       }
-
-      setData([
-        { name: `${name}`, value: count },
-        { name: "⛔", value: days - count },
-      ]);
     }
   }, [name, count, days, kaja]);
 
@@ -66,7 +66,7 @@ const TwoSimplePieChart = ({ name, count, days, kaja }) => {
         cy="50%"
         labelLine={false}
         label={renderCustomizedLabel}
-        innerRadius={16}
+        innerRadius={15}
         outerRadius={50}
         fill="#82ca9d"
       >
