@@ -13,6 +13,7 @@ import {
   Legend,
   Area,
   Cell,
+  ResponsiveContainer,
 } from "recharts";
 import { pastDays } from "../../utils/pastDays";
 
@@ -78,59 +79,68 @@ const ComposedCharts = () => {
   }, [resData]);
 
   return (
-    <ComposedChart
-      width={400}
-      height={400}
-      data={chartData}
-      margin={{
-        top: 20,
-        right: 20,
-        bottom: 20,
-        left: -20,
-      }}
-      className="bg-slate-800/[0.5] backdrop-blur-sm rounded-xl"
-    >
-      <CartesianGrid stroke="#e2e8f0" strokeDasharray="0.5 5" />
+    <div className="max-w-[400px]" style={{ width: "100%", height: 400 }}>
+      <ResponsiveContainer>
+        <ComposedChart
+          width={400}
+          height={400}
+          data={chartData}
+          margin={{
+            top: 20,
+            right: 20,
+            bottom: 30,
+            left: -20,
+          }}
+          className="bg-slate-800/[0.5] backdrop-blur-sm rounded-xl"
+        >
+          <CartesianGrid stroke="#e2e8f0" strokeDasharray="0.5 5" />
 
-      <XAxis
-        className="text-slate-200"
-        dataKey="day"
-        label={{
-          value: "Day",
-          position: "insideBottomRight",
-          offset: 0,
-          fill: "#e2e8f0",
-        }}
-        scale="band"
-        stroke="#e2e8f0"
-      />
-      <YAxis dataKey="" stroke="#e2e8f0" />
-      <Tooltip content={<CustomizedTooltip />} />
-      <Legend />
+          <XAxis
+            className="text-slate-200"
+            dataKey="day"
+            label={{
+              value: "Date",
+              position: "insideBottom",
+              offset: -15,
+              fill: "#0eca2d",
+            }}
+            scale="band"
+            stroke="#e2e8f0"
+          />
+          <YAxis  stroke="#e2e8f0" />
+          <Tooltip content={<CustomizedTooltip />} />
+          {/* <Legend /> */}
 
-      {/* <Area type="monotone" dataKey="Jamat" fill="#daadff" stroke="#00fbff" /> */}
+          {/* <Area type="monotone" dataKey="Jamat" fill="#daadff" stroke="#00fbff" /> */}
 
-      {/* <Bar dataKey="Namaz" barSize={30} fill="#0eca2d" /> */}
-      <Bar
-        dataKey="Namaz"
-        fill="#0eca2d"
-        shape={<TriangleBar />}
-        label={{ position: "top" }}
-      >
-        {chartData.map((entry, index) => (
-          <Cell key={`cell-${index}`} fill={colors[index % 20]} />
-        ))}
-      </Bar>
+          {/* <Bar dataKey="Namaz" barSize={30} fill="#0eca2d" /> */}
+          <Bar
+            dataKey="Namaz"
+            fill="#0eca2d"
+            shape={<TriangleBar />}
+            label={{ position: "top" }}
+          >
+            {chartData.map((entry, index) => (
+              <Cell key={`cell-${index}`} fill={colors[index % 20]} />
+            ))}
+          </Bar>
 
-      <Line type="monotone" dataKey="Jamat" stroke="#00fbff" fill="#daadff" />
+          <Line
+            type="monotone"
+            dataKey="Jamat"
+            stroke="#00fbff"
+            fill="#daadff"
+          />
 
-      <Line
-        type="monotone"
-        dataKey="Takbire_Ula"
-        stroke="#f6d860"
-        fill="#ff6161"
-      />
-    </ComposedChart>
+          <Line
+            type="monotone"
+            dataKey="Takbire_Ula"
+            stroke="#f6d860"
+            fill="#ff6161"
+          />
+        </ComposedChart>
+      </ResponsiveContainer>
+    </div>
   );
 };
 
