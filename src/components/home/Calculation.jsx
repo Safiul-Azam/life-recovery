@@ -6,14 +6,6 @@ const Calculation = ({ namaz }) => {
   const allData = useSelector((state) => state.filter.avg);
   const [data, setData] = useState({});
 
-  // const selectedNamaz =
-  //   (namaz === "ফজর" && "fajr") ||
-  //   (namaz === "ফজর" && "fajr") ||
-  //   (namaz === "ফজর" && "fajr") ||
-  //   (namaz === "ফজর" && "fajr") ||
-  //   (namaz === "ফজর" && "fajr") ||
-  //   (namaz === "ফজর" && "fajr");
-
   useEffect(() => {
     if (allData.length !== 0) {
       const seletedData = allData.find((e) => e.namaz === namaz);
