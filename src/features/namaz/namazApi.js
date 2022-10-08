@@ -88,7 +88,7 @@ export const namazApi = apiSlice.injectEndpoints({
                     (takbir_e_ula = takbir_e_ula + 1)
                       ? 1
                       : 0),
-                  max: 5,
+                  Max: 5,
                 })
             );
           });

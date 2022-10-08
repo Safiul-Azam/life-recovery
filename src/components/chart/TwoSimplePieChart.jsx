@@ -40,7 +40,7 @@ const TwoSimplePieChart = ({ name, count, days, kaja }) => {
   useEffect(() => {
     if (name && count && days) {
       if (kaja) {
-        setColors(["#ff4d4d", "#00bd42"]);
+        // setColors(["#ff4d4d", "#00bd42"]);
 
         setData([
           { name: `${name}`, value: days - count },
