@@ -34,7 +34,6 @@ const defaultData = [
 
 const CustomizedTooltip = ({ active, payload, label }) => {
   if (active) {
-    console.log(payload[0].value, payload[0].payload.days);
     return (
       <div className="chart-tooltip bg-white p-2 px-3 rounded-lg">
         <div className="">
@@ -43,7 +42,9 @@ const CustomizedTooltip = ({ active, payload, label }) => {
           </h3>
         </div>
         <div className="">
-          <p className="text-primary mt-2">{label}:- {payload[0].value}</p>
+          <p className="text-primary mt-2">
+            {label}:- {payload[0].value}
+          </p>
         </div>
       </div>
     );

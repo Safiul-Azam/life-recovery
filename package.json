@@ -11,7 +11,6 @@
     "d3-scale-chromatic": "^3.0.0",
     "daisyui": "^2.31.0",
     "date-fns": "^2.29.3",
-    "firebase": "^9.10.0",
     "react": "^18.2.0",
     "react-day-picker": "^8.3.0",
     "react-dom": "^18.2.0",
