@@ -1,5 +1,5 @@
 import { scaleOrdinal } from "d3-scale";
-import { schemeCategory10 } from "d3-scale-chromatic";
+import { schemePaired } from "d3-scale-chromatic";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import {
@@ -17,7 +17,7 @@ import {
 } from "recharts";
 import { pastDays } from "../../utils/pastDays";
 
-const colors = scaleOrdinal(schemeCategory10).range();
+const colors = scaleOrdinal(schemePaired).range();
 
 const getPath = (x, y, width, height) => {
   return `M${x},${y + height}C${x + width / 3},${y + height} ${x + width / 2},${
@@ -107,7 +107,7 @@ const ComposedCharts = () => {
             scale="band"
             stroke="#e2e8f0"
           />
-          <YAxis  stroke="#e2e8f0" />
+          <YAxis stroke="#e2e8f0" />
           <Tooltip content={<CustomizedTooltip />} />
           {/* <Legend /> */}
 
@@ -121,7 +121,7 @@ const ComposedCharts = () => {
             label={{ position: "top" }}
           >
             {chartData.map((entry, index) => (
-              <Cell key={`cell-${index}`} fill={colors[index % 20]} />
+              <Cell key={`cell-${index}`} fill={colors[index % 10]} />
             ))}
           </Bar>
 
