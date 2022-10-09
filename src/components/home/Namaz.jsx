@@ -170,18 +170,15 @@ const Namaz = () => {
   }, [_id, ishaCheck]);
 
   return (
-    <section className="bg-slate-800/[0.5] backdrop-blur-sm w-96 h-full p-6 rounded-md z-10">
-      {/* <p className="text-center -mt-3 text-orange-600">
-        {date || dateFormat(date)}
-      </p> */}
+    <section className="bg-slate-800/[0.5] backdrop-blur-sm w-80 md:w-96 h-full p-6 rounded-md z-10">
+      
       <h1 className="text-primary text-center text-2xl font-serif font-semibold py-5 pt-0">
         নামাজের চেকলিস্ট
       </h1>
 
-      {/* <hr className="border-secondary" /> */}
-
       <div className=" flex flex-col gap-7 pt-5">
         {" "}
+
         {/* ফজর */}
         <div className="form-control">
           <div className=" flex justify-between">
@@ -235,6 +232,7 @@ const Namaz = () => {
             />
           </div>
         </div>
+
         {/* যোহর */}
         <div className="form-control">
           <div className=" flex justify-between">
@@ -288,6 +286,7 @@ const Namaz = () => {
             />
           </div>
         </div>
+
         {/* আসর */}
         <div className="form-control">
           <div className=" flex justify-between">
@@ -341,6 +340,7 @@ const Namaz = () => {
             />
           </div>
         </div>
+
         {/* মাগরিব */}
         <div className="form-control">
           <div className=" flex justify-between">
@@ -394,6 +394,7 @@ const Namaz = () => {
             />
           </div>
         </div>
+        
         {/* এশা */}
         <div className="form-control">
           <div className=" flex justify-between">
@@ -449,7 +450,6 @@ const Namaz = () => {
         </div>
       </div>
 
-      {/* <hr className="border-secondary mt-4" /> */}
     </section>
   );
 };

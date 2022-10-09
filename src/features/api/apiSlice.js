@@ -6,7 +6,7 @@ import { userLoggedOut } from "../auth/authSlice";
 // http://localhost:8800
 // https://stormy-temple-90642.herokuapp.com
 const baseQuery = fetchBaseQuery({
-  baseUrl: "http://localhost:8800/api",
+  baseUrl: "https://stormy-temple-90642.herokuapp.com/api",
   prepareHeaders: async (headers, { getState, endpoint }) => {
     const token = getState()?.auth?.accessToken;
     if (token) {
