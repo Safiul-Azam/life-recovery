@@ -3,20 +3,21 @@ import Calendar from "react-github-contribution-calendar";
 
 const Contributions = () => {
   var values = {
-    '2016-06-23': 1,
-    '2016-06-26': 2,
-    '2016-06-27': 3,
-    '2016-06-28': 4
+    "2022-04-23": 1,
+    "2022-06-26": 2,
+    "2022-09-29": 3,
+    "2022-10-9": 4,
+    "2022-11-08": 4,
+    "2022-10-12": 2,
+    "2022-10-13": 5,
+    "2022-10-14": 4,
+    "2022-10-15": 3,
+    "2022-10-17": 5,
+    "2022-10-18": 3,
   };
-  var panelColors = [
-    '#ffffff',
-    '#9BE9A8',
-    '#40C463',
-    '#30A14E',
-    '#216E39',
-  ];
-  var until = "2016-12-30";
-  var weekNames = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
+  var panelColors = ["#EBEDF0", "rgba(196, 46, 0, 0.822)", "rgb(251, 255, 0)", "rgb(138, 115, 255)","rgba(1, 48, 177, 0.815)","rgb(25, 202, 2)"];
+  var until = "2022-12-30";
+  var weekNames = ["s", "m", "t", "w", "t", "f", "s"];
   var monthNames = [
     "Jan",
     "Feb",
@@ -31,16 +32,36 @@ const Contributions = () => {
     "Nov",
     "Dec",
   ];
+  var monthLabelAttributes = {
+    style: {
+      "font-size": 14,
+      "alignment-baseline": "central",
+      "margin":'20px',
+      fill: "#AAA",
+    },
+  };
+  var panelAttributes = { rx: 2, ry: 2 };
+  var weekLabelAttributes = {
+    style: {
+      "font-size": 14,
+      "alignment-baseline": "central",
+      "margin-bottom":'20px',
+      fill: "#AAA",
+    },
+  };
 
   return (
-    <div className=" my-20">
-      <div className="flex justify-center">
+    <div className="my-20">
+      <div className="w-1/2 mx-auto ">
         <Calendar
           values={values}
           panelColors={panelColors}
+          panelAttributes={panelAttributes}
           until={until}
           weekNames={weekNames}
+          monthLabelAttributes={monthLabelAttributes}
           monthNames={monthNames}
+          weekLabelAttributes={weekLabelAttributes}
         />
       </div>
     </div>

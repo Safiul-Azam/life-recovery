@@ -41,31 +41,31 @@ const DayManage = () => {
   const highlightDay = [
     {
       year: 2022,
-      month: 9,
+      month: 10,
       day: 4,
       className: "purpleDay",
     },
     {
       year: 2022,
-      month: 9,
+      month: 10,
       day: 12,
       className: "orangeDay",
     },
     {
       year: 2022,
-      month: 9,
+      month: 10,
       day: 18,
       className: "yellowDay",
     },
     {
       year: 2022,
-      month: 9,
+      month: 10,
       day: 20,
       className: "greenDay",
     },
     {
       year: 2022,
-      month: 9,
+      month: 10,
       day: 26,
       className: "navyBlueDay",
     },
@@ -78,7 +78,7 @@ const DayManage = () => {
         onChange={handleChange}
         shouldHighlightWeekends
         calendarClassName="date-picker md:text-xs rounded-xl bg-white"
-        // customDaysClassName={highlightDay}
+        customDaysClassName={highlightDay}
       />
     </div>
   );
