@@ -13,3 +13,4 @@
 - react-firebase-hooks
 - react-hook-form
 - react-icons
+- d3-scale-chromatic
