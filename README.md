@@ -14,3 +14,4 @@
 - react-hook-form
 - react-icons
 - d3-scale-chromatic
+- react-modern-calendar-datepicker
