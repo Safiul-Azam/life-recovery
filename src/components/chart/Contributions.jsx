@@ -5,10 +5,16 @@ const Contributions = () => {
   // <div className='w-3 h-3 bg-green-500 rounded'></div>
 
   return (
-    <div >
-      <div className="mt-20 grid grid-rows-5 grid-cols-12 gap-2">
-        {[...Array(365)].map((a, i) => (
-          <div className="w-3 h-3 bg-green-500 rounded"></div>
+    <div className="">
+      <div className=" flex gap-1 justify-center">
+        {[...Array(52)].map((a, i) => (
+          <div className="mt-20 flex flex-col gap-1">
+            {[...Array(7)].map((a, i) => (
+              <>
+              <div key={i} className="w-3 h-3 bg-green-500"></div>
+              </>
+            ))}
+          </div>
         ))}
       </div>
     </div>
