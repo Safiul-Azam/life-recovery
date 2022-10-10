@@ -1,4 +1,5 @@
 import React from "react";
+import Contributions from "../components/chart/Contributions";
 import Banner from "../components/home/Banner";
 import Calculations from "../components/home/Calculations";
 import Filter from "../components/home/Filter";
@@ -11,6 +12,7 @@ const Home = () => {
       <Banner />
       <Calculations />
       <Filter />
+      <Contributions />
     </main>
   );
 };
