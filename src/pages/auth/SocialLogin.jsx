@@ -64,7 +64,9 @@ const SocialLogin = ({ signUp }) => {
   if (loginLoading || isLoading || loading) {
     return <Loading />;
   }
-
+if(user){
+  console.log(user)
+}
   const handleSignIn = async () => {
     await signInWithGoogle();
     // await
