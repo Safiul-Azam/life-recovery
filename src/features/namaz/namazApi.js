@@ -13,6 +13,7 @@ export const namazApi = apiSlice.injectEndpoints({
           const result = await queryFulfilled;
           const resData = result?.data;
 
+          let allDateData = [];
           let finalData = [];
           let fajr = 0;
           let dhuhr = 0;
@@ -27,10 +28,9 @@ export const namazApi = apiSlice.injectEndpoints({
             // findDate
             resData.find(
               (namaz) =>
-                namaz.date === d &&
+                (namaz.date === d &&
                 finalData.push({
-                  day: d.slice(0, 2),
-
+                  day: d,
                   // namaz count
                   Namaz:
                     0 +
@@ -89,7 +89,7 @@ export const namazApi = apiSlice.injectEndpoints({
                       ? 1
                       : 0),
                   Max: 5,
-                })
+                })) && (allDateData.push())
             );
           });
 

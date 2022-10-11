@@ -11,7 +11,24 @@ export const dateFormat = ({ day, month, year }, date) => {
   const formattedToday = dd + "-" + mm + "-" + yyyy;
 
   // console.log(formattedToday);
-  // output === '1-10-2022'
+  // output === '01-10-2022'
 
   return formattedToday;
 };
+
+export const dateFormatRevers = (date) => {
+  let dd = date.split("-")[0];
+  let mm = date.split("-")[1];
+  const yyyy = date.split("-")[2];
+
+  if (dd < 10) dd = "0" + dd;
+  if (mm < 10) mm = "0" + mm;
+
+  const formattedToday = yyyy + "-" + mm + "-" + dd;
+
+  // console.log(formattedToday);
+  // output === '2022-10-01'
+
+  return formattedToday;
+};
+

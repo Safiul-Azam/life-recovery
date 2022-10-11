@@ -74,6 +74,7 @@ const ComposedCharts = () => {
 
   useEffect(() => {
     if (resData.length !== 0) {
+      console.log(resData)
       setChartData(resData);
     }
   }, [resData]);
