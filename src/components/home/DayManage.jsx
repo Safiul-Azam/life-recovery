@@ -78,7 +78,7 @@ const DayManage = () => {
         onChange={handleChange}
         shouldHighlightWeekends
         calendarClassName="date-picker md:text-xs rounded-xl bg-white"
-        customDaysClassName={highlightDay}
+        // customDaysClassName={highlightDay}
       />
     </div>
   );
