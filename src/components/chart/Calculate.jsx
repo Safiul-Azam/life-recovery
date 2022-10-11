@@ -57,6 +57,8 @@ const Calculate = () => {
   const resData = useSelector((state) => state.filter.avg);
   const [data, setData] = useState(defaultData);
 
+  // console.log(data);
+
   useEffect(() => {
     if (resData.length !== 0) {
       setData(resData);

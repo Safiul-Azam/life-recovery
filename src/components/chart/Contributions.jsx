@@ -1,8 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Calendar from "react-github-contribution-calendar";
+import { useSelector } from "react-redux";
+import { dateFormatRevers } from "../../utils/dateFormat";
 
 const Contributions = () => {
-  const values = {
+  const allData = useSelector((state) => state.filter.allDataByDate);
+
+  const [dates, setDates] = useState({});
+
+  useEffect(() => {
+    if (allData.length !== 0) {
+      setDates(allData.reduce((r, c) => Object.assign(r, c), {}));
+    }
+  }, [allData]);
+
+  /* 
+  {
     "2022-10-01": 0 + 1,
     "2022-10-02": 0 + 1,
     "2022-10-03": 1 + 1,
@@ -17,17 +30,21 @@ const Contributions = () => {
     "2022-10-12": 5 + 1,
     "2022-10-13": 4 + 1,
     "2022-10-14": 5 + 1,
-  };
+  }
+  */
+
+  const values = dates;
+
   const panelColors = [
-    "#ffffff2f",
-    "#ff0000",
-    "#fc754cd2",
-    "#FBFF00",
-    "#00eeff",
-    "#003cff",
-    "#1eff00",
+    "#ffffff2f", // default color
+    "#ff0000", // value = 0
+    "#fc754cd2", // value = 1
+    "#FBFF00", // value = 2
+    "#00eeff", // value = 3
+    "#003cff", // value = 4
+    "#1eff00", // value = 5
   ];
-  const until = "2022-10-15";
+  const until = dateFormatRevers({});
   const weekNames = ["", "M", "", "W", "", "F", ""];
   const monthNames = [
     "Jan",
@@ -52,8 +69,6 @@ const Contributions = () => {
   };
   const panelAttributes = { rx: 6, ry: 6 };
   const weekLabelAttributes = {
-    rotate: 20,
-
     style: {
       fontSize: 12,
       alignmentBaseline: "central",
@@ -78,19 +93,19 @@ const Contributions = () => {
             weekNames={weekNames}
             weekLabelAttributes={weekLabelAttributes}
           />
-          <div className="flex items-center space-x-1 mt-2 justify-start text-slate-200 text-sm px-4">
+          <div className="flex items-center space-x-1 mt-2 justify-center md:justify-start text-slate-200 text-sm px-4">
             <p className="w-3 h-3 rounded-full bg-[#ff0000]"></p>
-            <span> = 0</span>
-            <p className="w-3 h-3 rounded-full bg-[#fc754cd2]"></p>{" "}
-            <span> = 1</span>
-            <p className="w-3 h-3 rounded-full bg-[#FBFF00]"></p>{" "}
-            <span> = 2</span>
-            <p className="w-3 h-3 rounded-full bg-[#00eeff]"></p>{" "}
-            <span> = 3</span>
-            <p className="w-3 h-3 rounded-full bg-[#003cff]"></p>{" "}
-            <span> = 4</span>
-            <p className="w-3 h-3 rounded-full bg-[#1eff00]"></p>{" "}
-            <span> = 5</span>
+            <span className="pr-1.5"> - 0</span>
+            <p className="w-3 h-3 rounded-full bg-[#fc754cd2]"></p>
+            <span className="pr-1.5"> - 1</span>
+            <p className="w-3 h-3 rounded-full bg-[#FBFF00]"></p>
+            <span className="pr-1.5"> - 2</span>
+            <p className="w-3 h-3 rounded-full bg-[#00eeff]"></p>
+            <span className="pr-1.5"> - 3</span>
+            <p className="w-3 h-3 rounded-full bg-[#003cff]"></p>
+            <span className="pr-1.5"> - 4</span>
+            <p className="w-3 h-3 rounded-full bg-[#1eff00]"></p>
+            <span className="pr-1.5"> - 5</span>
           </div>
         </div>
         <div className="sm:w-7/12 h-full flex flex-col-reverse md:flex-row items-center justify-around -mt-7 md:-mt-10 text-slate-200 gap-1 md:gap-5">
@@ -108,7 +123,7 @@ const Contributions = () => {
               <div
                 className="radial-progress"
                 style={{
-                  "--value": "-0",
+                  "--value": "0",
                   "--size": "6rem",
                   "--thickness": "0.5rem",
                 }}

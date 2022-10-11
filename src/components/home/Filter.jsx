@@ -12,7 +12,7 @@ const Filter = () => {
     const day =
       (selected === "৭" && 7) ||
       (selected === "১৫" && 15) ||
-      (selected === "৩০" && 15);
+      (selected === "৩০" && 30);
       
     dispatch(filterDay(day));
     

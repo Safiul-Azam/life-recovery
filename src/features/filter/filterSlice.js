@@ -5,6 +5,7 @@ const initialState = {
   sum: 35,
   fullGraph: [],
   avg: [],
+  allDataByDate: [],
 };
 
 const filterSlice = createSlice({
@@ -15,14 +16,20 @@ const filterSlice = createSlice({
       state.day = action.payload;
       state.sum = action.payload * 5;
     },
+
     fullGraph: (state, action) => {
       state.fullGraph = action.payload;
     },
+
     avg: (state, action) => {
       state.avg = action.payload;
+    },
+
+    allDataByDate: (state, action) => {
+      state.allDataByDate = action.payload;
     },
   },
 });
 
-export const { filterDay, fullGraph, avg } = filterSlice.actions;
+export const { filterDay, fullGraph, avg, allDataByDate } = filterSlice.actions;
 export default filterSlice.reducer;
