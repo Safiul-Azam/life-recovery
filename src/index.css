@@ -26,23 +26,23 @@ code {
 
 /* highlight Day  CSS*/
 .purpleDay:not(.-selectedStart):not(.-selectedBetween):not(.-selectedEnd):not(.-selected) {
-    border: 2px solid rgb(138, 115, 255) !important;
+    border: 2px solid #8a73ff !important;
 }
 
 .orangeDay:not(.-selectedStart):not(.-selectedBetween):not(.-selectedEnd):not(.-selected) {
-    border: 2px solid rgba(196, 46, 0, 0.822) !important;
+    border: 2px solid #fc754cd2 !important;
 }
 
 .yellowDay:not(.-selectedStart):not(.-selectedBetween):not(.-selectedEnd):not(.-selected) {
-    border: 2px solid rgb(251, 255, 0) !important;
+    border: 2px solid #fbff00 !important;
 }
 
 .navyBlueDay:not(.-selectedStart):not(.-selectedBetween):not(.-selectedEnd):not(.-selected) {
-    border: 2px solid rgba(1, 48, 177, 0.815) !important;
+    border: 2px solid #0130b1d0 !important;
 }
 
 .greenDay:not(.-selectedStart):not(.-selectedBetween):not(.-selectedEnd):not(.-selected) {
-    border: 2px solid rgb(25, 202, 2) !important;
+    border: 2px solid #19ca02 !important;
 }
 
 .responsive-calendar {
@@ -95,3 +95,4 @@ code {
         font-size: 12px !important;
     }
 }
+

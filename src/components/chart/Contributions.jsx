@@ -2,30 +2,34 @@ import React from "react";
 import Calendar from "react-github-contribution-calendar";
 
 const Contributions = () => {
-  var values = {
-    "2022-04-23": 1,
-    "2022-06-26": 2,
-    "2022-09-29": 3,
-    "2022-10-9": 4,
-    "2022-11-08": 4,
-    "2022-10-12": 2,
-    "2022-10-13": 5,
-    "2022-10-14": 4,
-    "2022-10-15": 3,
-    "2022-10-17": 5,
-    "2022-10-18": 3,
+  const values = {
+    "2022-10-01": 0 + 1,
+    "2022-10-02": 0 + 1,
+    "2022-10-03": 1 + 1,
+    "2022-10-04": 1 + 1,
+    "2022-10-05": 2 + 1,
+    "2022-10-06": 2 + 1,
+    "2022-10-07": 3 + 1,
+    "2022-10-08": 3 + 1,
+    "2022-10-09": 4 + 1,
+    "2022-10-10": 4 + 1,
+    "2022-10-11": 5 + 1,
+    "2022-10-12": 5 + 1,
+    "2022-10-13": 4 + 1,
+    "2022-10-14": 5 + 1,
   };
-  var panelColors = [
-    "#EBEDF0",
-    "rgba(196, 46, 0, 0.822)",
-    "rgb(251, 255, 0)",
-    "rgb(138, 115, 255)",
-    "rgba(1, 48, 177, 0.815)",
-    "rgb(25, 202, 2)",
+  const panelColors = [
+    "#ffffff2f",
+    "#ff0000",
+    "#fc754cd2",
+    "#FBFF00",
+    "#00eeff",
+    "#003cff",
+    "#1eff00",
   ];
-  var until = "2022-12-30";
-  var weekNames = ["s", "m", "t", "w", "t", "f", "s"];
-  var monthNames = [
+  const until = "2022-10-15";
+  const weekNames = ["", "M", "", "W", "", "F", ""];
+  const monthNames = [
     "Jan",
     "Feb",
     "Mar",
@@ -39,51 +43,60 @@ const Contributions = () => {
     "Nov",
     "Dec",
   ];
-  var monthLabelAttributes = {
+  const monthLabelAttributes = {
     style: {
-      "font-size": 14,
-      "alignment-baseline": "central",
-      margin: "20px",
-      fill: "#AAA",
+      fontSize: 12,
+      alignmentBaseline: "central",
+      fill: "#ffffff",
+
     },
   };
-  var panelAttributes = { rx: 6, ry: 2 };
-  var weekLabelAttributes = {
+  const panelAttributes = { rx: 6, ry: 6 };
+  const weekLabelAttributes = {
+    rotate: 20,
+
     style: {
-      "font-size": 14,
-      "alignment-baseline": "central",
-      fill: "#AAA",
+      fontSize: 12,
+      alignmentBaseline: "central",
+      fill: "#ffffff",
     },
   };
 
   return (
-    <div className="my-20 max-w-5xl mx-auto bg-[#162033] ">
-      <h2 className="text-xl mb-3 text-white text-center">
+    <div className="my-20 max-w-7xl sm:px-10 mx-auto  px-5">
+      <h2 className="text-xl py-3 text-white text-center bg-[#162033] rounded-xl rounded-b-none">
         Contributions Graph
       </h2>
-      <div className="flex justify-center items-center">
-        <div className=" w-full mx-auto flex justify-center rounded-2xl">
+      <div className="flex justify-center items-center gap-3 px-5 pb-2 bg-[#162033] rounded-xl rounded-t-none">
+        <div className="flex flex-col justify-start w-full">
           <Calendar
             values={values}
             panelColors={panelColors}
             panelAttributes={panelAttributes}
             until={until}
-            weekNames={weekNames}
-            monthLabelAttributes={monthLabelAttributes}
             monthNames={monthNames}
+            monthLabelAttributes={monthLabelAttributes}
+            weekNames={weekNames}
             weekLabelAttributes={weekLabelAttributes}
-            className=""
           />
+          <div className="flex items-center space-x-1 mt-2 justify-start text-slate-200 text-sm px-4">
+            <p className="w-3 h-3 rounded-full bg-[#ff0000]"></p>
+            <span> = 0</span>
+            <p className="w-3 h-3 rounded-full bg-[#fc754cd2]"></p>{" "}
+            <span> = 1</span>
+            <p className="w-3 h-3 rounded-full bg-[#FBFF00]"></p>{" "}
+            <span> = 2</span>
+            <p className="w-3 h-3 rounded-full bg-[#00eeff]"></p>{" "}
+            <span> = 3</span>
+            <p className="w-3 h-3 rounded-full bg-[#003cff]"></p>{" "}
+            <span> = 4</span>
+            <p className="w-3 h-3 rounded-full bg-[#1eff00]"></p>{" "}
+            <span> = 5</span>
+          </div>
         </div>
-      </div>
-      <div className="flex items-center space-x-1 mt-2 justify-end">
-        <p className="text-white text-sm">Less</p>
-        <p className="w-3 h-3 bg-green-300"></p>
-        <p className="w-3 h-3 bg-[#FBFF00]"></p>
-        <p className="w-3 h-3 bg-[#052D99]"></p>
-        <p className="w-3 h-3 bg-[#8A73FF]"></p>
-        <p className="w-3 h-3 bg-[#19CA02]"></p>
-        <p className="text-sm text-white">More</p>
+        <div className="bg-white w-4/12 h-full">
+          <h1>hello</h1>
+        </div>
       </div>
     </div>
   );
