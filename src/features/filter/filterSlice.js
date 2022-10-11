@@ -5,7 +5,7 @@ const initialState = {
   sum: 35,
   fullGraph: [],
   avg: [],
-  allDataByDate: {},
+  allDataByDate: [],
 };
 
 const filterSlice = createSlice({

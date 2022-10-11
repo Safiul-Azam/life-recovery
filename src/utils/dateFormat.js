@@ -1,5 +1,5 @@
 export const dateFormat = ({ day, month, year }, date) => {
-  const today = date || new Date();
+  const today = new Date();
 
   let dd = day || today?.getDate();
   let mm = month || today?.getMonth() + 1;
@@ -16,13 +16,12 @@ export const dateFormat = ({ day, month, year }, date) => {
   return formattedDate;
 };
 
-export const dateFormatRevers = ({ day, month, year },date) => {
-  let dd = day || date?.split("-")[0];
-  let mm = month || date?.split("-")[1];
-  const yyyy = year || date?.split("-")[2];
+export const dateFormatRevers = ({ day, month, year }, date) => {
+  const today = new Date();
 
-  // if (dd < 10) dd = "0" + dd;
-  // if (mm < 10) mm = "0" + mm;
+  let dd = day || date?.split("-")[0] || today?.getDate();
+  let mm = month || date?.split("-")[1] || today?.getMonth() + 1;
+  const yyyy = year || date?.split("-")[2] || today?.getFullYear();
 
   const formattedToday = yyyy + "-" + mm + "-" + dd;
 
@@ -31,4 +30,3 @@ export const dateFormatRevers = ({ day, month, year },date) => {
 
   return formattedToday;
 };
-

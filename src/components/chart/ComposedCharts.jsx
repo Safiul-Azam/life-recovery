@@ -57,7 +57,7 @@ const CustomizedTooltip = ({ active, payload, label }) => {
 
 const ComposedCharts = () => {
   const { fullGraph: resData, day } = useSelector((state) => state.filter);
-
+  
   const prvDays = pastDays(day);
 
   const [chartData, setChartData] = useState(

@@ -3,7 +3,6 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   date: "",
   namaz: [],
-  allData: [],
 };
 
 const namazSlice = createSlice({
@@ -16,11 +15,8 @@ const namazSlice = createSlice({
         state.namaz = action.payload.namaz;
       }
     },
-    allData: (state, action) => {
-      state.allData = action.payload;
-    },
   },
 });
 
-export const { toDay, filterData, allData } = namazSlice.actions;
+export const { toDay, filterData } = namazSlice.actions;
 export default namazSlice.reducer;
