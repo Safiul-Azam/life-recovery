@@ -48,7 +48,6 @@ const Contributions = () => {
       fontSize: 12,
       alignmentBaseline: "central",
       fill: "#ffffff",
-
     },
   };
   const panelAttributes = { rx: 6, ry: 6 };
@@ -63,11 +62,11 @@ const Contributions = () => {
   };
 
   return (
-    <div className="my-20 max-w-7xl sm:px-10 mx-auto  px-5">
+    <div className="my-20 max-w-7xl px-10 mx-auto">
       <h2 className="text-xl py-3 text-white text-center bg-[#162033] rounded-xl rounded-b-none">
         Contributions Graph
       </h2>
-      <div className="flex justify-center items-center gap-3 px-5 pb-2 bg-[#162033] rounded-xl rounded-t-none">
+      <div className="flex flex-col sm:flex-row justify-center items-center gap-16 sm:gap-3 px-5 pb-2 bg-[#162033] rounded-xl rounded-t-none  w-full">
         <div className="flex flex-col justify-start w-full">
           <Calendar
             values={values}
@@ -94,8 +93,37 @@ const Contributions = () => {
             <span> = 5</span>
           </div>
         </div>
-        <div className="bg-white w-4/12 h-full">
-          <h1>hello</h1>
+        <div className="sm:w-7/12 h-full flex flex-col-reverse md:flex-row items-center justify-around -mt-7 md:-mt-10 text-slate-200 gap-1 md:gap-5">
+          {/* Longest Streak */}
+          <div className="md:bg-[#1d2a42] md:px-5 flex justify-center items-center rounded-lg md:py-5 text-center">
+            <h1 className="md:text-lg">Longest Streak</h1>{" "}
+            <span className="text-lg md:text-2xl text-secondary font-semibold pl-1 md:pl-2">
+              0
+            </span>
+          </div>
+
+          {/* Current Streak */}
+          <div className="flex flex-col justify-center items-center">
+            <div className="ring-4 ring-primary p-2 py-2 rounded-full w-fit">
+              <div
+                className="radial-progress"
+                style={{
+                  "--value": "-0",
+                  "--size": "6rem",
+                  "--thickness": "0.5rem",
+                }}
+              >
+                <span className="text-secondary text-4xl">0</span>
+              </div>
+            </div>
+
+            <div className="flex justify-center items-center rounded-lg text-center pt-3">
+              <h1 className="md:text-lg">Current Streak </h1>{" "}
+              <span className="text-lg md:text-2xl text-secondary font-semibold pl-1 md:pl-2">
+                0
+              </span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
