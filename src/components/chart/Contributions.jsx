@@ -69,8 +69,6 @@ const Contributions = () => {
   };
   const panelAttributes = { rx: 6, ry: 6 };
   const weekLabelAttributes = {
-    rotate: 20,
-
     style: {
       fontSize: 12,
       alignmentBaseline: "central",
