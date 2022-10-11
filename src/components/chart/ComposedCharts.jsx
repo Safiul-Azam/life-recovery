@@ -10,8 +10,6 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend,
-  Area,
   Cell,
   ResponsiveContainer,
 } from "recharts";
@@ -74,7 +72,6 @@ const ComposedCharts = () => {
 
   useEffect(() => {
     if (resData.length !== 0) {
-      console.log(resData)
       setChartData(resData);
     }
   }, [resData]);

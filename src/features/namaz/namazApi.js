@@ -1,6 +1,6 @@
 import { apiSlice } from "../api/apiSlice";
 import { avg, fullGraph } from "../filter/filterSlice";
-import { toDay } from "./namazSlice";
+import { allData, toDay } from "./namazSlice";
 
 export const namazApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -23,12 +23,24 @@ export const namazApi = apiSlice.injectEndpoints({
           let jamaat = 0;
           let takbir_e_ula = 0;
 
+          /* 
+           // pastDays(10).reduce((a, v) => resData.forEach(
+          //   (namaz) =>
+          //     namaz.date === v &&
+          //     allDateData.push({
+          //       ...a,
+          //       [dateFormatRevers({}, v)]: true,
+          //     })
+          // ), {})
+          // console.log(allDateData);
+          */
+
           // mainData
           date.forEach((d) => {
             // findDate
             resData.find(
               (namaz) =>
-                (namaz.date === d &&
+                namaz.date === d &&
                 finalData.push({
                   day: d,
                   // namaz count
@@ -89,7 +101,8 @@ export const namazApi = apiSlice.injectEndpoints({
                       ? 1
                       : 0),
                   Max: 5,
-                })) && (allDateData.push())
+                }) &&
+                allDateData.push()
             );
           });
 
@@ -131,7 +144,8 @@ export const namazApi = apiSlice.injectEndpoints({
             },
           ];
 
-          finalData.length !== 0 &&
+          dispatch(allData(resData)) &&
+            finalData.length !== 0 &&
             dispatch(fullGraph(finalData.reverse())) &&
             dispatch(avg(namazCount));
         } catch (err) {

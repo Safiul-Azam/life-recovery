@@ -108,7 +108,7 @@ const Contributions = () => {
               <div
                 className="radial-progress"
                 style={{
-                  "--value": "-0",
+                  "--value": "0",
                   "--size": "6rem",
                   "--thickness": "0.5rem",
                 }}
