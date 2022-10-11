@@ -19,13 +19,13 @@ const Contributions = () => {
     "2022-10-14": 5 + 1,
   };
   const panelColors = [
-    "#ffffff2f",
-    "#ff0000",
-    "#fc754cd2",
-    "#FBFF00",
-    "#00eeff",
-    "#003cff",
-    "#1eff00",
+    "#ffffff2f", // default color
+    "#ff0000", // value = 0
+    "#fc754cd2", // value = 1
+    "#FBFF00", // value = 2
+    "#00eeff", // value = 3
+    "#003cff", // value = 4
+    "#1eff00", // value = 5
   ];
   const until = "2022-10-15";
   const weekNames = ["", "M", "", "W", "", "F", ""];
