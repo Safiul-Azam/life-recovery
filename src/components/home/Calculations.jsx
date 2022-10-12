@@ -7,7 +7,7 @@ const Calculations = () => {
   const namazName = ["ফজর", "যোহর", "আসর", "মাগরিব", "এশা"];
 
   return (
-    <section className="max-w-7xl sm:px-10 mx-auto">
+    <section className="max-w-7xl mx-auto">
       <div className="flex flex-wrap sm:flex-row gap-1 z-10 justify-center items-center content-center mt-16 mb-5">
         {namazName.map((namaz, index) => (
           <h6
@@ -23,8 +23,10 @@ const Calculations = () => {
           </h6>
         ))}
       </div>
-      <div className="flex flex-col gap-10 justify-center items-center content-center">
-        <Calculation namaz={selectedNamaz} />
+      <div className="px-10">
+        <div className="flex flex-col gap-10 justify-center items-center content-center  backdrop-blur-sm rounded-xl py-8 px-5 bg-slate-800/[0.5]">
+          <Calculation namaz={selectedNamaz} />
+        </div>
       </div>
     </section>
   );

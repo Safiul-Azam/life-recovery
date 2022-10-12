@@ -1,8 +1,8 @@
-import { dateFormat } from "./dateFormat";
+import { dateFormat, dateFormatRevers } from "./dateFormat";
 
-export const pastDays = (day) => {
+export const pastDays = (day, reversFormat) => {
   // ✅ start from today's date
-  const prvDays = [...Array(day ||7).keys()].map((index) => {
+  const prvDays = [...Array(day || 7).keys()].map((index) => {
     const date = new Date();
 
     date.setDate(date.getDate() - index);
@@ -14,8 +14,14 @@ export const pastDays = (day) => {
     };
 
     const formatDate = dateFormat(format);
+    const reversFormatDate = dateFormatRevers(format);
 
-    return formatDate;
+    if (reversFormat) {
+      return reversFormatDate;
+    } else {
+      return formatDate;
+    }
+
   });
 
   return prvDays;
